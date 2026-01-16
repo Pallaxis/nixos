@@ -1,0 +1,53 @@
+/* General font and text color */
+* {
+  font-family: "JetbrainsMono Nerd Font", monospace;
+  font-size: 12px;
+  color: white;
+  /* text-shadow: 0 0 1.5px rgba(0, 0, 0, 10); */
+}
+
+/* Sets bar transparent */
+window#waybar {
+  background: transparent;
+  color: white;
+}
+
+.modules-left {
+  padding: 0px 2px;
+  margin:0 0 0 10;
+}
+.modules-center {
+  padding: 0px 2px;
+  margin:0 0 0 0;
+}
+.modules-right {
+  padding: 0px 2px;
+  margin:0 10 0 0;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background: transparent;
+  color: white;
+  border-top: 2px solid transparent;
+  border-radius: 0px;
+}
+#workspaces button.visible {
+  border-top: 2px solid #cba6f7;
+}
+
+#idle_inhibitor {
+  font-size: 15pt;
+  min-width: 24px;  /* keeps the icon from collapsing */
+  padding-left: 14px;
+  padding-right: 18px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+#custom-notifications, #idle_inhibitor.activated, #systemd-failed-units.degraded {
+  color: red;
+}
+
+#custom-update, #network, #custom-ram-usage, #custom-cpu-usage, #custom-cpu-temp, #battery, #tray, #custom-notifications, #privacy{
+  padding: 0px 3px;
+}

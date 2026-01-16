@@ -1,0 +1,169 @@
+{
+    "style": {
+        "font": "JetbrainsMono Nerd Font Mono"
+    },
+    "layer": "middle",
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock#date", "idle_inhibitor", "clock#time"],
+    "modules-right": ["custom/kernel-check", "systemd-failed-units", "tray", "custom/update", "network", "custom/ram-usage", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery", "custom/notifications", "privacy"],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "persistent-only": true,
+        "format-icons": {
+            "1": " web",
+            "2": " term",
+            "5": " slack",
+            "9": " pass",
+            "10": " email",
+            "default": " any",
+        },
+        "persistent-workspaces": {
+            "*": [ 1,2,3,4,5 ],
+            "eDP-1": [ 6,7,8,9,10 ],
+        }
+    },
+    "idle_inhibitor": {
+        "format": "",
+        "tooltip": true,
+        "tooltip-format-activated": "Idle Inhibited",
+        "tooltip-format-deactivated": "Able to idle",
+        "start-activated": false
+    },
+    "clock#time": {
+        "format": "󱑂 {:%H:%M}",
+        "tooltip": false,
+        "min-length": 8,
+        "max-length": 8
+    },
+    "clock#date": {
+        "format": "󰨳 {:%d-%m}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click": "shift_reset",
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "custom/kernel-check": {
+        "exec": "~/.config/waybar/scripts/kernel-module-check.sh",
+        "return-type": "json",
+        "interval": 300,
+        "format": "{}",  // Let JSON define format
+    },
+    "systemd-failed-units": {
+        "hide-on-ok": true,
+        "format": "{nr_failed_system} failed system, {nr_failed_user} failed user!",
+    },
+    "custom/update": {
+        "format": "{} {icon}",
+        "return-type": "json",
+        "format-icons": {
+            "has-updates": "󱍷 ",
+            "updated": "󰂪 "
+        },
+        "exec-if": "which waybar-module-pacman-updates",
+        "exec": "waybar-module-pacman-updates  --interval-seconds 60 --network-interval-seconds 300",
+        "on-click": "~/.config/waybar/scripts/update-tmuxified.sh",
+    },
+    "network": {
+        "on-click": "~/.config/waybar/scripts/attach-with-command.sh nmtui",
+        "format-ethernet": " ",
+        "format-wifi": " ",
+        "format-disconnected": "󱘖 ",
+        "tooltip-format-disconnected": "Network Disconnected",
+        "format-disabled": " ",
+        "tooltip-format-disabled": "Network Disabled",
+        "tooltip-format": "{ipaddr}\nUp: {bandwidthUpBits}\nDown:{bandwidthDownBits}",
+    },
+    "custom/ram-usage": {
+        "exec": "~/.config/waybar/scripts/ram-usage.sh",
+        "return-type": "json",
+        "tooltip": true,
+        "interval": 5,
+        "min-length": 6,
+        "max-length": 6
+    },
+    "custom/cpu-usage": {
+        "exec": "~/.config/waybar/scripts/cpu-usage.sh",
+        "return-type": "json",
+        "tooltip": true,
+        "interval": 5,
+        "min-length": 6,
+        "max-length": 6
+    },
+    "custom/cpu-temp": {
+        "exec": "~/.config/waybar/scripts/cpu-temp.sh",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "interval": 5,
+        "min-length": 6,
+        "max-length": 6
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"],
+            "headphone": "󰋋",
+            "headset": "󰋋"
+        },
+        "tooltip": true,
+        "tooltip-format": "Device: {desc}",
+        "on-click": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-",
+        "min-length": 6,
+        "max-length": 6
+    },
+    "battery": {
+        "states": {
+            "full": 100,
+            "good": 96,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-icons": ["󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂"],
+        "format-full": "󰁹 {capacity}%",
+        "format-warning": "󰁻 {capacity}%",
+        "format-critical": "󱃍 {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "tooltip-format": "Discharging: {time}",
+        "tooltip-format-charging": "Charging: {time}",
+        "interval": 1,
+        "min-length": 6,
+        "max-length": 6
+    },
+    "custom/notifications": {
+        "exec": "~/.config/waybar/scripts/notifications.sh",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "interval": 5,
+        "on-click": "dunstctl history-clear"
+    },
+    "privacy": {
+        "ignore": [
+            {
+                "type": "screenshare",
+                "name": "obs"
+            },
+        ]
+    },
+}
