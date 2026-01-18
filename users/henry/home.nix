@@ -6,12 +6,12 @@
   home.stateVersion = "25.11";
 
   ### LAZY DOTFILES ###
-  home.file.".config/nvim".source = ./.config/nvim;
-  home.file.".config/waybar".source = ./.config/waybar;
-  home.file.".config/bat".source = ./.config/bat;
-  home.file.".config/foot".source = ./.config/foot;
-  home.file.".config/rofi".source = ./.config/rofi;
-  home.file.".zshrc".source = ./.config/.zshrc;
+  home.file.".config/nvim".source = ./dotfiles/nvim;
+  home.file.".config/waybar".source = ./dotfiles/waybar;
+  home.file.".config/bat".source = ./dotfiles/bat;
+  home.file.".config/foot".source = ./dotfiles/foot;
+  home.file.".config/rofi".source = ./dotfiles/rofi;
+  home.file.".zshrc".source = ./dotfiles/.zshrc;
   # home.file.".local/share/wallpapers".source = ./wallpapers;
 
   # links fonts to where programs expect them to be
@@ -32,11 +32,11 @@
       splash = false;
       # preload = [ "${config.home.homeDirectory}/.local/share/wallpapers/kcd2-hawk-two-horses.png" ];
       # wallpaper = [ ",${config.home.homeDirectory}/.local/share/wallpapers/kcd2-hawk-two-horses.png" ];
-      preload = [ "${./wallpapers/kcd2-hawk-two-horses.png}" ];
+      preload = [ "${../../wallpapers/kcd2-hawk-two-horses.png}" ];
       wallpaper = [
         {
           monitor = "";
-          path = "${./wallpapers/kcd2-hawk-two-horses.png}";
+          path = "${../../wallpapers/kcd2-hawk-two-horses.png}";
         }
       ];
     };
