@@ -15,7 +15,6 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./hosts/night/default.nix
-        # ./modules/core/defualt.nix
       ];
     };
   };
