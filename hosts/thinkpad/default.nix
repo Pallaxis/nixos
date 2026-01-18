@@ -3,16 +3,14 @@
 {
   imports = [
     ./hardware-configuration.nix                      # Auto generated hardware file
-    ./filesystem.nix                                  # Filesystem stuff that goes with hardware
     ../../modules/core/default.nix                    # Loads all default files all systems should have
     ../../modules/desktop/default.nix                 # Desktop stuff, hyprland etc.
-    ../../modules/hardware/nvidia.nix                 # Vendor specific settings
-    ../../modules/apps/other.nix
+    # ../../modules/apps/other.nix
     inputs.home-manager.nixosModules.home-manager
   ];
 
   # Hostname
-  networking.hostName = "night";
+  networking.hostName = "thinkpad";
 
   # Temporary
   services.getty.autologinUser = "henry";
