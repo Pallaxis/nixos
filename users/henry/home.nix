@@ -17,7 +17,10 @@
   home.file.".config/rofi".source = ./dotfiles/rofi;
   home.file.".zshrc".source = ./dotfiles/.zshrc;
   # home.file.".local/share/wallpapers".source = ./wallpapers;
-
+  xdg.configFile."hypr" = {
+    source = ./dotfiles/hypr;
+    recursive = true; # <--- THIS IS THE KEY
+  };
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
 
