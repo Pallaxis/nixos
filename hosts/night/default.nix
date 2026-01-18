@@ -7,6 +7,7 @@
     ../../modules/core/default.nix                    # Loads all default files all systems should have
     ../../modules/desktop/default.nix                 # Desktop stuff, hyprland etc.
     ../../modules/hardware/nvidia.nix                 # Vendor specific settings
+    ../../modules/apps/other.nix
     inputs.home-manager.nixosModules.home-manager
   ];
 
