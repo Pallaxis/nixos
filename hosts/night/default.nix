@@ -2,15 +2,21 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-    ./filesystem.nix
-    ../../modules/core/default.nix
-    ../../modules/desktop/default.nix
+    ./hardware-configuration.nix                      # Auto generated hardware file
+    ./filesystem.nix                                  # Filesystem stuff that goes with hardware
+    ../../modules/core/default.nix                    # Loads all default files all systems should have
+    ../../modules/desktop/default.nix                 # Desktop stuff, hyprland etc.
+    ../../modules/hardware/nvidia.nix                 # Vendor specific settings
     inputs.home-manager.nixosModules.home-manager
   ];
 
+  # Hostname
   networking.hostName = "night";
 
+  # Temporary
+  services.getty.autologinUser = "henry";
+
+  # Home Manager setup
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -18,12 +24,5 @@
     users.henry = import ../../users/henry/home.nix;
   };
 
-  services.getty.autologinUser = "henry";
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true;
-  hardware.nvidia.modesetting.enable = true;
-
-  ### BOOT ###
   system.stateVersion = "25.11"; # Don't ever change this
 }
