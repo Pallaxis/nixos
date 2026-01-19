@@ -16,6 +16,7 @@
     fzf
     git
     grimblast
+    pavucontrol
     rofi
     udisks
     waybar
