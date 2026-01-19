@@ -15,13 +15,10 @@
   # Temporary
   services.getty.autologinUser = "henry";
 
-  # Home Manager setup
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
-    users.henry = import ../../users/henry/home.nix;
-  };
-
+  # SSH key
+  users.users.root.openssh.authorizedKeys.keys =
+  [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTC9Is0+rTNgKa6cs0dR6ZX/IUUU3bHWuV8wzBAHVss"
+  ];
   system.stateVersion = "25.11"; # Don't ever change this
 }
