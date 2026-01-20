@@ -19,6 +19,6 @@
     pavucontrol
     rofi
     udisks
-    waybar
+    # waybar
   ];
 }

@@ -7,7 +7,6 @@
 
   imports = [
     ./modules/shell.nix
-    ./modules/linux.nix
   ];
   ### LAZY DOTFILES ###
   home.file.".config/nvim".source = ./dotfiles/nvim;
@@ -19,11 +18,10 @@
   # home.file.".local/share/wallpapers".source = ./wallpapers;
   xdg.configFile."hypr" = {
     source = ./dotfiles/hypr;
-    recursive = true; # <--- THIS IS THE KEY
+    recursive = true;
   };
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
-
   
   ### USER SERVICES ###
   services.ssh-agent = {

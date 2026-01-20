@@ -6,13 +6,14 @@
     ../../modules/hardware/nvidia.nix                 # Vendor specific settings
     ../../modules/apps/other.nix
     ../../modules/apps/gaming.nix
-    
   ];
 
   # Hostname
   networking.hostName = "night";
   # Temporary
   services.getty.autologinUser = "henry";
+
+  myOptions.wallpaper = ../../modules/desktop/wallpapers/forrest.png;
 
   # Swap file
   swapDevices = lib.mkForce [{
