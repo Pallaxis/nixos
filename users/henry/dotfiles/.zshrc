@@ -4,11 +4,11 @@
 # if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 #     exec start-hyprland
 # fi
-if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
-    if uwsm check may-start; then
-      exec uwsm start hyprland.desktop
-    fi
-fi
+# if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
+#     if uwsm check may-start; then
+#       exec uwsm start hyprland.desktop
+#     fi
+# fi
 
 # Make general or attach to it if it's already running
 if [[ -n "$DISPLAY" ]]; then

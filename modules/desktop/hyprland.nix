@@ -1,23 +1,39 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
   {
   options.myOptions.wallpaper = lib.mkOption {
     type = lib.types.path;
     description = "Path to wallpaper image, set in the hosts default.nix";
   };
+
   config = {
-    programs.uwsm = {
-      enable = true;
-    };
+    ### GLOBAL ###
+    programs.uwsm = { enable = true; };
     programs.hyprland = {
       enable = true;
-      withUWSM = true;
     };
+    # services.greetd = {
+    #   enable = true;
+    #   settings = {
+    #     initial_session = {
+    #       command = "uwsm start hyprland-uwsm.desktop";
+    #       user = "henry";
+    #     };
+    #     default_session = {
+    #       command = "${pkgs.tuigreet}/bin/tuigreet --cmd 'exec uwsm start hyprland-uwsm.desktop'";
+    #       user = "greeter";
+    #     };
+    #   };
+    # };
+    # environment.systemPackages = with pkgs; [
+    #   tuigreet
+    # ];
 
+    ### HOME MANAGED ###
     home-manager.users.henry = {
       wayland.windowManager.hyprland = {
         enable = true;
-        systemd.enable = false;
+        systemd.enable = true;
       };
       services.hyprpaper = {
         enable = true;
