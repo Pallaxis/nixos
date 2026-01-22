@@ -9,4 +9,8 @@
   # environment.systemPackages = with pkgs; [
   #   virtualbox
   # ];
+
+  home-manager.users.henry = {
+    programs.gemini-cli.enable = true;
+  };
 }

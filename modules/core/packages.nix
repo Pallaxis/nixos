@@ -19,6 +19,7 @@
     pavucontrol
     rofi
     udisks
+    nodejs
     # waybar
   ];
 }

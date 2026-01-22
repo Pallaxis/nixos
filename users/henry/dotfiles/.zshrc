@@ -1,14 +1,22 @@
 #
 # Autostarts
 #
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    exec start-hyprland
+# if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+#     exec start-hyprland
+# fi
+if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
+    if uwsm check may-start; then
+      exec uwsm start hyprland.desktop
+    fi
 fi
+
 # Make general or attach to it if it's already running
-if [[ -z $(tmux list-sessions) ]]; then
-    tmux new-session -s general
-elif [[ -z $(tmux list-clients) ]]; then
-    tmux new-session -A -s general
+if [[ -n "$DISPLAY" ]]; then
+    if [[ -z $(tmux list-sessions) ]]; then
+	tmux new-session -s general
+    elif [[ -z $(tmux list-clients) ]]; then
+	tmux new-session -A -s general
+    fi
 fi
 # Sending commands on terminal launch
 # fastfetch											# Shows a sick ass fetch

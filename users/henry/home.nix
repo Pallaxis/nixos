@@ -7,6 +7,7 @@
 
   imports = [
     ./modules/shell.nix
+    ./modules/env.nix
   ];
   ### LAZY DOTFILES ###
   home.file.".config/nvim".source = ./dotfiles/nvim;

@@ -6,11 +6,18 @@
     description = "Path to wallpaper image, set in the hosts default.nix";
   };
   config = {
-    programs.hyprland.enable = true;
+    programs.uwsm = {
+      enable = true;
+    };
+    programs.hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
 
     home-manager.users.henry = {
       wayland.windowManager.hyprland = {
         enable = true;
+        systemd.enable = false;
       };
       services.hyprpaper = {
         enable = true;
@@ -29,10 +36,6 @@
       services.hyprpolkitagent.enable = true;
       programs.waybar = {
         enable = true;
-        systemd = {
-          enable = true;
-          target = "hyprland-session.target";
-        };
       };
     };
   };
