@@ -26,6 +26,5 @@
     "resume_offset=533760"
   ];
 
-
   system.stateVersion = "25.11"; # Don't ever change this
 }
