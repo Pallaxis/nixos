@@ -1,8 +1,12 @@
 { pkgs, ... }:
 
+let envars = {
+  EDITOR = "nvim";
+  VISUAL = "nvim";
+};
+in
 {
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-  };
+  home.sessionVariables = envars;
+
+  systemd.user.sessionVariables = envars;
 }
