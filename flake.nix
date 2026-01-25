@@ -14,7 +14,7 @@
       # A helper to reduce boilerplate for any host added to the folder
       mkSystem = host: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; host = host; };
         modules = [
           # Modules every host will need
           ./hosts/${host}/default.nix

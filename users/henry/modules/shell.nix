@@ -2,6 +2,7 @@
 
 {
   programs.foot.enable = true;
+  # programs.zsh.enable = true;
   programs.tmux = {
     enable = true;
     plugins = with pkgs; [

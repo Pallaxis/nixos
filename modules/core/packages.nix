@@ -16,10 +16,10 @@
     fzf
     git
     grimblast
+    nodejs
     pavucontrol
     rofi
     udisks
-    nodejs
-    # waybar
+    wl-clipboard
   ];
 }

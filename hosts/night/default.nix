@@ -13,8 +13,6 @@
   # Temporary
   services.getty.autologinUser = "henry";
 
-  myOptions.wallpaper = ../../modules/desktop/wallpapers/forrest.png;
-
   # Swap file
   swapDevices = lib.mkForce [{
     device = "/.swapvol/swapfile";

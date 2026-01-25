@@ -1,11 +1,12 @@
-{ config, lib, pkgs, ... }:
-
+{ config, lib, pkgs, host, ... }:
+let
+  # Pulls each var out I've listed to use in this file
+  inherit ( import ../../../hosts/${host}/system-vars.nix )
+    wallpaper
+    monitor_config
+  ;
+in
 {
-  options.myOptions.wallpaper = lib.mkOption {
-    type = lib.types.path;
-    description = "Path to wallpaper image, set in the hosts default.nix";
-  };
-
   config = {
     ### GLOBAL ###
     programs.hyprland = {
@@ -37,23 +38,19 @@
         enable = true;
         systemd.enable = true;
         settings = {
-          monitor = [
-            ",preferred,auto,auto"
-            "desc:Samsung Electric Company LC32G7xT H4ZR900653, 2560x1440@240, 0x0, 1"
-            "desc:Ancor Communications Inc ROG PG278Q, 2560x1440@144, -2560x0, 1"
-            "DP-1, 2560x1440@144, -2560x0, 1"
-          ];
+          monitor = monitor_config;
         };
       };
       services.hyprpaper = {
         enable = true;
         settings = {
           splash = false;
-          preload = [ "${config.myOptions.wallpaper}" ];
+          # Coerces path to string
+          preload = [ "${wallpaper}" ];
           wallpaper = [
             {
               monitor = "";
-              path = "${config.myOptions.wallpaper}";
+              path = "${wallpaper}";
             }
           ];
         };
