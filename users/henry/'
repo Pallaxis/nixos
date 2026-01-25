@@ -1,0 +1,94 @@
+{pkgs, ...}: {
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    waylandSupport = true;
+    extraPackages = with pkgs; [
+      alejandra # nix formatter
+      stylua # lua formatter
+    ];
+    extraLuaConfig = ''
+        vim.g.mapleader = " "
+        vim.g.maplocalleader = " "
+
+        vim.g.have_nerd_font = true
+        vim.opt.number = true
+        vim.opt.relativenumber = true
+        vim.opt.mouse = "a"
+        vim.opt.showmode = false
+
+        vim.opt.breakindent = true
+        vim.opt.undofile = true
+
+        -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+        vim.opt.ignorecase = true
+        vim.opt.smartcase = true
+        vim.opt.signcolumn = "yes"
+        vim.opt.updatetime = 250
+        vim.opt.timeoutlen = 300
+        vim.opt.splitright = true
+        vim.opt.splitbelow = true
+
+        -- Sets how neovim will display certain whitespace characters in the editor.
+        --  See `:help 'list'`
+        --  and `:help 'listchars'`
+        vim.opt.list = true
+        vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
+      -- Sets how tabs will be handled
+        vim.opt.tabstop = 2
+        vim.opt.shiftwidth = 2
+        vim.opt.softtabstop = -1
+        vim.opt.expandtab = true
+
+        -- Preview substitutions live, as you type!
+        vim.opt.inccommand = "split"
+        vim.opt.cursorline = true
+        -- Minimal number of screen lines to keep above and below the cursor.
+        vim.opt.scrolloff = 10
+
+        vim.opt.confirm = true
+
+        vim.keymap.set('n', '<C-h>', ':<C-U>TmuxNavigateLeft<cr>', { silent = true })
+        vim.keymap.set('n', '<C-j>', ':<C-U>TmuxNavigateDown<cr>', { silent = true })
+        vim.keymap.set('n', '<C-k>', ':<C-U>TmuxNavigateUp<cr>', { silent = true })
+        vim.keymap.set('n', '<C-l>', ':<C-U>TmuxNavigateRight<cr>', { silent = true })
+    '';
+    plugins = with pkgs.vimPlugins; [
+      {
+        plugin = catppuccin-nvim;
+        type = "lua";
+        config = ''
+          vim.cmd.colorscheme 'catppuccin-mocha'
+        '';
+      }
+      {
+        plugin = conform-nvim;
+        type = "lua";
+        config = ''
+          require("conform").setup({
+              format_on_save = {
+              timeout_ms = 500,
+              lsp_fallback = "fallback",
+              },
+              formatters_by_ft = {
+              lua = { "stylua" },
+              nix = { "alejandra" },
+              },
+              })
+        '';
+      }
+      {
+        plugin = vim-tmux-navigator;
+        type = "lua";
+        config = ''
+          vim.g.tmux_navigator_no_mappings = 1
+          vim.keymap.set('n', '<C-h>', ':<C-U>TmuxNavigateLeft<cr>', { silent = true })
+          vim.keymap.set('n', '<C-j>', ':<C-U>TmuxNavigateDown<cr>', { silent = true })
+          vim.keymap.set('n', '<C-k>', ':<C-U>TmuxNavigateUp<cr>', { silent = true })
+          vim.keymap.set('n', '<C-l>', ':<C-U>TmuxNavigateRight<cr>', { silent = true })
+        '';
+      }
+    ];
+  };
+}

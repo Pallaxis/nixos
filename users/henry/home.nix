@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.username = "henry";
   home.homeDirectory = "/home/henry";
   home.stateVersion = "25.11";
@@ -8,9 +10,10 @@
   imports = [
     ./modules/shell.nix
     ./modules/env.nix
+    ./modules/nvim/nvim.nix
   ];
   ### LAZY DOTFILES ###
-  home.file.".config/nvim".source = ./dotfiles/nvim;
+  # home.file.".config/nvim".source = ./dotfiles/nvim;
   home.file.".config/waybar".source = ./dotfiles/waybar;
   home.file.".config/bat".source = ./dotfiles/bat;
   home.file.".config/foot".source = ./dotfiles/foot;
@@ -23,7 +26,7 @@
   # };
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
-  
+
   ### USER SERVICES ###
   services.ssh-agent = {
     enable = true;
@@ -49,7 +52,6 @@
     tldr
     tmux
   ];
-
 
   ### USER PROGRAMS ###
   # programs.zsh.enable = true;
