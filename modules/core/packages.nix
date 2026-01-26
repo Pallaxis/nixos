@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Kernel version
   boot.kernelPackages = pkgs.linuxPackages_latest;
   ### SYSTEM PROGRAMS ###

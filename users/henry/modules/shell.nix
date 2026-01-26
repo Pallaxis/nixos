@@ -1,8 +1,59 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs.foot.enable = true;
-  # programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    defaultKeymap = "emacs";
+    autocd = true;
+    enableCompletion = true;
+    autosuggestion = {
+      enable = true;
+      strategy = ["history" "completion"];
+    };
+    syntaxHighlighting.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "sudo"
+        "command-not-found"
+      ];
+    };
+    history = {
+      size = 10000;
+      save = 10000;
+      append = true;
+      ignoreSpace = true;
+      ignoreAllDups = true;
+    };
+    setOptions = [
+      "inc_append_history"
+      "no_flow_control"
+      "extended_glob"
+      "prompt_subst"
+    ];
+    initContent = " PROMPT=$'\n''%F{#89b4fa}%~%f %(?..%F{red}%?%f )'$'\n''%F{#cba6f7}%f '";
+    shellAliases = {
+      # eza
+      ls = "eza --icons=auto --sort=type --no-quotes --oneline"; # Short list
+      ll = "eza --icons=auto --sort=type --no-quotes --all --long --header --smart-group"; # long list
+      lls = "eza --icons=auto --sort=size --no-quotes --all --long --header --total-size --smart-group"; # long list with dir sizes shown
+      lm = "eza --icons=auto --sort=modified --no-quotes --all --long --header --smart-group --modified"; # sorts by modifed date
+      lc = "eza --icons=auto --sort=created --no-quotes --all --long --header --smart-group --created"; # sorts by created date
+      tree = "eza --tree --icons=auto"; # Same as tree but with colours
+
+      # Handy dir change shortcuts
+      "-" = "cd -";
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "..3" = "cd ../../..";
+      "..4" = "cd ../../../..";
+      "..5" = "cd ../../../../..";
+      c = "clear"; # Clear terminal
+      mkdir = "mkdir -p"; # Always mkdir a path (this doesn't inhibit functionality to make a single dir)
+      cp = "cp -r"; # Same for cp
+      scp = "scp -r";
+    };
+  };
   programs.tmux = {
     enable = true;
     plugins = with pkgs; [
@@ -24,7 +75,7 @@
       set -g prefix C-s
       set -g mouse on
       set -g base-index 1
-      set -g pane-base-index 1 
+      set -g pane-base-index 1
       set-window-option -g pane-base-index 1
       set-option -g renumber-windows on
       set -g default-terminal "tmux-256color"
