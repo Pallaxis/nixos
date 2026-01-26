@@ -1,11 +1,9 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  home.username = "henry";
-  home.homeDirectory = "/home/henry";
-  home.stateVersion = "25.11";
+{pkgs, ...}: {
+  home = {
+    username = "henry";
+    homeDirectory = "/home/henry";
+    stateVersion = "25.11";
+  };
 
   imports = [
     ./modules/shell.nix
@@ -13,17 +11,11 @@
     ./modules/nvim/nvim.nix
   ];
   ### LAZY DOTFILES ###
-  # home.file.".config/nvim".source = ./dotfiles/nvim;
   home.file.".config/waybar".source = ./dotfiles/waybar;
   home.file.".config/bat".source = ./dotfiles/bat;
   home.file.".config/foot".source = ./dotfiles/foot;
   home.file.".config/rofi".source = ./dotfiles/rofi;
   home.file.".zshrc".source = ./dotfiles/.zshrc;
-  # home.file.".local/share/wallpapers".source = ./wallpapers;
-  # xdg.configFile."hypr" = {
-  #   source = ./dotfiles/hypr;
-  #   recursive = true;
-  # };
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
 
@@ -33,7 +25,6 @@
     socket = "ssh-agent.socket";
     enableZshIntegration = true;
   };
-  # wayland.windowManager.hyprland.systemd.variables = ["--all"];
 
   home.packages = with pkgs; [
     bat
@@ -52,7 +43,4 @@
     tldr
     tmux
   ];
-
-  ### USER PROGRAMS ###
-  # programs.zsh.enable = true;
 }
