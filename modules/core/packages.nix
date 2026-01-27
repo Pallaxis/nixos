@@ -13,6 +13,7 @@
     flatpak
     fzf
     git
+    glib
     grimblast
     nodejs
     pavucontrol

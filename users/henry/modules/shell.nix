@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   programs.foot.enable = true;
   programs.zsh = {
     enable = true;
@@ -31,7 +35,20 @@
       "extended_glob"
       "prompt_subst"
     ];
-    initContent = " PROMPT=$'\n''%F{#89b4fa}%~%f %(?..%F{red}%?%f )'$'\n''%F{#cba6f7}%f '";
+    initContent = let
+      zshConfigEarlyInit = lib.mkOrder 500 ''
+        # Make general or attach to it if it's already running
+        if [[ -n "$DISPLAY" ]]; then
+            if [[ -z $(tmux list-sessions) ]]; then
+          tmux new-session -s general
+            elif [[ -z $(tmux list-clients) ]]; then
+          tmux new-session -A -s general
+            fi
+        fi
+      '';
+      zshPrompt = lib.mkOrder 1000 "PROMPT=$'\n''%F{#89b4fa}%~%f %(?..%F{red}%?%f )'$'\n''%F{#cba6f7}%f '";
+    in
+      lib.mkMerge [zshConfigEarlyInit zshPrompt];
     shellAliases = {
       # eza
       ls = "eza --icons=auto --sort=type --no-quotes --oneline"; # Short list
@@ -52,6 +69,17 @@
       mkdir = "mkdir -p"; # Always mkdir a path (this doesn't inhibit functionality to make a single dir)
       cp = "cp -r"; # Same for cp
       scp = "scp -r";
+
+      # Other
+
+      sudo = "sudo ";
+      vi = "nvim";
+      ffplay = "ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzeduration 1";
+      cat = "bat --paging=never --style=grid,header-filename"; # Cat but with colors
+      diff = "diff --color"; # Enables color for diffs
+      info = "info --vi-keys";
+      fd-aged = "fd -0 -t d | xargs -0 stat --format '%Y %n' | sort -n";
+      resolve = "avahi-resolve-host-name";
     };
   };
   programs.tmux = {
