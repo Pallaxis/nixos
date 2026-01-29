@@ -14,6 +14,17 @@
       strategy = ["history" "completion"];
     };
     syntaxHighlighting.enable = true;
+    plugins = [
+      {
+        name = "fzf-tab";
+        src = pkgs.fetchFromGitHub {
+          owner = "Aloxaf";
+          repo = "fzf-tab";
+          rev = "v1.2.0";
+          sha256 = "q26XVS/LcyZPRqDNwKKA9exgBByE0muyuNb0Bbar2lY=";
+        };
+      }
+    ];
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -47,8 +58,37 @@
         fi
       '';
       zshPrompt = lib.mkOrder 1000 "PROMPT=$'\n''%F{#89b4fa}%~%f %(?..%F{red}%?%f )'$'\n''%F{#cba6f7}%f '";
+      fzfTab = lib.mkOrder 1200 ''
+        export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+        # System FZF settings
+        export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude git"
+        export FZF_DEFAULT_OPTS="--preview-window=up:70% --bind=ctrl-d:page-down,ctrl-u:page-up --color=query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"
+        # Uses bat as manpager (replaces bat-extras package)
+        export MANPAGER="bat -plman"
+
+        #
+        # Completion
+        #
+        zstyle ':completion:*:git-checkout:*' sort false
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+        zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
+        # Disable prompt and use menu selection
+        zstyle ':completion:*' list-prompt ""
+        zstyle ':completion:*' menu select=long
+        # fzf-tab settings
+        zstyle ':fzf-tab:*' fzf-preview '[[ -d $realpath ]] && eza -1 --icons=auto $realpath || bat --paging=never --style=plain --color=always $realpath' # Shows ls or bat based on context
+        zstyle ':fzf-tab:*' default-color "" # Color when there is no group
+        zstyle ':fzf-tab:*' fzf-flags --color="query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7" # Catppuccin colors
+        zstyle ':fzf-tab:*' fzf-bindings 'ctrl-d:page-down' 'ctrl-u:page-up'
+        zstyle ':fzf-tab:*' fzf-min-height 20 # Opens in tmux popup window
+        # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup # Opens in tmux popup window
+        # zstyle ':fzf-tab:*' popup-smart-tab no # Opens in tmux popup window
+        # zstyle ':fzf-tab:*' popup-min-size 200 40 # Sizes for tmux window
+        zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word' # Systemctl status
+        zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ''${P word}' # Environment variables
+      '';
     in
-      lib.mkMerge [zshConfigEarlyInit zshPrompt];
+      lib.mkMerge [zshConfigEarlyInit zshPrompt fzfTab];
     shellAliases = {
       # eza
       ls = "eza --icons=auto --sort=type --no-quotes --oneline"; # Short list
