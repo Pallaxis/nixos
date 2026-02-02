@@ -41,7 +41,7 @@ in {
     #$hypr_scr_path = ~/.config/hypr/scripts
     ### HOME MANAGED ###
     home-manager.users.henry = {
-      home.file.".config/hypr/scripts".source = ../../../users/henry/dotfiles/hypr/scripts;
+      home.file.".config/hypr/scripts".source = ../../../home/henry/dotfiles/hypr/scripts;
       wayland.windowManager.hyprland = {
         enable = true;
         systemd.enable = true;
