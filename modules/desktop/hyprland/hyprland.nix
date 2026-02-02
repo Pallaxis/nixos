@@ -1,13 +1,21 @@
-{ config, lib, pkgs, host, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  host,
+  ...
+}: let
   # Pulls each var out I've listed to use in this file
-  inherit ( import ../../../hosts/${host}/system-vars.nix )
+  inherit
+    (import ../../../hosts/${host}/system-vars.nix)
     wallpaper
     monitor_config
-  ;
-in
-{
-  config = {
+    ;
+in {
+  options.desktop.hyprland = {
+    enable = lib.mkEnableOption "Enables Hyprland";
+  };
+  config = lib.mkIf config.desktop.hyprland.enable {
     ### GLOBAL ###
     programs.hyprland = {
       enable = true;
@@ -46,7 +54,7 @@ in
         settings = {
           splash = false;
           # Coerces path to string
-          preload = [ "${wallpaper}" ];
+          preload = ["${wallpaper}"];
           wallpaper = [
             {
               monitor = "";

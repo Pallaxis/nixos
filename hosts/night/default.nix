@@ -1,17 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
+{lib, ...}: {
   imports = [
-    ../../modules/desktop/default.nix # Desktop stuff, hyprland etc.
-    ../../modules/hardware/nvidia.nix # Vendor specific settings
-    ../../modules/apps/other.nix
-    ../../modules/apps/gaming.nix
-    ../../modules/hardware/bluetooth.nix
+    ../../modules/default.nix
   ];
+
+  desktop.hyprland.enable = true;
+  bluetooth.enable = true;
+  hardware.nvidia.enable = true;
+  apps.gaming.enable = true;
 
   # Hostname
   networking.hostName = "night";

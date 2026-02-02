@@ -1,5 +1,9 @@
-{ ... }:
 {
+  config,
+  lib,
+  ...
+}:
+lib.mkIf config.desktop.hyprland.enable {
   home-manager.users.henry = {
     wayland.windowManager.hyprland = {
       settings = {
@@ -60,58 +64,58 @@
         ];
       };
       extraConfig = ''
-          windowrule {
-              name = osrs fix
-              match:class = net-runelite-client-RuneLite,title:^(win\d+)$, float # Fixes tooltip hover bug
-              no_focus = 1
-          }
-          windowrule {
-              name = keepassxc
-              match:class = ^(org.keepassxc.KeePassXC)$
-              no_screen_share = 1 # Prevents leaking password manager over screenshare
-          }
-          dwindle {
-              pseudotile = yes
-              preserve_split = yes
-          }
+        windowrule {
+            name = osrs fix
+            match:class = net-runelite-client-RuneLite,title:^(win\d+)$, float # Fixes tooltip hover bug
+            no_focus = 1
+        }
+        windowrule {
+            name = keepassxc
+            match:class = ^(org.keepassxc.KeePassXC)$
+            no_screen_share = 1 # Prevents leaking password manager over screenshare
+        }
+        dwindle {
+            pseudotile = yes
+            preserve_split = yes
+        }
 
-          master {
-              new_status = master
-          }
+        master {
+            new_status = master
+        }
 
-          general {
-              gaps_in = 2
-              gaps_out = 5
-              border_size = 2
-              col.active_border = rgba(f5c2e7ff) rgba(cba6f7ff) 45deg
-              col.inactive_border = rgba(89b4faff) rgba(89b4fadf) 45deg
-              layout = dwindle
-              resize_on_border = true
-          }
+        general {
+            gaps_in = 2
+            gaps_out = 5
+            border_size = 2
+            col.active_border = rgba(f5c2e7ff) rgba(cba6f7ff) 45deg
+            col.inactive_border = rgba(89b4faff) rgba(89b4fadf) 45deg
+            layout = dwindle
+            resize_on_border = true
+        }
 
-          group {
-              col.border_active = rgba(eb6f92ff) rgba(c4a7e7ff) 45deg
-              col.border_inactive = rgba(31748fcc) rgba(9ccfd8cc) 45deg
-              col.border_locked_active = rgba(eb6f92ff) rgba(c4a7e7ff) 45deg
-              col.border_locked_inactive = rgba(31748fcc) rgba(9ccfd8cc) 45deg
-          }
+        group {
+            col.border_active = rgba(eb6f92ff) rgba(c4a7e7ff) 45deg
+            col.border_inactive = rgba(31748fcc) rgba(9ccfd8cc) 45deg
+            col.border_locked_active = rgba(eb6f92ff) rgba(c4a7e7ff) 45deg
+            col.border_locked_inactive = rgba(31748fcc) rgba(9ccfd8cc) 45deg
+        }
 
-          decoration {
-              dim_special = 0.3
-              rounding = 10
-              shadow {
-                  enabled = no
-              }
-              blur {
-                  special = true
-                  enabled = yes
-                  size = 6
-                  passes = 3
-                  new_optimizations = on
-                  ignore_opacity = on
-                  xray = false
-              }
-          }
+        decoration {
+            dim_special = 0.3
+            rounding = 10
+            shadow {
+                enabled = no
+            }
+            blur {
+                special = true
+                enabled = yes
+                size = 6
+                passes = 3
+                new_optimizations = on
+                ignore_opacity = on
+                xray = false
+            }
+        }
       '';
     };
   };
