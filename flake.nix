@@ -43,5 +43,11 @@
       thinkpad = mkSystem "thinkpad";
       mist = mkSystem "mist";
     };
+    homeConfigurations = {
+      henry = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [./home/henry/home.nix];
+      };
+    };
   };
 }
