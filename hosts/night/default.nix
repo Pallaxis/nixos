@@ -1,11 +1,16 @@
-{ config, lib, pkgs, inputs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
-    ../../modules/desktop/default.nix                 # Desktop stuff, hyprland etc.
-    ../../modules/hardware/nvidia.nix                 # Vendor specific settings
+    ../../modules/desktop/default.nix # Desktop stuff, hyprland etc.
+    ../../modules/hardware/nvidia.nix # Vendor specific settings
     ../../modules/apps/other.nix
     ../../modules/apps/gaming.nix
+    ../../modules/hardware/bluetooth.nix
   ];
 
   # Hostname
@@ -14,9 +19,11 @@
   services.getty.autologinUser = "henry";
 
   # Swap file
-  swapDevices = lib.mkForce [{
-    device = "/.swapvol/swapfile";
-  }];
+  swapDevices = lib.mkForce [
+    {
+      device = "/.swapvol/swapfile";
+    }
+  ];
 
   # For hibernate resume, offset to swap offset
   boot.resumeDevice = "/dev/mapper/nixos-root";
