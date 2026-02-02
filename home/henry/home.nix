@@ -53,6 +53,17 @@
       };
     };
   };
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "*" = {
+      };
+    };
+    extraConfig = ''
+      AddKeysToAgent yes
+    '';
+  };
 
   home.packages = with pkgs; [
     bat
