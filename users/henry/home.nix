@@ -15,7 +15,7 @@
   home.file.".config/bat".source = ./dotfiles/bat;
   home.file.".config/foot".source = ./dotfiles/foot;
   home.file.".config/rofi".source = ./dotfiles/rofi;
-  home.file.".zshrc".source = ./dotfiles/.zshrc;
+
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
 
@@ -62,7 +62,6 @@
     fastfetch
     foot
     fortune
-    fzf
     gcc
     git
     keepassxc
