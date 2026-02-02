@@ -10,8 +10,6 @@
 
   # Hostname
   networking.hostName = "night";
-  # Temporary
-  services.getty.autologinUser = "henry";
 
   # Swap file
   swapDevices = lib.mkForce [
