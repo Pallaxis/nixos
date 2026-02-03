@@ -91,8 +91,57 @@
         zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word' # Systemctl status
         zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ''${P word}' # Environment variables
       '';
+      functions = lib.mkAfter ''
+        #
+        # Functions
+        #
+        ssh-host() {
+            # Pulls the IP from .ssh config for supplied arg
+            if [[ $# -ne 1 ]]; then
+        	echo "Supply only one arg to pull from ssh config"
+        	return 1
+            fi
+            ssh -G $1 | awk '/^hostname/{print $2}'
+        }
+        stopwatch() {
+            start=$(date +%s)
+            while true; do
+        	time="$(($(date +%s) - $start))"
+        	printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
+            done
+        }
+        countdown() {
+            start="$(( $(date '+%s') + $1))"
+            while [ $start -ge $(date +%s) ]; do
+        	time="$(( $start - $(date +%s) ))"
+        	printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
+        	sleep 0.1
+            done
+            notify-send Countdown Completed!
+        }
+        udm() {
+            udisksctl mount -b "$1" > /dev/null 2>&1
+            drive_mountpoint=$(udisksctl info -b "$1" | awk '/MountPoints:/ {print $2}')
+            cd "$drive_mountpoint" || echo "cd failed"
+        }
+        udu() {
+            drive_mountpoint=$(udisksctl info -b "$1" | awk '/MountPoints:/ {print $2}')
+            if [[ -n "$drive_mountpoint" && "$PWD" == "$drive_mountpoint" ]]; then
+        	cd '..'
+            fi
+            udisksctl unmount -b "$1"
+        }
+        # Checks a dir exists & is not in path, then prepends to PATH
+        add_paths() {
+          for directory in "$@"; do
+            [[ -d "$directory" && ! "$PATH" =~ (^|:)$directory(:|$) ]] && PATH="$directory:$PATH"
+          done
+        }
+        add_paths ~/.local/bin ~/.local/share/system-setup/bin
+
+      '';
     in
-      lib.mkMerge [zshConfigEarlyInit zshPrompt fzfTab];
+      lib.mkMerge [zshConfigEarlyInit zshPrompt fzfTab functions];
     shellAliases = {
       # eza
       ls = "eza --icons=auto --sort=type --no-quotes --oneline"; # Short list
