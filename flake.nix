@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,6 +17,7 @@
     self,
     nixpkgs,
     home-manager,
+    disko,
     ...
   } @ inputs: let
     # A helper to reduce boilerplate for any host added to the folder
@@ -27,6 +32,7 @@
           # Modules every host will need
           ./hosts/${host}/default.nix
           ./hosts/${host}/hardware-configuration.nix
+          disko.nixosModules.disko
           # Home manager defined here because I only have 1 user
           inputs.home-manager.nixosModules.home-manager
           {

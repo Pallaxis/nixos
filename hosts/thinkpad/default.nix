@@ -1,10 +1,16 @@
-{ config, lib, pkgs, inputs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
-    ../../modules/desktop/default.nix                 # Desktop stuff, hyprland etc.
+    ../../modules/default.nix # Desktop stuff, hyprland etc.
+    ./disk-config.nix
     # ../../modules/apps/other.nix
   ];
+  desktop.hyprland.enable = true;
 
   # Hostname
   networking.hostName = "thinkpad";
