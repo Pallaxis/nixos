@@ -6,9 +6,8 @@
   ...
 }: {
   imports = [
-    ../../modules/default.nix # Desktop stuff, hyprland etc.
+    ../../modules/default.nix
     ./disk-config.nix
-    # ../../modules/apps/other.nix
   ];
   desktop.hyprland.enable = true;
 

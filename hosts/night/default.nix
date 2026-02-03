@@ -3,6 +3,7 @@
     ../../modules/default.nix
   ];
 
+  #TODO: fix hardware config to use disk-config.nix
   desktop.hyprland.enable = true;
   bluetooth.enable = true;
   hardware.nvidia.enable = true;

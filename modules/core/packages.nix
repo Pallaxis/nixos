@@ -18,6 +18,7 @@
     nodejs
     pavucontrol
     rofi
+    thunderbird
     udisks
     wl-clipboard
   ];
