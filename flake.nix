@@ -11,12 +11,14 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    catppuccin,
     disko,
     ...
   } @ inputs: let
@@ -39,7 +41,10 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {inherit inputs;};
-            home-manager.users.henry = import ./home/henry/home.nix;
+            home-manager.users.henry.imports = [
+              ./home/henry/home.nix
+              catppuccin.homeModules.catppuccin
+            ];
           }
         ];
       };

@@ -10,6 +10,7 @@
     ./disk-config.nix
   ];
   desktop.hyprland.enable = true;
+  apps.work.enable = true;
 
   # Hostname
   networking.hostName = "thinkpad";

@@ -10,14 +10,16 @@
   };
   config = lib.mkIf config.apps.work.enable {
     environment.systemPackages = with pkgs; [
-      ansible
-      ansible-core
-      audacity
+      # ansible
+      # ansible-core
+      # audacity
+      # dpkg
+      # krita
+      # openbsd-netcat
       chromium
       ddcutil
-      dpkg
-      krita
-      openbsd-netcat
+      ffmpeg-full
+      slack
       tio
     ];
   };
