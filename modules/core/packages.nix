@@ -15,6 +15,7 @@
     git
     glib
     grimblast
+    jq
     nodejs
     pavucontrol
     rofi
