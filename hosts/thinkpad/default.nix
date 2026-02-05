@@ -11,6 +11,7 @@
   ];
   desktop.hyprland.enable = true;
   apps.work.enable = true;
+  apps.others.enable = true;
 
   # Hostname
   networking.hostName = "thinkpad";
