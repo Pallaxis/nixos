@@ -52,7 +52,7 @@
     nixosConfigurations = {
       night = mkSystem "night";
       thinkpad = mkSystem "thinkpad";
-      mist = mkSystem "mist";
+      # mist = mkSystem "mist";
     };
     homeConfigurations = {
       henry = home-manager.lib.homeManagerConfiguration {

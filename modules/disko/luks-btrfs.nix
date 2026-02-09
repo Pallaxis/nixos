@@ -1,9 +1,13 @@
 {
+  device ? throw "Set this to your disk device, e.g. /dev/sda",
+  swapSize ? throw "Set this to your desired swap partition size in GB, e.g. 8GB",
+  ...
+}: {
   disko.devices = {
     disk = {
       main = {
+        inherit device;
         type = "disk";
-        device = "/dev/nvme1n1";
         content = {
           type = "gpt";
           partitions = {
@@ -14,7 +18,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
+                mountOptions = ["umask=0077"];
               };
             };
             luks = {
@@ -27,7 +31,7 @@
                 };
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "-f" ];
+                  extraArgs = ["-f"];
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";
@@ -52,7 +56,7 @@
                     };
                     "/swap" = {
                       mountpoint = "/.swapvol";
-                      swap.swapfile.size = "32G";
+                      swap.swapfile.size = swapSize;
                     };
                   };
                 };

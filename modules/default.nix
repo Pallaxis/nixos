@@ -8,6 +8,7 @@ in {
   imports = [
     ./apps
     ./core
+    ./disko
     ./hardware
     ./hyprland
     ./networking
