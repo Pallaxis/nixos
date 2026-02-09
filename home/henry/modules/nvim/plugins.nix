@@ -92,15 +92,18 @@
       config = ''
         require('snacks').setup({
           picker = {
-            enabled = true
+            enabled = true,
+            replace_netrw = true,
+            layout = { preset = "default" },
           },
         })
         -- Search
-          vim.keymap.set('n', 's', function() Snacks.picker.registers() end, { desc = 'Registers' })
+          vim.keymap.set('n', 's', function() Snacks.picker.registers() end, { desc = '[S]earch registers' })
           vim.keymap.set('n', 's/', function() Snacks.picker.search_history() end, { desc = 'Search History' })
           vim.keymap.set('n', 'sM', function() Snacks.picker.man() end, { desc = 'Man pages' })
           vim.keymap.set('n', 'su', function() Snacks.picker.undo() end, { desc = 'Undo History' })
           vim.keymap.set('n', 'sk', function() Snacks.picker.keymaps() end, { desc = 'Search Keymaps' })
+          vim.keymap.set('n', 'sf', function() Snacks.explorer.open() end, { desc = '[S]earch [F]iles' })
         -- LSP
           vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
           vim.keymap.set('n', 'gd', function() Snacks.picker.lsp_definitions() end, { desc = '[G]oto [d]efinition' })
