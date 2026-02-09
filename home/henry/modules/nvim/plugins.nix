@@ -99,6 +99,7 @@
             enabled = true,
             sources = {
               explorer = {
+                auto_close = true,
                 layout = {
                   preset = "default",
                 },
@@ -107,7 +108,8 @@
           },
         })
         -- Search
-          vim.keymap.set('n', 'sr', function() Snacks.picker.registers() end, { desc = '[S]earch registers' })
+          vim.keymap.set('n', 'sr', function() Snacks.picker.registers() end, { desc = '[S]earch [R]egisters' })
+          vim.keymap.set('n', 'sb', function() Snacks.picker.buffers() end, { desc = '[S]earch [B]uffers' })
           vim.keymap.set('n', 's/', function() Snacks.picker.search_history() end, { desc = 'Search History' })
           vim.keymap.set('n', 'sM', function() Snacks.picker.man() end, { desc = 'Man pages' })
           vim.keymap.set('n', 'su', function() Snacks.picker.undo() end, { desc = 'Undo History' })
