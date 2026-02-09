@@ -1,9 +1,12 @@
 {...}: {
-  programs.neovim.extraLuaConfig = ''
+  programs.neovim.initLua = ''
     -- Misc binds
     vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- Clear highlights on search when pressing <Esc> in normal mode
     vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" }) -- Diagnostic keymaps
     vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }) -- For exiting terminal mode
+
+    -- Unbind space in normal and visual modes
+    vim.keymap.set({'n', 'v'}, '<Space>', '<Nop>', { noremap = true, silent = true })
 
     -- Leader binds for copying/putting/deleting to system clipboard
     -- Yank

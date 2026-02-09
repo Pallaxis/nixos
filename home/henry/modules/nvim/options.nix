@@ -1,5 +1,5 @@
 {lib, ...}: {
-  programs.neovim.extraLuaConfig = lib.mkBefore ''
+  programs.neovim.initLua = lib.mkBefore ''
     vim.g.mapleader = " "
     vim.g.maplocalleader = " "
 

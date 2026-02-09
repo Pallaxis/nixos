@@ -204,6 +204,8 @@
       set-option -g status-position bottom
       set-option -g history-limit 10000
       set-option -g detach-on-destroy off
+      # Fixes nvim long esc wait time
+      set -sg escape-time 10
 
       # <C-b> r to reload config quickly
       unbind r

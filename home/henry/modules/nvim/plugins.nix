@@ -91,14 +91,23 @@
       type = "lua";
       config = ''
         require('snacks').setup({
-          picker = {
+          explorer = {
             enabled = true,
             replace_netrw = true,
-            layout = { preset = "default" },
+          },
+          picker = {
+            enabled = true,
+            sources = {
+              explorer = {
+                layout = {
+                  preset = "default",
+                },
+              },
+            },
           },
         })
         -- Search
-          vim.keymap.set('n', 's', function() Snacks.picker.registers() end, { desc = '[S]earch registers' })
+          vim.keymap.set('n', 'sr', function() Snacks.picker.registers() end, { desc = '[S]earch registers' })
           vim.keymap.set('n', 's/', function() Snacks.picker.search_history() end, { desc = 'Search History' })
           vim.keymap.set('n', 'sM', function() Snacks.picker.man() end, { desc = 'Man pages' })
           vim.keymap.set('n', 'su', function() Snacks.picker.undo() end, { desc = 'Undo History' })

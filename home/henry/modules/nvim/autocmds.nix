@@ -1,5 +1,5 @@
 {...}: {
-  programs.neovim.extraLuaConfig = ''
+  programs.neovim.initLua = ''
     vim.opt.confirm = true
     -- Highlight when yanking (copying) text
     vim.api.nvim_create_autocmd("TextYankPost", {
