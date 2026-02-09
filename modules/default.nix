@@ -8,8 +8,8 @@ in {
   imports = [
     ./apps
     ./core
-    ./desktop
     ./hardware
+    ./hyprland
     ./networking
     ./options
   ];

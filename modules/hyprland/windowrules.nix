@@ -6,7 +6,7 @@
 }: let
   # Pulls each var out I've listed to use in this file
   inherit
-    (import ../../../hosts/${hostName}/system-vars.nix)
+    (import ../../hosts/${hostName}/system-vars.nix)
     workspaces
     ;
 in

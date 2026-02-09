@@ -8,7 +8,7 @@
   cfg = config.my.modules.hyprland;
   # Pulls each var out I've listed to use in this file
   inherit
-    (import ../../../hosts/${hostName}/system-vars.nix)
+    (import ../../hosts/${hostName}/system-vars.nix)
     wallpaper
     monitor_config
     ;
@@ -42,7 +42,7 @@ in {
     #$hypr_scr_path = ~/.config/hypr/scripts
     ### HOME MANAGED ###
     home-manager.users.henry = {
-      home.file.".config/hypr/scripts".source = ../../../home/henry/dotfiles/hypr/scripts;
+      home.file.".config/hypr/scripts".source = ../../home/henry/dotfiles/hypr/scripts;
       wayland.windowManager.hyprland = {
         enable = true;
         systemd.enable = true;
