@@ -1,16 +1,16 @@
 {
   config,
   lib,
-  host,
+  hostName,
   ...
 }: let
   # Pulls each var out I've listed to use in this file
   inherit
-    (import ../../../hosts/${host}/system-vars.nix)
+    (import ../../../hosts/${hostName}/system-vars.nix)
     workspaces
     ;
 in
-  lib.mkIf config.desktop.hyprland.enable {
+  lib.mkIf config.my.modules.hyprland.enable {
     home-manager.users.henry = {
       wayland.windowManager.hyprland = {
         settings = {

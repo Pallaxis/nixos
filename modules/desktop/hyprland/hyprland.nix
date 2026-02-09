@@ -2,20 +2,21 @@
   config,
   lib,
   pkgs,
-  host,
+  hostName,
   ...
 }: let
+  cfg = config.my.modules.hyprland;
   # Pulls each var out I've listed to use in this file
   inherit
-    (import ../../../hosts/${host}/system-vars.nix)
+    (import ../../../hosts/${hostName}/system-vars.nix)
     wallpaper
     monitor_config
     ;
 in {
-  options.desktop.hyprland = {
-    enable = lib.mkEnableOption "Enables Hyprland";
+  options.my.modules.hyprland = {
+    enable = lib.mkEnableOption "hyprland";
   };
-  config = lib.mkIf config.desktop.hyprland.enable {
+  config = lib.mkIf cfg.enable {
     ### GLOBAL ###
     programs.hyprland = {
       enable = true;

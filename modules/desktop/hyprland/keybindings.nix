@@ -3,7 +3,7 @@
   lib,
   ...
 }:
-lib.mkIf config.desktop.hyprland.enable {
+lib.mkIf config.my.modules.hyprland.enable {
   home-manager.users.henry = {
     wayland.windowManager.hyprland = {
       settings = {
