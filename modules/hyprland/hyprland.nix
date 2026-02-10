@@ -9,12 +9,18 @@
   # Pulls each var out I've listed to use in this file
   inherit
     (import ../../hosts/${hostName}/system-vars.nix)
-    wallpaper
     monitor_config
     ;
 in {
   options.my.modules.hyprland = {
     enable = lib.mkEnableOption "hyprland";
+  };
+  options.my.modules.hyprpaper = {
+    path = lib.mkOption {
+      type = lib.types.path;
+      default = ./wallpapers/forrest.png;
+      description = "Wallpaper used by hyprpaper";
+    };
   };
   config = lib.mkIf cfg.enable {
     ### GLOBAL ###
@@ -54,12 +60,10 @@ in {
         enable = true;
         settings = {
           splash = false;
-          # Coerces path to string
-          preload = ["${wallpaper}"];
           wallpaper = [
             {
               monitor = "";
-              path = "${wallpaper}";
+              path = toString config.my.modules.hyprpaper.path;
             }
           ];
         };
@@ -123,7 +127,7 @@ in {
           };
           background = {
             monitor = "";
-            path = "${wallpaper}";
+            path = toString config.my.modules.hyprpaper.path;
             blur_passes = "4";
             blur_size = "1";
           };

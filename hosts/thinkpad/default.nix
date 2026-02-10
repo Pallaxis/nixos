@@ -13,6 +13,7 @@
         bootDisk = "/dev/disk/by-id/nvme-TEAM_TM8FP4512G_17A8079402DE00100982";
         swapSize = "16G";
       };
+      hyprpaper.path = ../../modules/hyprland/wallpapers/alien-planet.png;
     };
   };
 
