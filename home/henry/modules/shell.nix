@@ -149,7 +149,7 @@
       lls = "eza --icons=auto --sort=size --no-quotes --all --long --header --total-size --smart-group"; # long list with dir sizes shown
       lm = "eza --icons=auto --sort=modified --no-quotes --all --long --header --smart-group --modified"; # sorts by modifed date
       lc = "eza --icons=auto --sort=created --no-quotes --all --long --header --smart-group --created"; # sorts by created date
-      tree = "eza --tree --icons=auto"; # Same as tree but with colours
+      tree = "eza --tree --icons=auto --sort=type"; # Same as tree but with colours
 
       # Handy dir change shortcuts
       "-" = "cd -";
