@@ -1,16 +1,31 @@
 {
   config,
   lib,
-  hostName,
   ...
 }: let
-  # Pulls each var out I've listed to use in this file
-  inherit
-    (import ../../hosts/${hostName}/system-vars.nix)
-    workspaces
-    ;
-in
-  lib.mkIf config.my.modules.hyprland.enable {
+  cfg = config.my.modules.hyprland;
+in {
+  options.my.modules = {
+    hyprland = {
+      workspaces = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [
+          "1, monitor:DP-1, default:true"
+          "2, monitor:DP-1"
+          "3, monitor:DP-1"
+          "4, monitor:DP-1"
+          "5, monitor:DP-1"
+          "6, monitor:DP-2, default:true"
+          "7, monitor:DP-2"
+          "8, monitor:DP-2"
+          "9, monitor:DP-2"
+          "10, monitor:DP-2"
+        ];
+        description = "Workspaces for Hyprland";
+      };
+    };
+  };
+  config = lib.mkIf cfg.enable {
     home-manager.users.henry = {
       wayland.windowManager.hyprland = {
         settings = {
@@ -57,7 +72,7 @@ in
             "match:namespace swaync-control-center, ignore_alpha 1"
             "match:namespace swaync-notification-window, ignore_alpha 1"
           ];
-          workspace = lib.mkForce workspaces;
+          workspace = config.my.modules.hyprland.workspaces;
         };
         extraConfig = ''
           windowrule {
@@ -115,4 +130,5 @@ in
         '';
       };
     };
-  }
+  };
+}

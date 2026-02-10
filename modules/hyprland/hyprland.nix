@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  hostName,
   ...
 }: let
   cfg = config.my.modules.hyprland;
