@@ -1,25 +1,30 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
+{...}: {
   imports = [
-    ../../modules/default.nix
-    ./disk-config.nix
+    ../../modules
   ];
-  desktop.hyprland.enable = true;
+
+  my = {
+    host = {
+      role = "desktop";
+    };
+    modules = {
+      disko = {
+        enable = true;
+        bootDisk = "/dev/disk/by-id/nvme-TEAM_TM8FP4512G_17A8079402DE00100982";
+        swapSize = "16G";
+      };
+    };
+  };
+
   apps.work.enable = true;
   apps.others.enable = true;
 
-  # Hostname
-  networking.hostName = "thinkpad";
-
+  # Only need this on thinkpad
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTRS{idVendor}=="4255", MODE="0666"
   '';
 
+  # Unique to thinkpad, PrtSc button where meta key should be
   services.keyd = {
     keyboards.caps-swap.settings = {
       main = {

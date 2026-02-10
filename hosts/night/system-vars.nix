@@ -5,5 +5,5 @@
     "desc:Ancor Communications Inc ROG PG278Q, 2560x1440@144, -2560x0, 1"
     "DP-1, 2560x1440@144, -2560x0, 1"
   ];
-  wallpaper = ../../modules/desktop/wallpapers/forrest.png;
+  wallpaper = ../../modules/hyprland/wallpapers/forrest.png;
 }

@@ -27,5 +27,5 @@
     "9, monitor:eDP-1"
     "10, monitor:eDP-1, default:true"
   ];
-  wallpaper = ../../modules/desktop/wallpapers/forrest.png;
+  wallpaper = ../../modules/hyprland/wallpapers/forrest.png;
 }

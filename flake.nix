@@ -23,17 +23,17 @@
     ...
   } @ inputs: let
     # A helper to reduce boilerplate for any host added to the folder
-    mkSystem = host:
+    mkSystem = hostName:
       nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
-          inherit host;
+          inherit hostName;
         };
         modules = [
           # Modules every host will need
-          ./hosts/${host}/default.nix
-          ./hosts/${host}/hardware-configuration.nix
+          ./hosts/${hostName}/default.nix
+          ./hosts/${hostName}/hardware-configuration.nix
           disko.nixosModules.disko
           # Home manager defined here because I only have 1 user
           inputs.home-manager.nixosModules.home-manager
@@ -52,7 +52,7 @@
     nixosConfigurations = {
       night = mkSystem "night";
       thinkpad = mkSystem "thinkpad";
-      mist = mkSystem "mist";
+      # mist = mkSystem "mist";
     };
     homeConfigurations = {
       henry = home-manager.lib.homeManagerConfiguration {

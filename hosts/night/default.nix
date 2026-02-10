@@ -1,16 +1,24 @@
 {lib, ...}: {
   imports = [
-    ../../modules/default.nix
+    ../../modules
   ];
 
-  #TODO: fix hardware config to use disk-config.nix
-  desktop.hyprland.enable = true;
+  my = {
+    host = {
+      role = "desktop";
+    };
+    modules = {
+      disko = {
+        enable = true;
+        bootDisk = "/dev/nvme1n1"; # TODO: change to id
+        swapSize = "32G";
+      };
+    };
+  };
+
   bluetooth.enable = true;
   hardware.nvidia.enable = true;
   apps.gaming.enable = true;
-
-  # Hostname
-  networking.hostName = "night";
 
   # Swap file
   swapDevices = lib.mkForce [
