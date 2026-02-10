@@ -6,9 +6,7 @@
   };
 
   imports = [
-    ./modules/shell.nix
-    ./modules/env.nix
-    ./modules/nvim/nvim.nix
+    ./modules
   ];
   ### LAZY DOTFILES ###
   home.file.".config/waybar".source = ./dotfiles/waybar;
@@ -18,6 +16,13 @@
 
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
+  my = {
+    home = {
+      modules = {
+        hyprland.enable = true;
+      };
+    };
+  };
 
   ### USER SERVICES ###
   services = {

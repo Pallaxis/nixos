@@ -42,7 +42,7 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {inherit inputs;};
             home-manager.users.henry.imports = [
-              ./home/henry/home.nix
+              ./home/henry.nix
               catppuccin.homeModules.catppuccin
             ];
           }
@@ -57,7 +57,7 @@
     homeConfigurations = {
       henry = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./home/henry/home.nix];
+        modules = [./home/henry.nix];
       };
     };
   };
