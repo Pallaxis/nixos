@@ -10,7 +10,7 @@
     modules = {
       disko = {
         enable = true;
-        bootDisk = "/dev/nvme1n1"; # TODO: change to id
+        bootDisk = "/dev/disk/by-id/nvme-eui.00000000000000000026b768622a1055";
         swapSize = "32G";
       };
     };
