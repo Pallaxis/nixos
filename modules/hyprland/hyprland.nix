@@ -6,20 +6,24 @@
   ...
 }: let
   cfg = config.my.modules.hyprland;
-  # Pulls each var out I've listed to use in this file
-  inherit
-    (import ../../hosts/${hostName}/system-vars.nix)
-    monitor_config
-    ;
 in {
-  options.my.modules.hyprland = {
-    enable = lib.mkEnableOption "hyprland";
-  };
-  options.my.modules.hyprpaper = {
-    path = lib.mkOption {
-      type = lib.types.path;
-      default = ./wallpapers/forrest.png;
-      description = "Wallpaper used by hyprpaper";
+  options.my.modules = {
+    hyprland = {
+      enable = lib.mkEnableOption "hyprland";
+      monitor = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [
+          ",preferred,auto,auto"
+        ];
+        description = "Hyprland monitors";
+      };
+    };
+    hyprpaper = {
+      path = lib.mkOption {
+        type = lib.types.path;
+        default = ./wallpapers/forrest.png;
+        description = "Wallpaper used by hyprpaper";
+      };
     };
   };
   config = lib.mkIf cfg.enable {
@@ -53,7 +57,9 @@ in {
         enable = true;
         systemd.enable = true;
         settings = {
-          monitor = monitor_config;
+          monitor = [
+            config.my.modules.hyprland.monitor
+          ];
         };
       };
       services.hyprpaper = {

@@ -14,6 +14,11 @@
         swapSize = "16G";
       };
       hyprpaper.path = ../../modules/hyprland/wallpapers/alien-planet.png;
+      hyprland.monitor = [
+        ",preferred,auto,auto"
+        "desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536, 1920x1080@60, 0x0, 1.25" # Work Thinkpad
+        "desc:Dell Inc. DELL U2717D 7GGH576A330L, 2560x1440@60, auto-center-up, 1.25"
+      ];
     };
   };
 
