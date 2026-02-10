@@ -17,6 +17,7 @@
       pyright # python ls
       hyprls # hypr ls
       shellcheck-minimal # bash ls
+      ripgrep
     ];
   };
 }

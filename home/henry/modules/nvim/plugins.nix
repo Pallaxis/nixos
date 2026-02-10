@@ -114,6 +114,7 @@
           vim.keymap.set('n', 'sM', function() Snacks.picker.man() end, { desc = 'Man pages' })
           vim.keymap.set('n', 'su', function() Snacks.picker.undo() end, { desc = 'Undo History' })
           vim.keymap.set('n', 'sk', function() Snacks.picker.keymaps() end, { desc = 'Search Keymaps' })
+          vim.keymap.set('n', 'sg', function() Snacks.picker.grep() end, { desc = '[S]earch [G]rep' })
           vim.keymap.set('n', 'sf', function() Snacks.explorer.open() end, { desc = '[S]earch [F]iles' })
         -- LSP
           vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
