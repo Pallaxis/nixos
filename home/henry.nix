@@ -1,13 +1,22 @@
 {pkgs, ...}: {
+  imports = [
+    ./modules
+  ];
+
   home = {
     username = "henry";
     homeDirectory = "/home/henry";
     stateVersion = "25.11";
   };
 
-  imports = [
-    ./modules
-  ];
+  my = {
+    home = {
+      modules = {
+        hyprland.enable = true;
+      };
+    };
+  };
+
   ### LAZY DOTFILES ###
   home.file.".config/waybar".source = ./dotfiles/waybar;
   home.file.".config/bat".source = ./dotfiles/bat;
@@ -16,13 +25,6 @@
 
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
-  my = {
-    home = {
-      modules = {
-        hyprland.enable = true;
-      };
-    };
-  };
 
   ### USER SERVICES ###
   services = {
@@ -83,6 +85,7 @@
     keepassxc
     lolcat
     nerd-fonts.jetbrains-mono
+    ripgrep
     tldr
     tmux
   ];

@@ -1,16 +1,16 @@
-{ ... }:
-
-{
+{...}: {
   services.udisks2.enable = true;
 
   services.printing.enable = true;
 
   services.keyd = {
     enable = true;
-    keyboards.caps-swap.settings = {
-      main = {
-        capslock = "esc";
-        esc = "capslock";
+    keyboards.caps-swap = {
+      settings = {
+        main = {
+          capslock = "esc";
+          esc = "capslock";
+        };
       };
     };
   };
