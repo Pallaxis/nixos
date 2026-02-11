@@ -1,9 +1,10 @@
 {pkgs, ...}: {
   imports = [
-    ./options.nix
-    ./keymaps.nix
-    ./plugins.nix
     ./autocmds.nix
+    ./keymaps.nix
+    ./options.nix
+    ./plugins.nix
+    ./snippets.nix
   ];
   programs.neovim = {
     enable = true;
@@ -17,6 +18,7 @@
       pyright # python ls
       hyprls # hypr ls
       shellcheck-minimal # bash ls
+      luajitPackages.jsregexp # for luasnip
       ripgrep
     ];
   };

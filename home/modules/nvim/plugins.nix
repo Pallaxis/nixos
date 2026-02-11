@@ -273,5 +273,35 @@
           }
       '';
     }
+    {
+      plugin = pkgs.vimPlugins.luasnip;
+      type = "lua";
+      config = ''
+        local ls = require("luasnip")
+
+        ls.setup({})
+
+        require("luasnip.loaders.from_lua").lazy_load({
+          paths = vim.fn.expand("~/.config/nvim/lua/snippets")
+        })
+      '';
+    }
+    {
+      plugin = pkgs.vimPlugins.blink-cmp;
+      type = "lua";
+      config = ''
+        local ls = require("luasnip")
+
+        require("blink.cmp").setup({
+          snippets = { preset = "luasnip" },
+
+          sources = {
+            default = { "lsp", "path", "buffer", "snippets" },
+          },
+
+          keymap = { preset = "default" }
+        })
+      '';
+    }
   ];
 }
