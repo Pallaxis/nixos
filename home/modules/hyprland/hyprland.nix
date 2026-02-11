@@ -26,7 +26,7 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    home.file.".config/hypr/scripts".source = ../../dotfiles/hypr/scripts;
+    home.file.".config/hypr/scripts".source = ./scripts;
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
