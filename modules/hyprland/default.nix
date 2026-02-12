@@ -6,11 +6,9 @@
 }: let
   cfg = config.my.modules.hyprland;
 in {
-  options.my.modules = {
-    hyprland = {
-      enable = lib.mkEnableOption "hyprland";
-    };
-  };
+  options.my.modules.hyprland.enable =
+    lib.mkEnableOption "Hyprland";
+
   config = lib.mkIf cfg.enable {
     programs.hyprland = {
       enable = true;

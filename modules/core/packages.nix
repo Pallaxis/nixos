@@ -10,7 +10,6 @@
     dunst
     fd
     file
-    flatpak
     fzf
     git
     glib

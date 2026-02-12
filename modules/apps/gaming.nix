@@ -8,8 +8,7 @@
     enable = lib.mkEnableOption "Enables gaming module";
   };
   config = lib.mkIf config.apps.gaming.enable {
-    # steam, lutris, heroic, etc...
-
+    my.modules.flatpak.enable = false;
     ### Steam
     programs.steam = {
       enable = true;
@@ -35,8 +34,11 @@
     #   ];
     # };
 
-    # environment.systemPackages = with pkgs; [
-    #   proton-ge-bin
-    # ];
+    environment.systemPackages = with pkgs; [
+      gamma-launcher
+      protonup-ng
+      wineWowPackages.stagingFull
+      winetricks
+    ];
   };
 }

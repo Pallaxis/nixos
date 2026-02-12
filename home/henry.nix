@@ -13,6 +13,7 @@
     home = {
       modules = {
         hyprland.enable = true;
+        lutris.enable = true;
       };
     };
   };

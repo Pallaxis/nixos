@@ -9,6 +9,7 @@ in {
     ./apps
     ./core
     ./disko
+    ./flatpak
     ./hardware
     ./hyprland
     ./networking
