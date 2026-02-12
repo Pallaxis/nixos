@@ -4,9 +4,10 @@ nix run github:nix-community/nixos-anywhere -- --flake ".#thinkpad" --target-hos
 ## To setup drive partition btrfs and encrtyption
 1. Boot up using the NixOS install media
 3. Clone this repo: `git clone https://github.com/pallaxis/nixos.git ~/.nixos`
-4. Edit the disko.nix file in the hostname you want, make sure the drive path and swapfile sizes are good
-5. `sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/.nixos/hosts/<hostname>/disko.nix`
-
+4. Copy hosts/night to hosts/<your-hostname>, then delete the `hardware-configuration.nix` file.
+5. Modify the default.nix in your new host to have the right disko settings, as well as any additional configs, i.e hyprland monitors
+6. `sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/.nixos/hosts/<hostname>/disko.nix`
+^ WIP: need to figure out the process better, shouldn't need the flake install section below as I've added disko as a module
 
 ## To install the flake
 1. Install NixOS onto a UEFI capable machine

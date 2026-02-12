@@ -26,6 +26,9 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
+    my.home.scripts = {
+      handleMonitorConnect.enable = true;
+    };
     home.file.".config/hypr/scripts".source = ./scripts;
     wayland.windowManager.hyprland = {
       enable = true;
