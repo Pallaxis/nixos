@@ -13,6 +13,19 @@ in {
     boot = {
       plymouth = {
         enable = true;
+        # Custom theme, borked atm
+        # theme = "circle_hud";
+        # themePackages = [
+        #   (pkgs.stdenv.mkDerivation {
+        #     name = "circle_hud";
+        #     src = ./circle_hud;
+        #
+        #     installPhase = ''
+        #       mkdir -p $out/share/plymouth/themes/circle_hud
+        #       cp -r * $out/share/plymouth/themes/circle_hud/
+        #     '';
+        #   })
+        # ];
       };
       # Enables silent boot
       consoleLogLevel = 3;
@@ -24,7 +37,7 @@ in {
         "systemd.show_status=auto"
       ];
 
-      loader.timeout = 0;
+      loader.timeout = 3; # shows generations at boot for this long
     };
   };
 }

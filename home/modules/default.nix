@@ -4,6 +4,7 @@
     ./lutris
     ./nvim
     ./scripts
+    ./services
     ./terminal
   ];
 }

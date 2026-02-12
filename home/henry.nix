@@ -15,6 +15,9 @@
         hyprland.enable = true;
         lutris.enable = true;
       };
+      services = {
+        handleMonitorConnect.enable = true;
+      };
     };
   };
 
