@@ -14,6 +14,7 @@ in {
     ./hyprland
     ./networking
     ./options
+    ./plymouth
   ];
   config = {
     my.modules =
@@ -25,6 +26,7 @@ in {
         # my-user.enable = true;
         # sound.enable = true;
         hyprland.enable = true;
+        plymouth.enable = true;
         # system-recovery.enable = true;
       }
       // lib.optionalAttrs (cfg.role == "server") {
