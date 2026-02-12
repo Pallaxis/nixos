@@ -20,6 +20,11 @@
             lua = { "stylua" },
             nix = { "alejandra" },
           },
+          formatters = {
+            stylua = {
+              args = { "--indent-type", "Spaces", "--indent-width", "2", "-" }
+            },
+          },
         })
       '';
     }
