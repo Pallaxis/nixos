@@ -13,6 +13,12 @@ in {
     boot = {
       plymouth = {
         enable = true;
+        theme = "circle_hud";
+        themePackages = [
+          (pkgs.adi1090x-plymouth-themes.override {
+            selected_themes = ["circle_hud"];
+          })
+        ];
         # Custom theme, borked atm
         # theme = "circle_hud";
         # themePackages = [
