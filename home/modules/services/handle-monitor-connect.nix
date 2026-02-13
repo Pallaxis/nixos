@@ -33,12 +33,17 @@ in {
               esac
             }
 
-            socat - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" \
-              | while read -r line; do
-                  handle "$line"
-                done
+            hypr_socket="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+            socat -u UNIX-CONNECT:"$hypr_socket" - |
+            while read -r line; do
+              # echo "handling $line"
+              handle "$line"
+            done
+
+            echo "Outside of loop, something's gone wrong!"
+            exit 1
           '';
-        }}";
+        }}/bin/handle-monitor-connect";
       };
     };
   };
