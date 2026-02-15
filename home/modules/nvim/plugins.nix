@@ -135,11 +135,31 @@
       plugin = pkgs.vimPlugins.nvim-lspconfig;
       type = "lua";
       config = ''
-          local servers = { 'nixd', 'pyright', 'yaml-language-server', 'hyprls', 'shellcheck' }
-            for _, server in ipairs(servers) do
-               vim.lsp.enable(server)
-            end
-
+        local servers = { 'nixd', 'pyright', 'yaml-language-server', 'hyprls', 'shellcheck' }
+          for _, server in ipairs(servers) do
+             vim.lsp.enable(server)
+          end
+        vim.lsp.config("nixd", {
+          cmd = { "nixd" },
+          settings = {
+            nixd = {
+              nixpkgs = {
+                expr = "import <nixpkgs> { }",
+              },
+              formatting = {
+                command = { "nixfmt" },
+              },
+              options = {
+                nixos = {
+                  expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.thinkpad.options',
+                 },
+                home_manager = {
+                  expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."henry@thinkpad".options',
+                },
+              },
+            },
+          },
+        })
         --  vim.api.nvim_create_autocmd('LspAttach', {
         --    group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         --    callback = function(event)
