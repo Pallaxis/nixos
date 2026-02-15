@@ -25,6 +25,22 @@
             "desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536, 1920x1080@60, 0x0, 1.25" # Work Thinkpad
             "desc:Dell Inc. DELL U2717D 7GGH576A330L, 2560x1440@60, auto-center-up, 1.25"
           ];
+          workspaces = [
+            "1, monitor:DP-1, default:true"
+            "2, monitor:DP-1"
+            "3, monitor:DP-1"
+            "4, monitor:DP-1"
+            "5, monitor:DP-1"
+            "6, monitor:DP-2"
+            "7, monitor:DP-2"
+            "8, monitor:DP-2"
+            "9, monitor:DP-2"
+            "10, monitor:DP-2, default:true"
+          ];
+          exec-once = [
+            "[workspace 5 silent] slack"
+            "[workspace 10 silent] thunderbird"
+          ];
         };
       };
     };
