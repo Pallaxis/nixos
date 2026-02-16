@@ -1,9 +1,9 @@
 {
-  config,
+  osConfig,
   lib,
   ...
 }:
-lib.mkIf config.my.home.modules.hyprland.enable {
+lib.mkIf osConfig.my.modules.hyprland.enable {
   wayland.windowManager.hyprland = {
     settings = {
       animation = [

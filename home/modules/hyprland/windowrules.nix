@@ -1,9 +1,10 @@
 {
+  osConfig,
   config,
   lib,
   ...
 }: let
-  cfg = config.my.home.modules.hyprland;
+  cfg = osConfig.my.modules.hyprland;
 in {
   options.my.home.modules = {
     hyprland = {
