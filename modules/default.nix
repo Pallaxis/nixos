@@ -10,6 +10,7 @@ in {
     ./core
     ./disko
     ./flatpak
+    ./garbage-collect
     ./hardware
     ./hyprland
     ./networking
@@ -20,14 +21,11 @@ in {
     my.modules =
       {
         networking.enable = true;
+        garbageCollect.enable = true;
       }
       // lib.optionalAttrs (cfg.role == "desktop") {
-        # fonts.enable = true;
-        # my-user.enable = true;
-        # sound.enable = true;
         hyprland.enable = true;
         plymouth.enable = true;
-        # system-recovery.enable = true;
       }
       // lib.optionalAttrs (cfg.role == "server") {
       };
