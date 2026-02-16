@@ -15,6 +15,7 @@
     glib
     grimblast
     jq
+    man-pages
     nodejs
     pavucontrol
     rofi

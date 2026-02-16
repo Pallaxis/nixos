@@ -8,6 +8,10 @@
     enable = true;
     enableZshIntegration = true;
   };
+  programs.tealdeer = {
+    enable = true;
+    enableAutoUpdates = true;
+  };
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";

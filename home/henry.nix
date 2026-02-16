@@ -69,11 +69,37 @@
     enableDefaultConfig = false;
     matchBlocks = {
       "*" = {
+        addKeysToAgent = "yes";
+      };
+      "*fenix*.local oclea*.local Oclea*.local zeus*.local hercules*.local depth-rdk*.local" = {
+        userKnownHostsFile = "/dev/null";
+        user = "root";
+        extraOptions = {
+          LogLevel = "QUIET";
+          StrictHostKeyChecking = "no";
+        };
+      };
+      "deskpi" = {
+        user = "pi";
+        hostname = "deskpi.local";
+      };
+      "ats*" = {
+        user = "pi";
+      };
+      "ats1" = {
+        hostname = "10.71.7.75";
+      };
+      "ats2" = {
+        hostname = "10.71.7.72";
+      };
+      "ats4" = {
+        hostname = "10.71.5.97";
+      };
+      "mikyla" = {
+        user = "mikyla";
+        hostname = "10.71.0.125";
       };
     };
-    extraConfig = ''
-      AddKeysToAgent yes
-    '';
   };
 
   home.packages = with pkgs; [
@@ -90,7 +116,6 @@
     lolcat
     nerd-fonts.jetbrains-mono
     ripgrep
-    tldr
     tmux
   ];
 }
