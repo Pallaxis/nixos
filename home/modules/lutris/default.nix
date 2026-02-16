@@ -12,6 +12,9 @@ in {
   config = lib.mkIf cfg.enable {
     programs.lutris = {
       enable = true;
+      extraPackages = with pkgs; [
+        umu-launcher
+      ];
       protonPackages = [
         pkgs.proton-ge-bin
       ];
