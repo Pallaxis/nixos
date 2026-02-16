@@ -15,6 +15,7 @@
     glib
     grimblast
     jq
+    ldns
     man-pages
     nodejs
     pavucontrol
