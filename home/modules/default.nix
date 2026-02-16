@@ -6,6 +6,7 @@
   imports = [
     ./hyprland
     ./lutris
+    ./niri
     ./nvim
     ./scripts
     ./services

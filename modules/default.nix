@@ -14,6 +14,7 @@ in {
     ./hardware
     ./hyprland
     ./networking
+    ./niri
     ./options
     ./other
     ./plymouth
