@@ -13,10 +13,10 @@ in {
     systemd.user.services."handle-monitor-connect" = {
       Unit = {
         Description = "Moves workspaces when new monitor is connected";
-        After = ["graphical-session.target"];
+        After = ["hyprland-session.target"];
       };
       Install = {
-        WantedBy = ["default.target"];
+        WantedBy = ["hyprland-session.target"];
       };
       Service = {
         Restart = "on-failure";
@@ -34,9 +34,10 @@ in {
             }
 
             hypr_socket="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+
             socat -u UNIX-CONNECT:"$hypr_socket" - |
             while read -r line; do
-              # echo "handling $line"
+              echo "$line"
               handle "$line"
             done
 
