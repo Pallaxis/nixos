@@ -17,11 +17,11 @@ in {
       enable = true;
       settings = {
         initial_session = {
-          command = "start-hyprland";
+          command = "${pkgs.systemd}/bin/systemd-cat ${config.programs.hyprland.package}/bin/start-hyprland";
           user = "henry";
         };
         default_session = {
-          command = "${pkgs.tuigreet}/bin/tuigreet --cmd start-hyprland";
+          command = "${pkgs.tuigreet}/bin/tuigreet --cmd ${pkgs.systemd}/bin/systemd-cat ${config.programs.hyprland.package}/bin/start-hyprland";
           user = "greeter";
         };
       };
