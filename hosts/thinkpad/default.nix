@@ -3,10 +3,10 @@
     ../../modules
   ];
 
+  # Global options
   my = {
     host = {
       role = "desktop";
-      work = true;
     };
     modules = {
       disko = {
@@ -14,9 +14,10 @@
         bootDisk = "/dev/disk/by-id/nvme-TEAM_TM8FP4512G_17A8079402DE00100982";
         swapSize = "16G";
       };
+      work.enable = true;
     };
   };
-
+  # Home-Manager options
   home-manager.users.henry = {
     my = {
       home.modules = {

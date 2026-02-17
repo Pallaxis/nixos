@@ -22,11 +22,6 @@
         ];
         description = "The role this machine has";
       };
-      work = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Work setup flag";
-      };
     };
     user = {
       name = mkOption {

@@ -1,8 +1,9 @@
-{lib, ...}: {
+{...}: {
   imports = [
     ../../modules
   ];
 
+  # Global options
   my = {
     host = {
       role = "desktop";
@@ -14,9 +15,9 @@
         swapSize = "32G";
       };
       gaming.enable = true;
-      others.enable = true;
     };
   };
+  # Home-Manager options
   home-manager.users.henry = {
     my = {
       home.modules = {

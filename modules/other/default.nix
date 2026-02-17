@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.my.modules.others;
+  cfg = config.my.modules.other;
 in {
-  options.my.modules.others = {
+  options.my.modules.other = {
     enable = lib.mkEnableOption "Misc apps";
   };
   config = lib.mkIf cfg.enable {

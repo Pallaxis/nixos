@@ -24,14 +24,13 @@ in {
       {
         networking.enable = true;
         garbageCollect.enable = true;
+        other.enable = true;
       }
       // lib.optionalAttrs (cfg.role == "desktop") {
         hyprland.enable = true;
         plymouth.enable = true;
       }
-      // lib.optionalAttrs cfg.work {
-        work.enable = true;
-        others.enable = true;
+      // lib.optionalAttrs (cfg.role == "server") {
       };
   };
 }
