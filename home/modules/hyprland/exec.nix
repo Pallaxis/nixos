@@ -1,5 +1,6 @@
 {
   osConfig,
+  config,
   lib,
   ...
 }: let
@@ -28,13 +29,12 @@ in {
           # "gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'"
           # "gsettings set org.gnome.desktop.interface cursor-size 20"
         ];
-        exec-once = lib.concatLists [
+        exec-once =
           [
             "[workspace 1 silent] firefox"
             "[workspace 2 silent] foot"
           ]
-          (cfg.exec-once or [])
-        ];
+          ++ config.my.home.modules.hyprland.exec-once;
       };
     };
   };
