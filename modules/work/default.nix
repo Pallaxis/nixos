@@ -3,12 +3,12 @@
   lib,
   config,
   ...
-}: {
-  options = {
-    apps.work.enable =
-      lib.mkEnableOption "Packages used for work";
-  };
-  config = lib.mkIf config.apps.work.enable {
+}: let
+  cfg = config.my.modules.work;
+in {
+  options.my.modules.work.enable =
+    lib.mkEnableOption "Packages used for work";
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       # ansible
       # ansible-core

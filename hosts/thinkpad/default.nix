@@ -6,6 +6,7 @@
   my = {
     host = {
       role = "desktop";
+      work = true;
     };
     modules = {
       disko = {
@@ -45,9 +46,6 @@
       };
     };
   };
-
-  apps.work.enable = true;
-  apps.others.enable = true;
 
   # Only need this on thinkpad
   services.udev.extraRules = ''

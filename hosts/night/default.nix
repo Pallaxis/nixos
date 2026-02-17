@@ -13,6 +13,8 @@
         bootDisk = "/dev/disk/by-id/nvme-eui.00000000000000000026b768622a1055";
         swapSize = "32G";
       };
+      gaming.enable = true;
+      others.enable = true;
     };
   };
   home-manager.users.henry = {
@@ -29,10 +31,6 @@
       };
     };
   };
-
-  bluetooth.enable = true;
-  hardware.nvidia.enable = true;
-  apps.gaming.enable = true;
 
   # Swap file
   swapDevices = lib.mkForce [

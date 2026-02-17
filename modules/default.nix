@@ -6,16 +6,18 @@
   cfg = config.my.host;
 in {
   imports = [
-    ./apps
     ./core
     ./disko
     ./flatpak
+    ./gaming
     ./garbage-collect
     ./hardware
     ./hyprland
     ./networking
     ./options
+    ./other
     ./plymouth
+    ./work
   ];
   config = {
     my.modules =
@@ -27,7 +29,9 @@ in {
         hyprland.enable = true;
         plymouth.enable = true;
       }
-      // lib.optionalAttrs (cfg.role == "server") {
+      // lib.optionalAttrs cfg.work {
+        work.enable = true;
+        others.enable = true;
       };
   };
 }

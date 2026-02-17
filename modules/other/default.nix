@@ -3,11 +3,13 @@
   lib,
   pkgs,
   ...
-}: {
-  options.apps.others = {
+}: let
+  cfg = config.my.modules.others;
+in {
+  options.my.modules.others = {
     enable = lib.mkEnableOption "Misc apps";
   };
-  config = lib.mkIf config.apps.others.enable {
+  config = lib.mkIf cfg.enable {
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
     programs.localsend = {

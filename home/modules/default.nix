@@ -17,7 +17,7 @@
       {
         ssh.enable = true;
       }
-      // lib.optionalAttrs osConfig.apps.gaming.enable {
+      // lib.optionalAttrs osConfig.my.modules.gaming.enable {
         lutris.enable = true;
       }
       // lib.optionalAttrs (osConfig.my.host.name == "thinkpad") {

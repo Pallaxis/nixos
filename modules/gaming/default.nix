@@ -3,11 +3,13 @@
   lib,
   pkgs,
   ...
-}: {
-  options.apps.gaming = {
-    enable = lib.mkEnableOption "Enables gaming module";
-  };
-  config = lib.mkIf config.apps.gaming.enable {
+}: let
+  cfg = config.my.modules.gaming;
+in {
+  options.my.modules.gaming.enable =
+    lib.mkEnableOption "Enables gaming module";
+
+  config = lib.mkIf cfg.enable {
     my.modules.flatpak.enable = false;
     ### Steam
     programs.steam = {
