@@ -32,13 +32,6 @@
     };
   };
 
-  # Swap file
-  swapDevices = lib.mkForce [
-    {
-      device = "/.swapvol/swapfile";
-    }
-  ];
-
   # For hibernate resume, offset to swap offset
   boot.resumeDevice = "/dev/mapper/nixos-root";
   boot.kernelParams = [
