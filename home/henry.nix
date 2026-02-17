@@ -9,18 +9,6 @@
     stateVersion = "25.11";
   };
 
-  my = {
-    home = {
-      modules = {
-        hyprland.enable = true;
-        lutris.enable = true;
-      };
-      services = {
-        handleMonitorConnect.enable = true;
-      };
-    };
-  };
-
   ### LAZY DOTFILES ###
   home.file.".config/waybar".source = ./dotfiles/waybar;
   home.file.".config/bat".source = ./dotfiles/bat;
@@ -32,11 +20,6 @@
 
   ### USER SERVICES ###
   services = {
-    ssh-agent = {
-      enable = true;
-      socket = "ssh-agent.socket";
-      enableZshIntegration = true;
-    };
     syncthing = {
       enable = true;
       settings = {
@@ -64,44 +47,6 @@
       };
     };
   };
-  programs.ssh = {
-    enable = true;
-    enableDefaultConfig = false;
-    matchBlocks = {
-      "*" = {
-        addKeysToAgent = "yes";
-      };
-      "*fenix*.local oclea*.local Oclea*.local zeus*.local hercules*.local depth-rdk*.local" = {
-        userKnownHostsFile = "/dev/null";
-        user = "root";
-        extraOptions = {
-          LogLevel = "QUIET";
-          StrictHostKeyChecking = "no";
-        };
-      };
-      "deskpi" = {
-        user = "pi";
-        hostname = "deskpi.local";
-      };
-      "ats*" = {
-        user = "pi";
-      };
-      "ats1" = {
-        hostname = "10.71.7.75";
-      };
-      "ats2" = {
-        hostname = "10.71.7.72";
-      };
-      "ats4" = {
-        hostname = "10.71.5.97";
-      };
-      "mikyla" = {
-        user = "mikyla";
-        hostname = "10.71.0.125";
-      };
-    };
-  };
-
   home.packages = with pkgs; [
     bat
     btop
