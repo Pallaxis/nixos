@@ -22,5 +22,13 @@
       }
       // lib.optionalAttrs (osConfig.my.host.name == "thinkpad") {
       };
+    catppuccin = {
+      enable = true;
+      accent = "blue";
+      flavor = "mocha";
+
+      hyprlock.useDefaultConfig = false;
+      zsh-syntax-highlighting.enable = false;
+    };
   };
 }
