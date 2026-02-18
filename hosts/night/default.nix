@@ -15,6 +15,7 @@
         swapSize = "32G";
       };
       gaming.enable = true;
+      nvidia.enable = true;
     };
   };
   # Home-Manager options
