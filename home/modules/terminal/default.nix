@@ -12,6 +12,10 @@
     enable = true;
     enableAutoUpdates = true;
   };
+  programs.taskwarrior = {
+    enable = true;
+    package = pkgs.taskwarrior3;
+  };
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";
