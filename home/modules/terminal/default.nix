@@ -142,7 +142,9 @@
       '';
     in
       lib.mkMerge [zshConfigEarlyInit zshPrompt fzfTab functions];
-    shellAliases = {
+    shellAliases = let
+      pretty = ''--pretty="%C(#89b4fa)%h%Creset -%C(auto)%d%Creset %s %C(#a6e3a1)(%ad) %C(bold #cba6f7)<%an>%Creset"'';
+    in {
       # eza
       ls = "eza --icons=auto --sort=type --no-quotes --oneline"; # Short list
       ll = "eza --icons=auto --sort=type --no-quotes --all --long --header --smart-group"; # long list
@@ -173,6 +175,14 @@
       info = "info --vi-keys";
       fd-aged = "fd -0 -t d | xargs -0 stat --format '%Y %n' | sort -n";
       resolve = "avahi-resolve-host-name";
+
+      # Git
+      gst = "git status";
+      gl = "git log --oneline --decorate --graph --all ${pretty}";
+      gd = "git diff";
+      gc = "git commit --verbose";
+      gca = "git commit --verbose --all";
+      "gca!" = "git commit --verbose --all --amend";
     };
   };
   programs.starship = {
@@ -184,6 +194,12 @@
         style = "blue";
         truncation_length = 5;
         truncation_symbol = "../";
+      };
+      git_branch = {
+        style = "mauve";
+      };
+      cmd_duration = {
+        style = "peach";
       };
       character = {
         success_symbol = "[❯](mauve)";
