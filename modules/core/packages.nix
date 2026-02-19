@@ -4,7 +4,10 @@
   ### SYSTEM PROGRAMS ###
   programs = {
     firefox.enable = true;
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      enableCompletion = false;
+    };
     neovim.enable = true;
   };
 

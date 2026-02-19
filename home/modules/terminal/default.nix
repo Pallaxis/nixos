@@ -21,6 +21,7 @@
     enable = true;
     defaultKeymap = "emacs";
     autocd = true;
+    completionInit = "autoload -U compinit && compinit -C";
     enableCompletion = true;
     autosuggestion = {
       enable = true;
@@ -38,14 +39,6 @@
         };
       }
     ];
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "git"
-        "sudo"
-        "command-not-found"
-      ];
-    };
     history = {
       size = 10000;
       save = 10000;
@@ -146,8 +139,6 @@
             [[ -d "$directory" && ! "$PATH" =~ (^|:)$directory(:|$) ]] && PATH="$directory:$PATH"
           done
         }
-        add_paths ~/.local/bin ~/.local/share/system-setup/bin
-
       '';
     in
       lib.mkMerge [zshConfigEarlyInit zshPrompt fzfTab functions];
@@ -182,6 +173,31 @@
       info = "info --vi-keys";
       fd-aged = "fd -0 -t d | xargs -0 stat --format '%Y %n' | sort -n";
       resolve = "avahi-resolve-host-name";
+    };
+  };
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      format = "$directory$status$all$character";
+      directory = {
+        style = "blue";
+        truncation_length = 5;
+        truncation_symbol = "../";
+      };
+      character = {
+        success_symbol = "[❯](mauve)";
+        error_symbol = "[❯](red)";
+      };
+      status = {
+        style = "red";
+        disabled = false;
+        symbol = "";
+        not_executable_symbol = "";
+        not_found_symbol = "";
+        sigint_symbol = "";
+        signal_symbol = "";
+      };
     };
   };
   programs.tmux = {
