@@ -38,6 +38,16 @@
           sha256 = "q26XVS/LcyZPRqDNwKKA9exgBByE0muyuNb0Bbar2lY=";
         };
       }
+      {
+        name = "sudo";
+        src = pkgs.runCommand "sudo-plugin-src" {} ''
+          mkdir -p $out
+          cp ${pkgs.fetchurl {
+            url = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/sudo/sudo.plugin.zsh";
+            sha256 = "sha256-pXylDddgevJlHbVYFRz7L+oBOb8hQbGWi4e7Z9lcLFk=";
+          }} $out/sudo.plugin.zsh
+        '';
+      }
     ];
     history = {
       size = 10000;
