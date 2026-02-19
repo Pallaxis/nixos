@@ -29,6 +29,18 @@
 
       hyprlock.useDefaultConfig = false;
       zsh-syntax-highlighting.enable = false;
+      thunderbird.profile = "henry";
+    };
+    programs.thunderbird = {
+      enable = true;
+      profiles = {
+        henry = {
+          isDefault = true;
+          settings = {
+            "mailnews.start_page.enabled" = false;
+          };
+        };
+      };
     };
   };
 }

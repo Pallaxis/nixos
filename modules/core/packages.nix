@@ -2,9 +2,11 @@
   # Kernel version
   boot.kernelPackages = pkgs.linuxPackages_latest;
   ### SYSTEM PROGRAMS ###
-  programs.firefox.enable = true;
-  programs.zsh.enable = true;
-  programs.neovim.enable = true;
+  programs = {
+    firefox.enable = true;
+    zsh.enable = true;
+    neovim.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     dunst
@@ -20,7 +22,6 @@
     nodejs
     pavucontrol
     rofi
-    thunderbird
     udisks
     wl-clipboard
   ];
