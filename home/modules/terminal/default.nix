@@ -17,6 +17,7 @@
     package = pkgs.taskwarrior3;
   };
   programs.yazi.enable = true;
+  programs.eza.enable = true;
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";

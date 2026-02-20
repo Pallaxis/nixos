@@ -51,7 +51,6 @@
     bat
     btop
     cowsay
-    eza
     fastfetch
     foot
     fortune
