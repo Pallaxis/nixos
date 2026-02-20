@@ -28,7 +28,6 @@
       enable = true;
       strategy = ["history" "completion"];
     };
-    syntaxHighlighting.enable = true;
     plugins = [
       {
         name = "fzf-tab";
@@ -38,6 +37,11 @@
           rev = "v1.2.0";
           sha256 = "q26XVS/LcyZPRqDNwKKA9exgBByE0muyuNb0Bbar2lY=";
         };
+      }
+      {
+        name = "fast-syntax-highlighting";
+        src = pkgs.zsh-fast-syntax-highlighting;
+        file = "share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh";
       }
       {
         name = "sudo";
