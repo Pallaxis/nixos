@@ -231,16 +231,6 @@
     plugins = with pkgs; [
       tmuxPlugins.vim-tmux-navigator
       tmuxPlugins.yank
-      {
-        plugin = tmuxPlugins.catppuccin;
-        extraConfig = ''
-          set -g @catppuccin_window_status_style "rounded"
-          set -ogq @catppuccin_window_text " #W"
-          set -ogq @catppuccin_window_current_text " #W"
-          set -g status-left ""
-          set -g status-right "#{?window_zoomed_flag,#[fg=#{@thm_mauve}]ZOOMED ,}#{E:@catppuccin_status_session}"
-        '';
-      }
     ];
     extraConfig = ''
       # General settings
