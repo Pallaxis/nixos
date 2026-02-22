@@ -7,6 +7,7 @@
     ./hyprland
     ./lutris
     ./nvim
+    ./mime
     ./scripts
     ./services
     ./ssh
