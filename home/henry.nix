@@ -6,7 +6,7 @@
   home = {
     username = "henry";
     homeDirectory = "/home/henry";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
   };
 
   ### LAZY DOTFILES ###

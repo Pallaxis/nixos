@@ -7,11 +7,11 @@
     ./hyprland
     ./lutris
     ./nvim
-    ./mime
     ./scripts
     ./services
     ./ssh
     ./terminal
+    ./xdg
   ];
   config = {
     my.home.modules =
