@@ -1,7 +1,13 @@
-{...}: {
+{pkgs, ...}: {
   services.udisks2.enable = true;
 
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
 
   services.keyd = {
     enable = true;

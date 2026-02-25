@@ -194,6 +194,7 @@
       # Git
       gst = "git status";
       gl = "git log --oneline --decorate --graph --all ${pretty}";
+      ga = "git add";
       gd = "git diff";
       gc = "git commit --verbose";
       gca = "git commit --verbose --all";
