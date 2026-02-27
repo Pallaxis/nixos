@@ -44,7 +44,7 @@ in {
     environment.systemPackages = with pkgs; [
       gamma-launcher
       protonup-ng
-      wineWowPackages.stagingFull
+      wineWow64Packages.full
       winetricks
     ];
   };

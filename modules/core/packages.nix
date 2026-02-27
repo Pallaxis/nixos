@@ -26,6 +26,7 @@
     pavucontrol
     rofi
     udisks
+    usbutils
     wl-clipboard
   ];
 }

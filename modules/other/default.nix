@@ -10,7 +10,14 @@ in {
     enable = lib.mkEnableOption "Misc apps";
   };
   config = lib.mkIf cfg.enable {
-    virtualisation.libvirtd.enable = true;
+    virtualisation.libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+      };
+    };
     programs.virt-manager.enable = true;
     programs.localsend = {
       enable = true;
