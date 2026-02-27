@@ -18,6 +18,7 @@
     git
     glib
     grimblast
+    imv
     jq
     ldns
     man-pages
