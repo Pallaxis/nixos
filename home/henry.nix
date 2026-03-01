@@ -49,7 +49,6 @@
   };
   home.packages = with pkgs; [
     bat
-    btop
     cowsay
     fastfetch
     foot
