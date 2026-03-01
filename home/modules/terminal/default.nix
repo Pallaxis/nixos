@@ -113,46 +113,74 @@
         # Functions
         #
         ssh-host() {
-            # Pulls the IP from .ssh config for supplied arg
-            if [[ $# -ne 1 ]]; then
-        	echo "Supply only one arg to pull from ssh config"
-        	return 1
-            fi
-            ssh -G $1 | awk '/^hostname/{print $2}'
+          # Pulls the IP from .ssh config for supplied arg
+          if [[ $# -ne 1 ]]; then
+            echo "Supply only one arg to pull from ssh config"
+            return 1
+          fi
+          ssh -G $1 | awk '/^hostname/{print $2}'
         }
         stopwatch() {
-            start=$(date +%s)
-            while true; do
-        	time="$(($(date +%s) - $start))"
-        	printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
-            done
+          start=$(date +%s)
+          while true; do
+            time="$(($(date +%s) - $start))"
+            printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
+          done
         }
         countdown() {
-            start="$(( $(date '+%s') + $1))"
-            while [ $start -ge $(date +%s) ]; do
-        	time="$(( $start - $(date +%s) ))"
-        	printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
-        	sleep 0.1
-            done
-            notify-send Countdown Completed!
+          start="$(( $(date '+%s') + $1))"
+          while [ $start -ge $(date +%s) ]; do
+            time="$(( $start - $(date +%s) ))"
+            printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
+            sleep 0.1
+          done
+          notify-send Countdown Completed!
         }
         udm() {
-            udisksctl mount -b "$1" > /dev/null 2>&1
-            drive_mountpoint=$(udisksctl info -b "$1" | awk '/MountPoints:/ {print $2}')
-            cd "$drive_mountpoint" || echo "cd failed"
+          udisksctl mount -b "$1" > /dev/null 2>&1
+          drive_mountpoint=$(udisksctl info -b "$1" | awk '/MountPoints:/ {print $2}')
+          cd "$drive_mountpoint" || echo "cd failed"
         }
         udu() {
-            drive_mountpoint=$(udisksctl info -b "$1" | awk '/MountPoints:/ {print $2}')
-            if [[ -n "$drive_mountpoint" && "$PWD" == "$drive_mountpoint" ]]; then
-        	cd '..'
-            fi
-            udisksctl unmount -b "$1"
+          drive_mountpoint=$(udisksctl info -b "$1" | awk '/MountPoints:/ {print $2}')
+          if [[ -n "$drive_mountpoint" && "$PWD" == "$drive_mountpoint" ]]; then
+            cd '..'
+          fi
+          udisksctl unmount -b "$1"
         }
         # Checks a dir exists & is not in path, then prepends to PATH
         add_paths() {
           for directory in "$@"; do
             [[ -d "$directory" && ! "$PATH" =~ (^|:)$directory(:|$) ]] && PATH="$directory:$PATH"
           done
+        }
+        # xdg-open wrapper
+        open() {
+          (
+          xdg-open "$1" &> /dev/null
+          local exit_code=$?
+
+          case $exit_code in
+            0)
+              # Success - usually no output needed
+              ;;
+            1)
+              echo "Error: Error in command line syntax" >&2
+              ;;
+            2)
+              echo "Error: A file passed doesn't exist" >&2
+              ;;
+            3)
+              echo "Error: A required tool could not be found" >&2
+              ;;
+            4)
+              echo "Error: The action failed" >&2
+              ;;
+            *)
+              echo "Error: xdg-open failed with exit code $exit_code" >&2
+              ;;
+          esac
+          ) & disown
         }
       '';
     in
