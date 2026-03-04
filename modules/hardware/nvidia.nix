@@ -15,5 +15,8 @@ in {
       nvidia.modesetting.enable = true;
     };
     services.xserver.videoDrivers = ["nvidia"];
+
+    #FIXME: check this works for loading nvidia drivers early
+    boot.initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
   };
 }
