@@ -340,6 +340,10 @@
       bind c new-window -c "#{pane_current_path}"
     '';
   };
+  programs.nix-index = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   programs.btop = {
     enable = true;
     settings = {

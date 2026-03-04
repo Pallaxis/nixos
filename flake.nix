@@ -15,6 +15,10 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -23,6 +27,7 @@
     home-manager,
     catppuccin,
     disko,
+    nix-index-database,
     ...
   } @ inputs: let
     # A helper to reduce boilerplate for any host added to the folder
@@ -47,6 +52,7 @@
             home-manager.users.henry.imports = [
               ./home/henry.nix
               catppuccin.homeModules.catppuccin
+              nix-index-database.homeModules.nix-index
             ];
           }
         ];
