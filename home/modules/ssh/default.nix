@@ -37,7 +37,7 @@ in {
         "ats2" = {
           hostname = "10.71.7.72";
         };
-        "ats4" = {
+        "ats3" = {
           hostname = "10.71.5.97";
         };
         "mikyla" = {
