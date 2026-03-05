@@ -211,7 +211,7 @@ in {
           border-top: 2px solid #cba6f7;
         }
         #workspaces button.active {
-          background: #cba6f7;
+          background: rgba(203, 166, 247, 0.5);
         }
 
         #idle_inhibitor {
