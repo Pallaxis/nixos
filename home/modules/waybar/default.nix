@@ -208,10 +208,10 @@ in {
           border-radius: 0px;
         }
         #workspaces button.visible {
-          border-top: 2px solid #cba6f7;
+          border-top: 2px solid @mauve;
         }
         #workspaces button.active {
-          background: rgba(203, 166, 247, 0.5);
+          background: alpha(@mauve, 0.5);
         }
 
         #idle_inhibitor {
@@ -223,7 +223,7 @@ in {
           margin-right: 0px;
         }
         #custom-notifications, #idle_inhibitor.activated, #systemd-failed-units.degraded {
-          color: red;
+          color: @red;
         }
 
         #custom-update, #network, #custom-ram-usage, #custom-cpu-usage, #battery, #tray, #custom-notifications, #privacy{
