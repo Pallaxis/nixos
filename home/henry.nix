@@ -48,7 +48,6 @@
     };
   };
   home.packages = with pkgs; [
-    bat
     cowsay
     fastfetch
     foot

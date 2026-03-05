@@ -351,4 +351,10 @@
       update_ms = "1000";
     };
   };
+  programs.bat = {
+    enable = true;
+    config = {
+      map-syntax = "*.conf:INI";
+    };
+  };
 }
