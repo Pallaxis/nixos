@@ -8,10 +8,12 @@
     ./lutris
     ./niri
     ./nvim
+    ./programs
     ./scripts
     ./services
     ./ssh
     ./terminal
+    ./waybar
     ./xdg
   ];
   config = {

@@ -119,7 +119,7 @@ in {
             }
             blur {
                 special = true
-                enabled = yes
+                enabled = false
                 size = 6
                 passes = 3
                 new_optimizations = on

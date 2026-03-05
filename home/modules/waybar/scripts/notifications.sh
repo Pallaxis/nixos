@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Returns most recent Dunst history entry & a nice little icon for waybar to use
 
 text_output=""

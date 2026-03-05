@@ -10,7 +10,6 @@
   };
 
   ### LAZY DOTFILES ###
-  home.file.".config/waybar".source = ./dotfiles/waybar;
   home.file.".config/bat".source = ./dotfiles/bat;
   home.file.".config/foot".source = ./dotfiles/foot;
   home.file.".config/rofi".source = ./dotfiles/rofi;
