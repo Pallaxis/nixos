@@ -86,7 +86,7 @@
         export FZF_DEFAULT_OPTS="--preview-window=up:70% --bind=ctrl-d:page-down,ctrl-u:page-up --color=query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"
         # Uses bat as manpager (replaces bat-extras package)
         export MANPAGER="bat -plman"
-        export WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
+        export WORDCHARS="*?_.[]~&;!#$%^(){}<>"
 
         #
         # Completion
