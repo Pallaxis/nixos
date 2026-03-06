@@ -49,6 +49,7 @@ in {
           };
           "idle_inhibitor" = {
             "format" = "";
+            "justify" = "center";
             "tooltip" = true;
             "tooltip-format-activated" = "Idle Inhibited";
             "tooltip-format-deactivated" = "Able to idle";
@@ -57,8 +58,8 @@ in {
           "clock#time" = {
             "format" = "󱑂 {:%H:%M}";
             "tooltip" = false;
-            "min-length" = 8;
-            "max-length" = 8;
+            # "min-length" = 8;
+            # "max-length" = 8;
           };
           "clock#date" = {
             "format" = "󰨳 {:%d-%m}";
@@ -108,16 +109,16 @@ in {
             "return-type" = "json";
             "tooltip" = true;
             "interval" = 5;
-            "min-length" = 6;
-            "max-length" = 6;
+            # "min-length" = 6;
+            # "max-length" = 6;
           };
           "custom/cpu-usage" = {
             "exec" = "${cpuUsage}/bin/cpu-usage";
             "return-type" = "json";
             "tooltip" = true;
             "interval" = 5;
-            "min-length" = 6;
-            "max-length" = 6;
+            # "min-length" = 6;
+            # "max-length" = 6;
           };
           "pulseaudio" = {
             "format" = "{icon} {volume}%";
@@ -133,8 +134,8 @@ in {
             "on-click-middle" = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             "on-scroll-up" = "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+";
             "on-scroll-down" = "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-";
-            "min-length" = 6;
-            "max-length" = 6;
+            # "min-length" = 6;
+            # "max-length" = 6;
           };
           "battery" = {
             "states" = {
@@ -216,18 +217,25 @@ in {
 
         #idle_inhibitor {
           font-size: 15pt;
-          min-width: 24px;  /* keeps the icon from collapsing */
-          padding-left: 14px;
-          padding-right: 18px;
+          padding-left: 10px;
+          padding-right: 10px;
           margin-left: 0px;
           margin-right: 0px;
+        }
+        #clock.date {
+          padding-left: 0px;
+          padding-right: 18px;
+        }
+        #clock.time {
+          padding-left: 23px;
+          padding-right: 0px;
         }
         #custom-notifications, #idle_inhibitor.activated, #systemd-failed-units.degraded {
           color: @red;
         }
 
-        #custom-update, #network, #custom-ram-usage, #custom-cpu-usage, #battery, #tray, #custom-notifications, #privacy{
-          padding: 0px 3px;
+        #network, #custom-ram-usage, #custom-cpu-usage, #pulseaudio, #battery, #tray, #custom-notifications, #privacy{
+          padding: 0px 4px;
         }
       '';
     };
