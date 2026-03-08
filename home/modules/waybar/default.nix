@@ -92,7 +92,8 @@ in {
           };
           "systemd-failed-units" = {
             "hide-on-ok" = true;
-            "format" = "{nr_failed_system} failed system, {nr_failed_user} failed user!";
+            "format" = "S:{nr_failed_system} U:{nr_failed_user}";
+            "format-ok" = "";
           };
           "network" = {
             "format" = " {bandwidthUpBits}  {bandwidthDownBits}";
@@ -232,6 +233,7 @@ in {
         }
         #custom-notifications, #idle_inhibitor.activated, #systemd-failed-units.degraded {
           color: @red;
+          font-weight: bold;
         }
 
         #network, #custom-ram-usage, #custom-cpu-usage, #pulseaudio, #battery, #tray, #custom-notifications, #privacy{
