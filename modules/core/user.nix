@@ -5,4 +5,5 @@
     home = "/home/henry";
     shell = pkgs.zsh;
   };
+  environment.pathsToLink = ["/share/zsh"];
 }
