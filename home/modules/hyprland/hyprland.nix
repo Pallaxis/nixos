@@ -29,7 +29,19 @@ in {
   config = lib.mkIf cfg.enable {
     my.home.modules.waybar.enable = true;
     my.home.services.handleMonitorConnect.enable = true;
-    home.file.".config/hypr/scripts".source = ./scripts;
+    home = {
+      file.".config/hypr/scripts".source = ./scripts;
+      pointerCursor = {
+        enable = true;
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+        size = 24;
+        hyprcursor.enable = true;
+        hyprcursor.size = 24;
+        gtk.enable = true;
+      };
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
@@ -55,10 +67,7 @@ in {
     services.dunst.enable = true;
     gtk = {
       enable = true;
-      cursorTheme = {
-        name = "Bibata-Modern_Ice";
-        package = pkgs.bibata-cursors;
-      };
+      colorScheme = "dark";
     };
     programs.waybar = {
       enable = true;
