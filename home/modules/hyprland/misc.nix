@@ -8,6 +8,8 @@ in {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       extraConfig = ''
+        env = QT_QPA_PLATFORMTHEME,qt5ct
+
         input {
                 kb_layout = us
                 follow_mouse = 1
