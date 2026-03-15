@@ -22,7 +22,13 @@
     enable = true;
     defaultKeymap = "emacs";
     autocd = true;
-    completionInit = "autoload -U compinit && compinit -C";
+    completionInit = ''
+      if [[ "$ZDOTDIR/.zcompdump" -nt /run/current-system/sw/share/zsh/site-functions ]]; then
+        autoload -U compinit && compinit -C
+      else
+        autoload -U compinit && compinit
+      fi
+    '';
     enableCompletion = true;
     autosuggestion = {
       enable = true;
