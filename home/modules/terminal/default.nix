@@ -23,10 +23,14 @@
     defaultKeymap = "emacs";
     autocd = true;
     completionInit = ''
-      if [[ "$ZDOTDIR/.zcompdump" -nt /run/current-system/sw/share/zsh/site-functions ]]; then
-        autoload -U compinit && compinit -C
+      _dumpfile="$ZDOTDIR/.zcompdump"
+      _zwcfile="$ZDOTDIR/.zcompdump.zwc"
+
+      if [[ -f "$_zwcfile" && "$_zwcfile" -nt /run/current-system/sw/share/zsh/site-functions ]]; then
+        autoload -Uz compinit && compinit -C
       else
-        autoload -U compinit && compinit
+        autoload -Uz compinit && compinit
+        zcompile "$_dumpfile"
       fi
     '';
     enableCompletion = true;
@@ -76,11 +80,11 @@
     initContent = let
       zshConfigEarlyInit = lib.mkOrder 500 ''
         # Make general or attach to it if it's already running
-        if [[ -n "$DISPLAY" ]]; then
+        if [[ -z "$TMUX" && -n "$DISPLAY" ]]; then
             if [[ -z $(tmux list-sessions) ]]; then
-          tmux new-session -s general
+          exec tmux new-session -s general
             elif [[ -z $(tmux list-clients) ]]; then
-          tmux new-session -A -s general
+          exec tmux new-session -A -s general
             fi
         fi
       '';
