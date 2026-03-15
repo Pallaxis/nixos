@@ -23,7 +23,7 @@ in {
           # Application shortcuts
           "SUPER SHIFT, minus, Start hyprlock, exec, hyprlock"
           "SUPER SHIFT, F, Pin focused window, exec, ~/.config/hypr/scripts/windowpin"
-          "CONTROL, ESCAPE, Toggle waybar, exec, killall waybar || waybar"
+          "CONTROL, ESCAPE, Toggle waybar, exec, systemctl --user is-active waybar && systemctl --user stop waybar || systemctl --user start waybar"
           "SUPER ALT, W, Wallpaper selection script, exec, ~/.config/hypr/scripts/select-wp"
           "SUPER, T, Launch terminal, exec, foot"
           "SUPER, F, Launch browser, exec, firefox"

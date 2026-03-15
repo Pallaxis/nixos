@@ -102,7 +102,7 @@ in {
             # "format-wifi" = " ";
             # "format-disconnected" = "󱘖 ";
             # "format-disabled" = " ";
-            "tooltip-format" = "{ifname}\n{ipaddr}/{cidr}\n{netmask}\n{gwaddr}";
+            "tooltip-format" = "if:{ifname}\nip:{ipaddr}/{cidr}\nmask:{netmask}\ngw:{gwaddr}";
             "tooltip-format-disconnected" = "Network Disconnected";
             "tooltip-format-disabled" = "Network Disabled";
           };
