@@ -67,6 +67,7 @@ in {
             "calendar" = {
               "mode" = "month";
               "mode-mon-col" = 3;
+              "iso8601" = true;
               "weeks-pos" = "right";
               "on-scroll" = 1;
               "format" = {
@@ -78,8 +79,8 @@ in {
               };
             };
             "actions" = {
-              "on-click" = "shift_reset";
-              "on-click-right" = "mode";
+              "on-click" = "mode";
+              "on-click-right" = "shift_reset";
               "on-scroll-up" = "shift_up";
               "on-scroll-down" = "shift_down";
             };
