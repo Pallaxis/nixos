@@ -49,6 +49,7 @@
           isDefault = true;
           settings = {
             "mailnews.start_page.enabled" = false;
+            "calendar.week.start" = 1;
           };
         };
       };
