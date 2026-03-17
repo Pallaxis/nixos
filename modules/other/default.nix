@@ -23,6 +23,14 @@ in {
       enable = true;
       openFirewall = true;
     };
+    # Syncthing ports, can't use option because it needs system service enabled
+    networking.firewall = {
+      allowedTCPPorts = [22000];
+      allowedUDPPorts = [
+        21027
+        22000
+      ];
+    };
 
     environment.systemPackages = with pkgs; [
       libreoffice-fresh
