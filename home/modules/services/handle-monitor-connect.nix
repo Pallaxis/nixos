@@ -37,7 +37,6 @@ in {
 
             socat -u UNIX-CONNECT:"$hypr_socket" - |
             while read -r line; do
-              echo "$line"
               handle "$line"
             done
 
