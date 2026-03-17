@@ -98,6 +98,7 @@ in {
           };
           "network" = {
             "format" = " {bandwidthUpBits}  {bandwidthDownBits}";
+            "interval" = 5;
             # "format-ethernet" = " ";
             # "format-wifi" = " ";
             # "format-disconnected" = "󱘖 ";

@@ -14,8 +14,16 @@ in {
     networking = {
       hostName = hostCfg.name;
       networkmanager.enable = true;
+      nameservers = [
+        "1.1.1.1"
+        "1.0.0.1"
+      ];
     };
 
+    services.resolved = {
+      enable = true;
+      settings.Resolve.DNSOverTLS = true;
+    };
     services.avahi = {
       enable = true;
       nssmdns4 = true;
