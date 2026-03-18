@@ -17,12 +17,17 @@ in {
       nameservers = [
         "1.1.1.1"
         "1.0.0.1"
+        "1.1.1.1#cloudflare-dns.com"
+        "1.0.0.1#cloudflare-dns.com"
       ];
     };
 
     services.resolved = {
       enable = true;
-      settings.Resolve.DNSOverTLS = true;
+      settings.Resolve = {
+        DNSOverTLS = true;
+        DNSSEC = true;
+      };
     };
     services.avahi = {
       enable = true;
