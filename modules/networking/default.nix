@@ -34,20 +34,5 @@ in {
       nssmdns4 = true;
       nssmdns6 = true;
     };
-
-    environment.etc."nsswitch.conf".text = ''
-      passwd:    files systemd
-      group:     files [success=merge] systemd
-      shadow:    files systemd
-      sudoers:   files
-
-      hosts:     mymachines mdns_minimal [NOTFOUND=return] files myhostname dns
-      networks:  files
-
-      ethers:    files
-      services:  files
-      protocols: files
-      rpc:       files
-    '';
   };
 }
