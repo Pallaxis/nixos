@@ -1,9 +1,41 @@
 {
   osConfig,
   lib,
+  pkgs,
   ...
 }: let
   cfg = osConfig.my.modules.hyprland;
+
+  logoutMenu = pkgs.writeShellScriptBin "logout-menu" ''
+    # Simple app launcher that shows a list of options and handles them by on a case basis
+    options=$(printf " Lock\n󰤄 Sleep\n⏻ Power Off\n Reboot\n󰗽 Logout")
+
+    selection=$(${pkgs.procps}/bin/pkill fuzzel || echo -e "''$options" | ${pkgs.fuzzel}/bin/fuzzel --dmenu -i -p "Logout Menu")
+
+    [[ -z "''$selection" ]] && exit 0 # exit on no selection
+
+    case "''$selection" in
+        " Lock")
+            sleep 0.5
+            ${pkgs.systemd}/bin/loginctl lock-session
+            ;;
+        "󰤄 Sleep")
+            ${pkgs.systemd}/bin/systemctl suspend
+            ;;
+        "⏻ Power Off")
+            ${pkgs.systemd}/bin/systemctl poweroff
+            ;;
+        " Reboot")
+            ${pkgs.systemd}/bin/systemctl reboot
+            ;;
+        "󰗽 Logout")
+            ${pkgs.systemd}/bin/loginctl terminate-user ""
+            ;;
+        *)
+            echo "how did we get here"
+            ;;
+    esac
+  '';
 in {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
@@ -29,11 +61,10 @@ in {
           "SUPER, F, Launch browser, exec, firefox"
           "SUPER, ESCAPE, Launch btop, exec, setsid -f $term -e btop"
           "SUPER SHIFT, slash, Show keybinds, exec, setsid -f $term -T Keybindings -e $scr_path/keybindings"
-          # Rofi
-          "SUPER, SPACE, Launch desktop programs, exec, pkill -x rofi || rofi -show drun"
-          "SUPER, tab, Switch between desktop programs, exec, pkill -x rofi || rofi -show window"
-          "SUPER, R, Browse system files, exec, pkill -x rofi || rofi -show run"
-          "SUPER, backspace, Logout menu, exec, ~/.config/rofi/scripts/logout-menu"
+          # Application launcher
+          "SUPER, SPACE, Launch desktop programs, exec, pkill -x fuzzel || fuzzel"
+          # "SUPER, R, Browse system files, exec, pkill -x rofi || rofi -show run"
+          "SUPER, backspace, Logout menu, exec, ${logoutMenu}/bin/logout-menu"
           # Audio control
           ", XF86AudioMute, Toggle audio mute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           ", XF86AudioLowerVolume, Lower volume, exec, ~/.config/hypr/scripts/change-volume 5%-"

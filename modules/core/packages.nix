@@ -24,7 +24,6 @@
     man-pages
     nodejs
     pavucontrol
-    rofi
     udisks
     usbutils
     wl-clipboard

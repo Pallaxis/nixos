@@ -62,6 +62,11 @@ in {
         ];
         layerrule = [
           "match:namespace rofi, blur on"
+          "match:namespace launcher, no_anim on"
+          "match:namespace launcher, blur off"
+          "match:namespace launcher, blur_popups off"
+          "match:namespace launcher, ignore_alpha 0"
+          "match:namespace launcher, dim_around off"
           "match:namespace logout_dialog, blur on"
           "match:namespace notifications, blur on"
           "match:namespace swaync-control-center, blur on"

@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./desktop
     ./hyprland
     ./lutris
     ./niri

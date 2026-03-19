@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Simple rofi menu that shows a list of options and handles them by on a case basis
+# Simple app launcher that shows a list of options and handles them by on a case basis
 
-config="$HOME/.config/rofi/logout-menu.rasi"
 options=$(
     echo " Lock"
     echo "󰤄 Sleep"
@@ -10,8 +9,7 @@ options=$(
     echo "󰗽 Logout"
 )
 
-# Kill rofi if it's running or show rofi with our options otherwise
-selection=$(pkill rofi || echo -e "$options" | rofi -dmenu -no-custom -i -p "Logout Menu" -config "${config}")
+selection=$(pkill fuzzel || echo -e "$options" | fuzzel --dmenu -i -p "Logout Menu")
 if [[ -z $selection ]]; then
     exit
 fi

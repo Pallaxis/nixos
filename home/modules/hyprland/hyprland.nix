@@ -28,6 +28,7 @@ in {
   };
   config = lib.mkIf cfg.enable {
     my.home.modules.waybar.enable = true;
+    my.home.modules.desktop.enable = true;
     my.home.services.handleMonitorConnect.enable = true;
     home = {
       file.".config/hypr/scripts".source = ./scripts;
