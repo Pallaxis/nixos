@@ -21,6 +21,7 @@
     imv
     jq
     ldns
+    libsForQt5.qt5ct
     man-pages
     nodejs
     pavucontrol

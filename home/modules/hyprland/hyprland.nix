@@ -73,20 +73,20 @@ in {
     qt = {
       enable = true;
       style.name = "kvantum";
-      # qt5ctSettings = {
-      #   Appearance = {
-      #     style = "kvantum";
-      #     custom_palette = "true";
-      #     color_scheme_path = "/home/henry/.config/qt5ct/style-colors.conf";
-      #   };
-      # };
-      # qt6ctSettings = {
-      #   Appearance = {
-      #     style = "kvantum";
-      #     custom_palette = "true";
-      #     color_scheme_path = "/home/henry/.config/qt6ct/style-colors.conf";
-      #   };
-      # };
+      qt5ctSettings = {
+        Appearance = {
+          style = "kvantum";
+          custom_palette = "true";
+          color_scheme_path = "/home/henry/.config/qt5ct/style-colors.conf";
+        };
+      };
+      qt6ctSettings = {
+        Appearance = {
+          style = "kvantum";
+          custom_palette = "true";
+          color_scheme_path = "/home/henry/.config/qt6ct/style-colors.conf";
+        };
+      };
     };
     programs.waybar = {
       enable = true;
