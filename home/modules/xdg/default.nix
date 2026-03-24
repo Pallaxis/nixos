@@ -4,8 +4,9 @@
 
     userDirs = {
       enable = true;
-      download = "downloads";
+      desktop = "desktop";
       documents = "documents";
+      download = "downloads";
       music = "music";
       pictures = "pictures";
       publicShare = "public";
