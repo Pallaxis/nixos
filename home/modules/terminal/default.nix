@@ -3,7 +3,15 @@
   lib,
   ...
 }: {
-  programs.foot.enable = true;
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        font = "JetbrainsMono Nerd Font Mono:size=11";
+        pad = "5x5 center";
+      };
+    };
+  };
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -79,14 +87,14 @@
     ];
     initContent = let
       zshConfigEarlyInit = lib.mkOrder 500 ''
-        # Make general or attach to it if it's already running
-        if [[ -z "$TMUX" && -n "$DISPLAY" ]]; then
-            if [[ -z $(tmux list-sessions) ]]; then
-          exec tmux new-session -s general
-            elif [[ -z $(tmux list-clients) ]]; then
-          exec tmux new-session -A -s general
-            fi
-        fi
+        # # Make general or attach to it if it's already running
+        # if [[ -z "$TMUX" && -n "$DISPLAY" ]]; then
+        #     if [[ -z $(tmux list-sessions) ]]; then
+        #   exec tmux new-session -s general
+        #     elif [[ -z $(tmux list-clients) ]]; then
+        #   exec tmux new-session -A -s general
+        #     fi
+        # fi
       '';
       zshPrompt = lib.mkOrder 1000 "PROMPT=$'\n''%F{#89b4fa}%~%f %(?..%F{red}%?%f )'$'\n''%F{#cba6f7}%f '";
       fzfTab = lib.mkOrder 1200 ''
@@ -268,6 +276,280 @@
         not_found_symbol = "";
         sigint_symbol = "";
         signal_symbol = "";
+      };
+    };
+  };
+  programs.zellij = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      show_startup_tips = false;
+      keybinds = {
+        _props.clear-defaults = true;
+
+        shared_except = {
+          _args = ["tmux" "locked"];
+          _children = [
+            {
+              bind = {
+                _args = ["Ctrl s"];
+                SwitchToMode = "Tmux";
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl h"];
+                MoveFocus = "Left";
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl j"];
+                MoveFocus = "Down";
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl k"];
+                MoveFocus = "Up";
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl l"];
+                MoveFocus = "Right";
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 1"];
+                GoToTab = 1;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 2"];
+                GoToTab = 2;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 3"];
+                GoToTab = 3;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 4"];
+                GoToTab = 4;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 5"];
+                GoToTab = 5;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 6"];
+                GoToTab = 6;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 7"];
+                GoToTab = 7;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 8"];
+                GoToTab = 8;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 9"];
+                GoToTab = 9;
+              };
+            }
+            {
+              bind = {
+                _args = ["Alt 0"];
+                GoToTab = 10;
+              };
+            }
+          ];
+        };
+        tmux = {
+          _children = [
+            {
+              bind = {
+                _args = ["["];
+                SwitchToMode = "Scroll";
+              };
+            }
+            {
+              bind = {
+                _args = ["s"];
+                LaunchOrFocusPlugin = {
+                  _args = ["zellij:session-manager"];
+                  floating = true;
+                };
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl s"];
+                Write = 2;
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["\""];
+                NewPane = "Down";
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["%"];
+                NewPane = "Right";
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["z"];
+                ToggleFocusFullscreen = {};
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["c"];
+                NewTab = {};
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = [","];
+                SwitchToMode = "RenameTab";
+              };
+            }
+            {
+              bind = {
+                _args = ["p"];
+                GoToPreviousTab = {};
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["n"];
+                GoToNextTab = {};
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["h"];
+                MoveFocus = "Left";
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["l"];
+                MoveFocus = "Right";
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["j"];
+                MoveFocus = "Down";
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["k"];
+                MoveFocus = "Up";
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["o"];
+                FocusNextPane = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["d"];
+                Detach = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["Space"];
+                NextSwapLayout = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["x"];
+                CloseFocus = {};
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["Esc"];
+                SwitchToMode = "Normal";
+              };
+            }
+          ];
+        };
+        scroll = {
+          _children = [
+            {
+              bind = {
+                _args = ["Esc"];
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["PageUp"];
+                PageScrollUp = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["PageDown"];
+                PageScrollDown = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl u"];
+                PageScrollUp = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl d"];
+                PageScrollDown = {};
+              };
+            }
+          ];
+        };
       };
     };
   };

@@ -10,7 +10,6 @@
   };
 
   ### LAZY DOTFILES ###
-  home.file.".config/foot".source = ./dotfiles/foot;
   home.file.".config/rofi".source = ./dotfiles/rofi;
 
   # links fonts to where programs expect them to be
