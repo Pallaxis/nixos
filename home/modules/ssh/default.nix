@@ -15,6 +15,9 @@ in {
       matchBlocks = {
         "*" = {
           addKeysToAgent = "yes";
+          setEnv = {
+            TERM = "xterm-256color";
+          };
         };
         "*fenix*.local oclea*.local Oclea*.local zeus*.local hercules*.local depth-rdk*.local" = {
           userKnownHostsFile = "/dev/null";

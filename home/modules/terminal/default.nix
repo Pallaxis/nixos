@@ -9,6 +9,7 @@
       main = {
         font = "JetbrainsMono Nerd Font Mono:size=11";
         pad = "5x5 center";
+        term = "foot";
       };
     };
   };
