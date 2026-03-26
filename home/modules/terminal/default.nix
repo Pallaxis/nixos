@@ -283,6 +283,26 @@
   programs.zellij = {
     enable = true;
     enableZshIntegration = true;
+    layouts = {
+      default = {
+        layout = {
+          _children = [
+            {
+              pane = {};
+            }
+            {
+              pane = {
+                size = 1;
+                borderless = true;
+                plugin = {
+                  location = "zellij:tab-bar";
+                };
+              };
+            }
+          ];
+        };
+      };
+    };
     settings = {
       show_startup_tips = false;
       mouse_hover_effects = false;
@@ -390,7 +410,8 @@
             {
               bind = {
                 _args = ["["];
-                SwitchToMode = "Scroll";
+                EditScrollback = {};
+                SwitchToMode = "Normal";
               };
             }
             {
