@@ -285,6 +285,8 @@
     enableZshIntegration = true;
     settings = {
       show_startup_tips = false;
+      mouse_hover_effects = false;
+
       keybinds = {
         _props.clear-defaults = true;
 
