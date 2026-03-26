@@ -58,6 +58,9 @@
         p.bash
         p.c
         p.diff
+        p.gitcommit
+        p.gitignore
+        p.git_rebase
         p.javascript
         p.lua
         p.luadoc
@@ -70,9 +73,18 @@
       ]);
       type = "lua";
       config = ''
+        -- Starts Treesitter if parser for filetype is installed
         vim.api.nvim_create_autocmd('FileType', {
-          pattern = { 'nix' },
-          callback = function() vim.treesitter.start() end,
+          callback = function(args)
+            local buf, filetype = args.buf, args.match
+
+            local language = vim.treesitter.language.get_lang(filetype)
+            if not language then return end
+
+            if not vim.treesitter.language.add(language) then return end
+
+            vim.treesitter.start(buf, language)
+          end,
         })
       '';
     }
