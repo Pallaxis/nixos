@@ -539,6 +539,30 @@
             }
             {
               bind = {
+                _args = ["Home"];
+                ScrollToTop = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["End"];
+                ScrollToBottom = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["/"];
+                SwitchToMode = "entersearch";
+              };
+            }
+            {
+              bind = {
+                _args = ["?"];
+                SwitchToMode = "entersearch";
+              };
+            }
+            {
+              bind = {
                 _args = ["Ctrl u"];
                 PageScrollUp = {};
               };
@@ -547,6 +571,112 @@
               bind = {
                 _args = ["Ctrl d"];
                 PageScrollDown = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["j"];
+                ScrollDown = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["k"];
+                ScrollUp = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["e"];
+                EditScrollback = {};
+                SwitchToMode = "Normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["D"];
+                DumpScreen = {
+                  _args = ["/tmp/zellij-dump.txt"];
+                  full = true;
+                };
+              };
+            }
+          ];
+        };
+        entersearch = {
+          _children = [
+            {
+              bind = {
+                _args = ["Esc"];
+                SwitchToMode = "normal";
+              };
+            }
+            {
+              bind = {
+                _args = ["Enter"];
+                SwitchToMode = "search";
+              };
+            }
+          ];
+        };
+        search = {
+          _children = [
+            {
+              bind = {
+                _args = ["Esc"];
+                SwitchToMode = "scroll";
+              };
+            }
+            {
+              bind = {
+                _args = ["n"];
+                Search = {
+                  _args = ["down"];
+                };
+              };
+            }
+            {
+              bind = {
+                _args = ["p"];
+                Search = {
+                  _args = ["up"];
+                };
+              };
+            }
+            {
+              bind = {
+                _args = ["PageUp"];
+                PageScrollUp = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["PageDown"];
+                PageScrollDown = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl u"];
+                PageScrollUp = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["Ctrl d"];
+                PageScrollDown = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["Home"];
+                ScrollToTop = {};
+              };
+            }
+            {
+              bind = {
+                _args = ["End"];
+                ScrollToBottom = {};
               };
             }
           ];
