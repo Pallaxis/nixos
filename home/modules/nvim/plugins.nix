@@ -73,6 +73,11 @@
       ]);
       type = "lua";
       config = ''
+        vim.filetype.add({
+          extension = {
+            dump = "vim",
+          },
+        })
         -- Starts Treesitter if parser for filetype is installed
         vim.api.nvim_create_autocmd('FileType', {
           callback = function(args)
