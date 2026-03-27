@@ -36,6 +36,7 @@ in {
       libreoffice-fresh
       mpv
       imagemagick
+      gimp
     ];
   };
 }
