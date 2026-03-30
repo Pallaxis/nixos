@@ -207,6 +207,16 @@ in {
           esac
           ) & disown
         }
+        ns() {
+          # Create an array to store the prefixed packages
+          local pkgs=()
+          for pkg in "$@"; do
+            pkgs+=("nixpkgs#$pkg")
+          done
+
+          # Run the nix shell command with all prefixed packages
+          nix shell "''${pkgs[@]}" --command zsh -c "export IN_NIX_SHELL=impure; exec zsh"
+        }
       '';
     in
       lib.mkMerge [zshConfigEarlyInit zshPrompt fzfTab functions];
