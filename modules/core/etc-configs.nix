@@ -4,6 +4,7 @@
     Defaults        timestamp_timeout=15
   '';
   nixpkgs.config.allowUnfree = true;
+  documentation.man.cache.enable = true;
   environment.etc."libinput/local-overrides.quirks".text = ''
     [Serial Keyboards]
     MatchUdevType=keyboard
