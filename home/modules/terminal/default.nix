@@ -120,7 +120,7 @@ in {
         export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
         export FZF_DEFAULT_OPTS="--preview-window=up:70% --bind=ctrl-d:page-down,ctrl-u:page-up --color=query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"
         # Uses bat as manpager (replaces bat-extras package)
-        export MANPAGER="bat -plman"
+        export MANPAGER="bat -plman --strip-ansi always"
         export WORDCHARS="*?_.[]~&;!#$%^(){}<>"
 
         #
@@ -368,15 +368,16 @@ in {
       mouse_hover_effects = false;
       pane_viewport_serialization = true;
       scrollback_lines_to_serialize = 4000;
-      post_command_discovery_hook = ''
-        WRAPPER_START="zsh -c"
-
-        if [[ "$RESURRECT_COMMAND" == "$WRAPPER_START"* ]]; then
-            echo "$RESURRECT_COMMAND"
-        else
-          echo "zsh -c '$RESURRECT_COMMAND; exec zsh -i'"
-        fi
-      '';
+      # post_command_discovery_hook = ''
+      #   WRAPPER_START="zsh -c"
+      #
+      #   if [[ "$RESURRECT_COMMAND" == "$WRAPPER_START"* ]]; then
+      #       echo "$RESURRECT_COMMAND"
+      #   else
+      #     SAFE_CMD=$(printf "%q" "$RESURRECT_COMMAND; exec zsh -i")
+      #     echo "zsh -c $SAFE_CMD"
+      #   fi
+      # '';
 
       keybinds = {
         _props.clear-defaults = true;
