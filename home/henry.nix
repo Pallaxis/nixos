@@ -50,7 +50,6 @@
     foot
     fortune
     gcc
-    git
     keepassxc
     lolcat
     nerd-fonts.jetbrains-mono
