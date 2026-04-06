@@ -345,5 +345,11 @@
         })
       '';
     }
+    {
+      plugin = pkgs.vimPlugins.diffview-nvim;
+      type = "lua";
+      config = ''
+      '';
+    }
   ];
 }

@@ -228,6 +228,9 @@ in {
           # Run the nix shell command with all prefixed packages
           nix shell "''${pkgs[@]}" --command zsh -c "export IN_NIX_SHELL=impure; exec zsh"
         }
+        gdt() {
+          nvim -c "DiffviewOpen $1..$2"
+        }
       '';
     in
       lib.mkMerge [zshConfigEarlyInit zshPrompt fzfTab functions];
