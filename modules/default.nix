@@ -3,23 +3,14 @@
   lib,
   ...
 }: let
+  # Maps dirs in current dir to a list of paths
+  dirNames = lib.attrNames (lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./.));
+  importPaths = map (name: ./. + "/${name}") dirNames;
+
   cfg = config.my.host;
 in {
-  imports = [
-    ./core
-    ./disko
-    ./flatpak
-    ./gaming
-    ./garbage-collect
-    ./hardware
-    ./hyprland
-    ./networking
-    ./niri
-    ./options
-    ./other
-    ./plymouth
-    ./work
-  ];
+  imports = importPaths;
+
   config = {
     my.modules =
       {
