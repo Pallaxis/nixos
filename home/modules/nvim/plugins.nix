@@ -29,16 +29,41 @@
       '';
     }
     {
-      plugin = pkgs.vimPlugins.vim-tmux-navigator;
+      plugin = pkgs.vimPlugins.Navigator-nvim.overrideAttrs (oldAttrs: {
+        src = pkgs.fetchFromGitHub {
+          owner = "dynamotn";
+          repo = "Navigator.nvim";
+          rev = "master";
+          sha256 = "zwZgqgIZNmMUVcGibfWWbyzI9plfEFWVFwT366xGGMg=";
+        };
+      });
       type = "lua";
       config = ''
-        vim.g.tmux_navigator_no_mappings = 1
-        vim.keymap.set('n', '<C-h>', ':<C-U>TmuxNavigateLeft<cr>', { silent = true })
-        vim.keymap.set('n', '<C-j>', ':<C-U>TmuxNavigateDown<cr>', { silent = true })
-        vim.keymap.set('n', '<C-k>', ':<C-U>TmuxNavigateUp<cr>', { silent = true })
-        vim.keymap.set('n', '<C-l>', ':<C-U>TmuxNavigateRight<cr>', { silent = true })
+        require('Navigator').setup({})
+        vim.keymap.set('n', '<C-h>', '<CMD>NavigatorLeft<CR>', { silent = true })
+        vim.keymap.set('n', '<C-j>', '<CMD>NavigatorDown<CR>', { silent = true })
+        vim.keymap.set('n', '<C-k>', '<CMD>NavigatorUp<CR>', { silent = true })
+        vim.keymap.set('n', '<C-l>', '<CMD>NavigatorRight<CR>', { silent = true })
       '';
     }
+    # NOTE: disabling until speed of nvim > zellij is as good as Navigator, issue #378
+    # will eventually swap to this as Navigator is abandoned
+    # {
+    #   plugin = pkgs.vimPlugins.smart-splits-nvim;
+    #   type = "lua";
+    #   config = ''
+    #     require('smart-splits').setup({})
+    #     vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
+    #     vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)
+    #     vim.keymap.set('n', '<A-k>', require('smart-splits').resize_up)
+    #     vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
+    #
+    #     vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+    #     vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+    #     vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+    #     vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+    #   '';
+    # }
     {
       plugin = pkgs.vimPlugins.nvim-lint;
       type = "lua";
