@@ -15,7 +15,13 @@
         swapSize = "32G";
       };
       gaming.enable = true;
+      garbageCollect.enable = true;
+      hyprland.enable = true;
+      networking.enable = true;
       nvidia.enable = true;
+      other.enable = true;
+      plymouth.enable = true;
+      work.enable = false;
     };
   };
   # Home-Manager options

@@ -8,6 +8,7 @@
     ./modules
   ];
 
+  # My user's modules enabled here
   my.home.modules =
     {
       ssh.enable = true;
@@ -20,6 +21,8 @@
     }
     // lib.optionalAttrs (osConfig.my.host.name == "thinkpad") {
     };
+
+  # Basic user info
   home = {
     username = "henry";
     homeDirectory = "/home/henry";
@@ -32,17 +35,15 @@
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
 
-  ### USER SERVICES ###
+  ### USER PACKAGES ###
   home.packages = with pkgs; [
     cowsay
     fastfetch
-    foot
     fortune
     gcc
     keepassxc
     lolcat
     nerd-fonts.jetbrains-mono
     ripgrep
-    tmux
   ];
 }

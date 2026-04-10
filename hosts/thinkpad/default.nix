@@ -14,6 +14,13 @@
         bootDisk = "/dev/disk/by-id/nvme-TEAM_TM8FP4512G_17A8079402DE00100982";
         swapSize = "16G";
       };
+      gaming.enable = false;
+      garbageCollect.enable = true;
+      hyprland.enable = true;
+      networking.enable = true;
+      nvidia.enable = false;
+      other.enable = true;
+      plymouth.enable = true;
       work.enable = true;
     };
   };
