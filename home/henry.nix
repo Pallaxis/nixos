@@ -11,6 +11,7 @@
   my.home.modules =
     {
       ssh.enable = true;
+      thunderbird.enable = true;
     }
     // lib.optionalAttrs osConfig.my.modules.gaming.enable {
       lutris.enable = true;
@@ -32,18 +33,6 @@
       set -g status-left ""
       set -g status-right "#{?window_zoomed_flag,#[fg=#{@thm_mauve}]ZOOMED ,}#{E:@catppuccin_status_session}"
     '';
-  };
-  programs.thunderbird = {
-    enable = true;
-    profiles = {
-      henry = {
-        isDefault = true;
-        settings = {
-          "mailnews.start_page.enabled" = false;
-          "calendar.week.start" = 1;
-        };
-      };
-    };
   };
   home = {
     username = "henry";
