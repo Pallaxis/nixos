@@ -44,6 +44,18 @@
         t({ "", "  };", "}" }),
       }),
 
+      s("togglehomemod", {
+        t({ "{", "  config,", "  lib,", "  ...", "}: let", "  cfg = config.my.home.modules." }),
+        i(1, "name"),
+        t({ ";", "in {", "  options.my.home.modules." }),
+        f(copy, { 1 }),
+        t({ ".enable =", '    lib.mkEnableOption "' }),
+        f(capitalize, { 1 }),
+        t({ '";', "", "  config = lib.mkIf cfg.enable {", "    " }),
+        i(0),
+        t({ "", "  };", "}" }),
+      }),
+
     })
   '';
 }
