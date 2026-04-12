@@ -53,7 +53,6 @@ in {
       ssh-agent = {
         enable = true;
         socket = "ssh-agent.socket";
-        enableZshIntegration = true;
       };
     };
   };
