@@ -15,7 +15,7 @@
       statix # nix linter
       nixd # nix ls
       stylua # lua formatter
-      pyright # python ls
+      basedpyright # python ls
       hyprls # hypr ls
       shellcheck-minimal # bash ls
       luajitPackages.jsregexp # for luasnip

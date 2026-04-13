@@ -24,6 +24,7 @@ in {
         set -g status-left ""
         set -g status-right "#{?window_zoomed_flag,#[fg=#{@thm_mauve}]ZOOMED ,}#{E:@catppuccin_status_session}"
       '';
+      nvim.enable = false; # TODO: check if nix catppuccin is broken in nvim 12+ later
     };
   };
 }

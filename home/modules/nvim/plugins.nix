@@ -4,7 +4,7 @@
       plugin = pkgs.vimPlugins.catppuccin-nvim;
       type = "lua";
       config = ''
-        vim.cmd.colorscheme 'catppuccin-mocha'
+        vim.cmd.colorscheme 'catppuccin-nvim'
       '';
     }
     {
@@ -26,6 +26,18 @@
             },
           },
         })
+      '';
+    }
+    {
+      plugin = pkgs.vimPlugins.which-key-nvim;
+      type = "lua";
+      config = ''
+        require("which-key").setup({
+        })
+
+        vim.keymap.set("n", "<leader>?", function()
+          require("which-key").show({ global = false })
+        end, { desc = "Buffer Local Keymaps (which-key)" })
       '';
     }
     {
@@ -155,20 +167,20 @@
           },
         })
         -- Search
-          vim.keymap.set('n', 'sr', function() Snacks.picker.registers() end, { desc = '[S]earch [R]egisters' })
-          vim.keymap.set('n', 'sb', function() Snacks.picker.buffers() end, { desc = '[S]earch [B]uffers' })
-          vim.keymap.set('n', 's/', function() Snacks.picker.search_history() end, { desc = 'Search History' })
-          vim.keymap.set('n', 'sM', function() Snacks.picker.man() end, { desc = 'Man pages' })
-          vim.keymap.set('n', 'su', function() Snacks.picker.undo() end, { desc = 'Undo History' })
-          vim.keymap.set('n', 'sk', function() Snacks.picker.keymaps() end, { desc = 'Search Keymaps' })
-          vim.keymap.set('n', 'sg', function() Snacks.picker.grep() end, { desc = '[S]earch [G]rep' })
-          vim.keymap.set('n', 'sf', function() Snacks.explorer.open() end, { desc = '[S]earch [F]iles' })
+          vim.keymap.set('n', '<leader>sr', function() Snacks.picker.registers() end, { desc = '[S]earch [R]egisters' })
+          vim.keymap.set('n', '<leader>sb', function() Snacks.picker.buffers() end, { desc = '[S]earch [B]uffers' })
+          vim.keymap.set('n', '<leader>s/', function() Snacks.picker.search_history() end, { desc = 'Search History' })
+          vim.keymap.set('n', '<leader>sM', function() Snacks.picker.man() end, { desc = 'Man pages' })
+          vim.keymap.set('n', '<leader>su', function() Snacks.picker.undo() end, { desc = 'Undo History' })
+          vim.keymap.set('n', '<leader>sk', function() Snacks.picker.keymaps() end, { desc = 'Search Keymaps' })
+          vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = '[S]earch [G]rep' })
+          vim.keymap.set('n', '<leader>sf', function() Snacks.explorer.open() end, { desc = '[S]earch [F]iles' })
         -- LSP
-          vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
-          vim.keymap.set('n', 'gd', function() Snacks.picker.lsp_definitions() end, { desc = '[G]oto [d]efinition' })
-          vim.keymap.set('n', 'gD', function() Snacks.picker.lsp_declarations() end, { desc = '[G]oto [D]eclaration' })
-          vim.keymap.set('n', 'gr', function() Snacks.picker.lsp_references() end, { desc = '[G]oto [r]eferences' })
-          vim.keymap.set('n', 'gt', function() Snacks.picker.lsp_type_definitions() end, { desc = '[G]oto [t]ype definition' })
+          vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = '[G]oto [r]e[n]ame' })
+          vim.keymap.set('n', 'grd', function() Snacks.picker.lsp_definitions() end, { desc = '[G]oto [d]efinition' })
+          vim.keymap.set('n', 'grD', function() Snacks.picker.lsp_declarations() end, { desc = '[G]oto [D]eclaration' })
+          vim.keymap.set('n', 'grr', function() Snacks.picker.lsp_references() end, { desc = '[G]oto [r]eferences' })
+          vim.keymap.set('n', 'grt', function() Snacks.picker.lsp_type_definitions() end, { desc = '[G]oto [t]ype definition' })
           vim.keymap.set('n', 'gai', function() Snacks.picker.lsp_incoming_calls() end, { desc = '[G]oto C[a]lls [i]ncoming' })
           vim.keymap.set('n', 'gao', function() Snacks.picker.lsp_outgoing_calls() end, { desc = '[G]oto C[a]lls [o]utgoing' })
       '';
@@ -177,7 +189,7 @@
       plugin = pkgs.vimPlugins.nvim-lspconfig;
       type = "lua";
       config = ''
-        local servers = { 'nixd', 'pyright', 'yaml-language-server', 'hyprls', 'shellcheck' }
+        local servers = { 'nixd', 'basedpyright', 'yaml-language-server', 'hyprls', 'shellcheck' }
           for _, server in ipairs(servers) do
              vim.lsp.enable(server)
           end
