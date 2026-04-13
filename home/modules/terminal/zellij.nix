@@ -406,6 +406,13 @@ in {
                   SwitchToMode = "Normal";
                 };
               }
+              {
+                bind = {
+                  _args = ["f"];
+                  ToggleFloatingPanes = {};
+                  SwitchToMode = "Normal";
+                };
+              }
             ];
           };
           scroll = {
