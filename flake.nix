@@ -33,7 +33,6 @@
     # A helper to reduce boilerplate for any host added to the folder
     mkSystem = hostName:
       nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
           inherit hostName;
