@@ -390,5 +390,11 @@
       config = ''
       '';
     }
+    {
+      plugin = pkgs.vimPlugins.nvim-web-devicons;
+      type = "lua";
+      config = ''
+      '';
+    }
   ];
 }
