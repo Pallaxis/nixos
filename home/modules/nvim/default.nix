@@ -9,6 +9,7 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    viAlias = true;
     waylandSupport = true;
     extraPackages = with pkgs; [
       alejandra # nix formatter

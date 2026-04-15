@@ -146,6 +146,15 @@
       '';
     }
     {
+      plugin = pkgs.vimPlugins.render-markdown-nvim;
+      type = "lua";
+      config = ''
+        require('render-markdown').setup({
+          code = { border = 'show' }
+        })
+      '';
+    }
+    {
       plugin = pkgs.vimPlugins.snacks-nvim;
       type = "lua";
       config = ''
