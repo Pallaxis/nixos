@@ -44,6 +44,5 @@
     keepassxc
     lolcat
     nerd-fonts.jetbrains-mono
-    ripgrep
   ];
 }
