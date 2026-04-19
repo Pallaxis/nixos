@@ -130,6 +130,32 @@ in {
                   MoveFocus = "Right";
                 };
               }
+              # NOTE: Temporary settings for normal mode while this issue remains open
+              # https://github.com/zellij-org/zellij/issues/605
+              {
+                bind = {
+                  _args = ["Ctrl PageUp"];
+                  PageScrollUp = {};
+                };
+              }
+              {
+                bind = {
+                  _args = ["Ctrl PageDown"];
+                  PageScrollDown = {};
+                };
+              }
+              {
+                bind = {
+                  _args = ["Ctrl Home"];
+                  ScrollToTop = {};
+                };
+              }
+              {
+                bind = {
+                  _args = ["Ctrl End"];
+                  ScrollToBottom = {};
+                };
+              }
               {
                 bind = {
                   _args = ["Alt 1"];
