@@ -172,6 +172,9 @@
                   preset = "default",
                 },
               },
+              buffers = {
+                focus="list",
+              },
             },
           },
         })
@@ -185,7 +188,14 @@
           vim.keymap.set('n', '<leader>su', function() Snacks.picker.undo() end, { desc = '[S]earch [u]ndo history' })
           vim.keymap.set('n', '<leader>sk', function() Snacks.picker.keymaps() end, { desc = '[S]earch [k]eymaps' })
           vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = '[S]earch [g]rep' })
-          vim.keymap.set('n', '<leader>sf', function() Snacks.explorer.open() end, { desc = '[S]earch [f]iles' })
+          vim.keymap.set('n', '<leader>sf', function() Snacks.picker.files() end, { desc = '[S]earch [f]iles' })
+          vim.keymap.set('n', '<leader>se', function() Snacks.explorer.open() end, { desc = '[S]earch [e]xplorer' })
+        -- Git
+          vim.keymap.set('n', '<leader>gd', function() Snacks.picker.git_diff() end, { desc = '[G]it [d]iff' })
+          vim.keymap.set('n', '<leader>gs', function() Snacks.picker.git_status() end, { desc = '[G]it [s]tatus' })
+          vim.keymap.set('n', '<leader>gl', function() Snacks.picker.git_log() end, { desc = '[G]it [l]og' })
+          vim.keymap.set('n', '<leader>gf', function() Snacks.picker.git_log_file() end, { desc = '[G]it log of [f]ile' })
+          vim.keymap.set('n', '<leader>gb', function() Snacks.picker.git_branches() end, { desc = '[G]it [b]ranches' })
         -- LSP
           vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = '[G]oto [r]e[n]ame' })
           vim.keymap.set('n', 'grd', function() Snacks.picker.lsp_definitions() end, { desc = '[G]oto [d]efinition' })
