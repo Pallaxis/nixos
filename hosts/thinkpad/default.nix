@@ -60,6 +60,11 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="4255", MODE="0666"
   '';
 
+  services.logind.settings.Login = {
+    HandlePowerKey = "ignore";
+    HandlePowerKeyLongPress = "powereoff";
+  };
+
   # Unique to thinkpad, PrtSc button where meta key should be
   services.keyd = {
     keyboards.caps-swap.settings = {
