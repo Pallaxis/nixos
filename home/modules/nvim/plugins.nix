@@ -401,8 +401,6 @@
       plugin = pkgs.vimPlugins.blink-cmp;
       type = "lua";
       config = ''
-        local ls = require("luasnip")
-
         require("blink.cmp").setup({
           snippets = { preset = "luasnip" },
 
