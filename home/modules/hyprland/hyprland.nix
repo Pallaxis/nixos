@@ -136,7 +136,7 @@ in {
       settings = {
         general = {
           hide_cursor = true;
-          # immediate_render = true;
+          immediate_render = true;
           ignore_empty_input = true;
         };
         background = {
