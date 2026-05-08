@@ -35,5 +35,11 @@
     -- Allows moving entire selections
     vim.keymap.set({ "v" }, "J", ":m '>+1<CR>gv=gv")
     vim.keymap.set({ "v" }, "K", ":m '<-2<CR>gv=gv")
+
+    vim.keymap.set("n", "<leader>sd", function()
+        local is_enabled = vim.diagnostic.is_enabled()
+        vim.diagnostic.enable(not is_enabled)
+        print("Diagnostics " .. (is_enabled and "disabled" or "enabled"))
+    end, { desc = "Toggle [d]iagnostics" })
   '';
 }
