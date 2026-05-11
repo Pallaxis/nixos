@@ -59,7 +59,7 @@ in {
         wallpaper = [
           {
             monitor = "";
-            path = toString config.my.home.modules.hyprpaper.path;
+            path = "${config.my.home.modules.hyprpaper.path}";
           }
         ];
       };
@@ -141,7 +141,7 @@ in {
         };
         background = {
           monitor = "";
-          path = toString config.my.home.modules.hyprpaper.path;
+          path = "${config.my.home.modules.hyprpaper.path}";
           blur_passes = "4";
           blur_size = "1";
         };
