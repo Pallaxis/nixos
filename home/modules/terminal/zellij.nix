@@ -74,6 +74,7 @@ in {
       settings = {
         show_startup_tips = false;
         mouse_hover_effects = false;
+        session_serialization = false;
         pane_viewport_serialization = true;
         scrollback_lines_to_serialize = 4000;
         # post_command_discovery_hook = ''
