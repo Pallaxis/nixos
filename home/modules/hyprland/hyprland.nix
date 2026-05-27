@@ -43,14 +43,15 @@ in {
       };
     };
 
+    xdg.configFile."hypr/hyprland.lua".source = ./hyprland.lua;
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
-      settings = {
-        monitor = [
-          config.my.home.modules.hyprland.monitor
-        ];
-      };
+      #   settings = {
+      #     monitor = [
+      #       config.my.home.modules.hyprland.monitor
+      #     ];
+      #   };
     };
     services.hyprpaper = {
       enable = true;

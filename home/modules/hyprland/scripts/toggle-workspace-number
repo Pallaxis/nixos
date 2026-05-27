@@ -10,8 +10,8 @@ fi
 
 # if we hit the same key as the workspace we're on, go to last known workspace
 if [[ "$current_active_workspace" == "$workspace_pressed" ]]; then
-    hyprctl dispatch workspace "$previous_active_workspace"
+    hyprctl dispatch "hl.dsp.focus({{ workspace = $previous_active_workspace })"
 else
-    hyprctl dispatch workspace "$workspace_pressed"
+    hyprctl dispatch "hl.dsp.focus({ workspace = $workspace_pressed })"
 fi
 echo "$current_active_workspace" | tee /tmp/previous_workspace > /dev/null
