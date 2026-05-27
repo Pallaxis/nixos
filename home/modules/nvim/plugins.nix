@@ -22,7 +22,7 @@
           },
           formatters = {
             stylua = {
-              args = { "--indent-type", "Spaces", "--indent-width", "2", "-" }
+              args = { "--indent-type", "Spaces", "--indent-width", "2", "-", "--column-width", "200" }
             },
           },
         })

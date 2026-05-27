@@ -15,6 +15,7 @@ in {
     programs.steam = {
       enable = true;
       gamescopeSession.enable = true;
+      protontricks.enable = true;
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];
@@ -44,7 +45,7 @@ in {
     environment.systemPackages = with pkgs; [
       gamma-launcher
       protonup-ng
-      wineWow64Packages.full
+      wineWow64Packages.stagingFull
       winetricks
     ];
   };

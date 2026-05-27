@@ -17,6 +17,7 @@
       gaming.enable = true;
       garbageCollect.enable = true;
       hyprland.enable = true;
+      # plasma.enable = true;
       networking.enable = true;
       nvidia.enable = true;
       other.enable = true;

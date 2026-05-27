@@ -37,6 +37,8 @@ in {
       mpv
       imagemagick
       gimp
+      unrar
+      python3
     ];
   };
 }

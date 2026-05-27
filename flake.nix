@@ -54,6 +54,16 @@
               nix-index-database.homeModules.nix-index
             ];
           }
+          # FIXME: https://github.com/NixOS/nixpkgs/issues/514113
+          {
+            nixpkgs.overlays = [
+              (_: prev: {
+                openldap = prev.openldap.overrideAttrs {
+                  doCheck = !prev.stdenv.hostPlatform.isi686;
+                };
+              })
+            ];
+          }
         ];
       };
   in {
