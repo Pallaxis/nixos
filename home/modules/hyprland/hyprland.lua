@@ -3,23 +3,28 @@
 --
 
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
+-- Home monitors
 hl.monitor({ output = "desc:Samsung Electric Company LC32G7xT H4ZR900653", mode = "2560x1440@240", position = "0x0", scale = "1" })
 hl.monitor({ output = "desc:Ancor Communications Inc ROG PG278Q", mode = "2560x1440@144", position = "-2560x0", scale = "1" })
+-- Work monitors
+hl.monitor({ output = "desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536", mode = "1920x1080@60", position = "0x0", scale = "1.25" })
+hl.monitor({ output = "desc:Dell Inc. DELL U2715H 6VY7R735038S", mode = "2560x1440@60", position = "auto-center-up", scale = "1.25" })
 
 --
 -- Workspace rules
 --
 
-hl.workspace_rule({ workspace = "1", monitor = "DP-1", default = true })
-hl.workspace_rule({ workspace = "2", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "3", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "4", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "5", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "6", monitor = "DP-2", default = true })
-hl.workspace_rule({ workspace = "7", monitor = "DP-2" })
-hl.workspace_rule({ workspace = "8", monitor = "DP-2" })
-hl.workspace_rule({ workspace = "9", monitor = "DP-2" })
-hl.workspace_rule({ workspace = "10", monitor = "DP-2" })
+-- FIXME: need to add conditional logic per system
+hl.workspace_rule({ workspace = "1", monitor = "DP-4", default = true })
+hl.workspace_rule({ workspace = "2", monitor = "DP-4" })
+hl.workspace_rule({ workspace = "3", monitor = "DP-4" })
+hl.workspace_rule({ workspace = "4", monitor = "DP-4" })
+hl.workspace_rule({ workspace = "5", monitor = "DP-4" })
+hl.workspace_rule({ workspace = "6", monitor = "eDP-1", default = true })
+hl.workspace_rule({ workspace = "7", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "8", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "9", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "10", monitor = "eDP-1" })
 
 --
 -- Devices
@@ -170,8 +175,7 @@ hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("setsid -f $term -e btop"), { descript
 -- FIXME: keybinds
 hl.bind("SUPER + SHIFT + slash", hl.dsp.exec_cmd("setsid -f $term -T Keybindings -e $scr_path/keybindings"), { description = "Show keybinds" })
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"), { description = "Program launcher" })
-hl.bind("SUPER + backspace", hl.dsp.exec_cmd("#PATHHERE"), { description = "Logout menu" })
--- hl.bindd("SUPER, backspace, Logout menu, exec, /nix/store/q8v17ffdbkr6jjkk61vz9zf9sw2ajnfq-logout-menu/bin/logout-menu")
+hl.bind("SUPER + backspace", hl.dsp.exec_cmd("logout-menu"), { description = "Logout menu" })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { description = "Toggle audio mute" })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("~/.config/hypr/scripts/change-volume 5%-"), { description = "Lower volume" })
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("~/.config/hypr/scripts/change-volume 5%+"), { description = "Raise volume" })
