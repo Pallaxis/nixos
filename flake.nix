@@ -57,21 +57,6 @@
           }
           {
             nixpkgs.overlays = [
-              # FIXME: https://github.com/NixOS/nixpkgs/issues/514113
-              (_: prev: {
-                openldap = prev.openldap.overrideAttrs {
-                  doCheck = !prev.stdenv.hostPlatform.isi686;
-                };
-              })
-              # FIXME: https://github.com/nixos/nixpkgs/issues/523200
-              (_final: prev: let
-                stable = import self.inputs.nixpkgs-stable {
-                  inherit (prev.stdenv.hostPlatform) system;
-                  config.allowUnfree = true;
-                };
-              in {
-                inherit (stable) bubblewrap;
-              })
             ];
           }
         ];

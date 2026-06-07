@@ -11,18 +11,21 @@ in {
 
   config = lib.mkIf cfg.enable {
     my.modules.flatpak.enable = false;
-    ### Steam
-    programs.steam = {
-      enable = true;
-      gamescopeSession.enable = true;
-      protontricks.enable = true;
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
-      ];
-    };
-    programs.gamescope = {
-      enable = true;
-      capSysNice = true;
+    programs = {
+      steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+        protontricks.enable = true;
+        extraCompatPackages = with pkgs; [
+          proton-ge-bin
+        ];
+      };
+      gamescope = {
+        enable = true;
+        # FIXME: https://github.com/nixos/nixpkgs/issues/523200
+        capSysNice = false;
+      };
+      vesktop.enable = true;
     };
 
     # May be needed to get gamescope to run
