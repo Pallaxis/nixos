@@ -25,7 +25,6 @@ in {
         # FIXME: https://github.com/nixos/nixpkgs/issues/523200
         capSysNice = false;
       };
-      vesktop.enable = true;
     };
 
     # May be needed to get gamescope to run
