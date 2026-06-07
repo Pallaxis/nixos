@@ -12,40 +12,36 @@ in {
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = {
+      settings = {
         "*" = {
           addKeysToAgent = "yes";
-          setEnv = {
-            TERM = "xterm-256color";
-          };
+          setEnv = ["TERM=xterm-256color"];
         };
         "*fenix*.local oclea*.local Oclea*.local zeus*.local hercules*.local depth-rdk*.local" = {
-          userKnownHostsFile = "/dev/null";
-          user = "root";
-          extraOptions = {
-            LogLevel = "QUIET";
-            StrictHostKeyChecking = "no";
-          };
+          UserKnownHostsFile = "/dev/null";
+          User = "root";
+          LogLevel = "QUIET";
+          StrictHostKeyChecking = "no";
         };
         "deskpi" = {
-          user = "pi";
-          hostname = "deskpi.local";
+          User = "pi";
+          Hostname = "deskpi.local";
         };
         "ats*" = {
-          user = "pi";
+          User = "pi";
         };
         "ats1" = {
-          hostname = "10.71.7.75";
+          Hostname = "10.71.7.75";
         };
         "ats2" = {
-          hostname = "10.71.7.72";
+          Hostname = "10.71.6.220";
         };
         "ats3" = {
-          hostname = "10.71.5.97";
+          Hostname = "10.71.5.97";
         };
         "mikyla" = {
-          user = "mikyla";
-          hostname = "10.71.0.125";
+          User = "mikyla";
+          Hostname = "10.71.0.125";
         };
       };
     };
