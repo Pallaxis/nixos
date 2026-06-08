@@ -11,6 +11,7 @@ in {
   config = lib.mkIf cfg.enable {
     catppuccin = {
       enable = true;
+      autoEnable = true;
       accent = "blue";
       flavor = "mocha";
 
