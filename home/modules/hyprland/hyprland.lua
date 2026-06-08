@@ -159,7 +159,7 @@ hl.bind("SUPER + K", hl.dsp.focus({ direction = "u" }))
 hl.bind("SUPER + L", hl.dsp.focus({ direction = "r" }))
 
 -- hl.bind(keys, dispatcher, { flag1 = true, flag2 = true })
-hl.bind("SUPER + C", hl.dsp.exec_cmd("hyprctl dispatch killactive"), { description = "Kills active window" })
+hl.bind("SUPER + C", hl.dsp.window.kill(), { description = "Kills active window" })
 -- hl.bind("SUPER + W", hl.dsp.togglefloating, { description = "Toggles window floating" })
 -- hl.bindd("SUPER, W, Toggles window floating, togglefloating")
 hl.bind("SUPER + G", hl.dsp.group.toggle(), { description = "Toggle focused window to group" })

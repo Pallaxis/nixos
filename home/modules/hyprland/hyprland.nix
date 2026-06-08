@@ -100,7 +100,7 @@ in {
         general = {
           lock_cmd = "pidof hyprlock || hyprlock --grace 0"; # Avoid starting multiple hyprlock instances.
           before_sleep_cmd = "loginctl lock-session"; # Lock before suspend.
-          after_sleep_cmd = "hyprctl dispatch dpms on"; # To avoid having to press a key twice to turn on the display.
+          after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({action=on})'"; # To avoid having to press a key twice to turn on the display.
           inhibit_sleep = "3"; # Waits for lock before sleeping
         };
 
@@ -122,8 +122,8 @@ in {
           }
           {
             timeout = 900; # 15min
-            on-timeout = "hyprctl dispatch dpms off"; # Screen off when timeout has passed
-            on-resume = "hyprctl dispatch dpms on"; # Screen on when activity is detected after timeout has fired.
+            on-timeout = "hyprctl dispatch 'hl.dsp.dpms({action=off})'"; # Screen off when timeout has passed
+            on-resume = "hyprctl dispatch 'hl.dsp.dpms({action=on})'"; # Screen on when activity is detected after timeout has fired.
           }
           {
             timeout = 7200; # 120min
