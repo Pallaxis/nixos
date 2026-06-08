@@ -28,7 +28,7 @@ in {
             handle() {
               case "$1" in
                 monitoradded*)
-                  seq 1 5 | xargs -I {} hyprctl dispatch "hl.dsp.workspace.move({workspace={}, monitor=1)}"
+                  seq 1 5 | xargs -I {} hyprctl dispatch "hl.dsp.workspace.move({workspace={}, monitor=1})"
                   ;;
               esac
             }
