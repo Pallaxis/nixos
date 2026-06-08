@@ -35,6 +35,7 @@
     mkSystem = hostName:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
+          inherit self;
           inherit inputs;
           inherit hostName;
         };
