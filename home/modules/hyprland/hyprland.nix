@@ -29,7 +29,7 @@ in {
   config = lib.mkIf cfg.enable {
     my.home.modules.waybar.enable = true;
     my.home.modules.desktop.enable = true;
-    my.home.services.handleMonitorConnect.enable = true;
+    my.home.services.handleMonitorConnect.enable = false; # TODO: unneeded systemd service, could keep as an example
     home = {
       file.".config/hypr/scripts".source = ./scripts;
       pointerCursor = {

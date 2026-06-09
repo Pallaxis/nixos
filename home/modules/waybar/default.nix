@@ -42,10 +42,11 @@ in {
               "10" = " email";
               "default" = " any";
             };
-            "persistent-workspaces" = {
-              "*" = [1 2 3 4 5];
-              "eDP-1" = [6 7 8 9 10];
-            };
+            # handled by hyprland now
+            # "persistent-workspaces" = {
+            #   "eDP-1" = [6 7 8 9 10];
+            #   "*" = [1 2 3 4 5];
+            # };
           };
           "idle_inhibitor" = {
             "format" = "";

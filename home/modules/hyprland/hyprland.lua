@@ -14,17 +14,50 @@ hl.monitor({ output = "desc:Dell Inc. DELL U2715H 6VY7R735038S", mode = "2560x14
 -- Workspace rules
 --
 
--- FIXME: need to add conditional logic per system
-hl.workspace_rule({ workspace = "1", monitor = "DP-4", default = true })
-hl.workspace_rule({ workspace = "2", monitor = "DP-4" })
-hl.workspace_rule({ workspace = "3", monitor = "DP-4" })
-hl.workspace_rule({ workspace = "4", monitor = "DP-4" })
-hl.workspace_rule({ workspace = "5", monitor = "DP-4" })
-hl.workspace_rule({ workspace = "6", monitor = "eDP-1", default = true })
-hl.workspace_rule({ workspace = "7", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "8", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "9", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "10", monitor = "eDP-1" })
+local hostname = os.getenv("HOST")
+if hostname == "thinkpad" then
+  PRIMARY_MONITOR = "eDP-1"
+  SECONDARY_MONITOR = "DP-5"
+elseif hostname == "night" then
+  PRIMARY_MONITOR = "eDP-1"
+  SECONDARY_MONITOR = "DP-5"
+else
+  PRIMARY_MONITOR = "eDP-1"
+  SECONDARY_MONITOR = "DP-5"
+end
+
+local function apply_workspace_layout()
+  local active_monitors = hl.get_monitors()
+
+  -- Helper function to check if our secondary monitor is connected
+  local is_secondary_connected = false
+  for _, mon in ipairs(active_monitors) do
+    if mon.name == SECONDARY_MONITOR then
+      is_secondary_connected = true
+      break
+    end
+  end
+
+  -- 3. Apply conditional rules based on hardware presence
+  if is_secondary_connected then
+    -- Secondary monitor is present: it gets 1-5, primary gets 6-10
+    for ws = 1, 5 do
+      hl.workspace_rule({ workspace = tostring(ws), monitor = SECONDARY_MONITOR, persistent = true })
+    end
+    for ws = 6, 10 do
+      hl.workspace_rule({ workspace = tostring(ws), monitor = PRIMARY_MONITOR, persistent = true })
+    end
+  else
+    -- Secondary monitor is disconnected: collapse all persistent workspaces (1-10) onto primary
+    for ws = 1, 10 do
+      hl.workspace_rule({ workspace = tostring(ws), monitor = PRIMARY_MONITOR, persistent = true })
+    end
+  end
+end
+
+apply_workspace_layout()
+hl.on("monitor.added", apply_workspace_layout)
+hl.on("monitor.removed", apply_workspace_layout)
 
 --
 -- Devices
