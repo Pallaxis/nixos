@@ -10,7 +10,7 @@
     # Simple app launcher that shows a list of options and handles them by on a case basis
     options=$(printf " Lock\n󰤄 Sleep\n⏻ Power Off\n Reboot\n󰗽 Logout")
 
-    selection=$(${pkgs.procps}/bin/pkill fuzzel || echo -e "''$options" | ${pkgs.fuzzel}/bin/fuzzel --dmenu -i -p "Logout Menu")
+    selection=$(${pkgs.procps}/bin/pkill fuzzel || echo -e "''$options" | ${pkgs.fuzzel}/bin/fuzzel --dmenu -i --placeholder "Search")
 
     [[ -z "''$selection" ]] && exit 0 # exit on no selection
 
