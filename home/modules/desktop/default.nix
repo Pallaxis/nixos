@@ -23,13 +23,13 @@
             ${pkgs.systemd}/bin/systemctl suspend
             ;;
         "⏻ Power Off")
-            ${pkgs.systemd}/bin/systemctl poweroff
+            ${pkgs.hyprshutdown}/bin/hyprshutdown --top-label "Shutting down..." --post-cmd "${pkgs.systemd}/bin/systemctl poweroff"
             ;;
         " Reboot")
-            ${pkgs.systemd}/bin/systemctl reboot
+            ${pkgs.hyprshutdown}/bin/hyprshutdown --top-label "Rebooting..." --post-cmd "${pkgs.systemd}/bin/systemctl reboot"
             ;;
         "󰗽 Logout")
-            ${pkgs.systemd}/bin/loginctl terminate-user ""
+            ${pkgs.hyprshutdown}/bin/hyprshutdown --top-label "Logging out..." --post-cmd "${pkgs.systemd}/bin/loginctl terminate-user """
             ;;
         *)
             echo "how did we get here"
