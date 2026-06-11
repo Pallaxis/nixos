@@ -19,6 +19,7 @@
           formatters_by_ft = {
             lua = { "stylua" },
             nix = { "alejandra" },
+            qml = { "qmlformat" },
           },
           formatters = {
             stylua = {
@@ -105,6 +106,7 @@
         p.markdown_inline
         p.nix
         p.python
+        p.qmljs
         p.vim
         p.vimdoc
       ]);
