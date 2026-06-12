@@ -14,33 +14,57 @@ hl.monitor({ output = "desc:Dell Inc. DELL U2715H 6VY7R735038S", mode = "2560x14
 -- Workspace rules
 --
 
-local hostname = os.getenv("HOST")
+-- keeping so i know how to peel apart a lua key value pair (im stupid)
+-- hl.bind("SUPER + N", function()
+--   -- Define your Lua function output
+--   local output = ""
+--   local my_output = hl.get_monitors()
+--   for k, v in pairs(my_output) do
+--     output = output .. tostring(k) .. ": " .. tostring(v) .. "\n"
+--   end
+--
+--   -- Send it as an on-screen notification
+--   hl.notification.create({
+--     text = output,
+--     duration = 3000, -- Duration in milliseconds
+--     icon = 0,
+--   })
+-- end)
+hl.bind("SUPER + N", function()
+  apply_workspace_layout()
+end)
+
+local file = io.popen("hostname")
+local hostname = file and file:read("*l") or ""
+if file then
+  file:close()
+end
 if hostname == "thinkpad" then
   PRIMARY_MONITOR = "eDP-1"
-  SECONDARY_MONITOR = "DP-5"
+  SECONDARY_MONITOR = "desc:Dell Inc. DELL U2715H 6VY7R735038S"
 elseif hostname == "night" then
   PRIMARY_MONITOR = "eDP-1"
   SECONDARY_MONITOR = "DP-5"
 else
-  PRIMARY_MONITOR = "eDP-1"
-  SECONDARY_MONITOR = "DP-5"
+  PRIMARY_MONITOR = "DP-1"
+  SECONDARY_MONITOR = "DP-2"
 end
 
+-- hl.workspace_rule({ workspace = "name:web", monitor = "DP-5", persistent = true })
+-- hl.workspace_rule({ workspace = "name:term", monitor = "DP-5", persistent = true })
 local function apply_workspace_layout()
   local active_monitors = hl.get_monitors()
 
   -- Helper function to check if our secondary monitor is connected
   local is_secondary_connected = false
-  for _, mon in ipairs(active_monitors) do
-    if mon.name == SECONDARY_MONITOR then
+  for id, mon in ipairs(active_monitors) do
+    if mon.name == SECONDARY_MONITOR or id == 1 then -- workaround for get_monitors not exposing desc
       is_secondary_connected = true
       break
     end
   end
 
-  -- 3. Apply conditional rules based on hardware presence
   if is_secondary_connected then
-    -- Secondary monitor is present: it gets 1-5, primary gets 6-10
     for ws = 1, 5 do
       hl.workspace_rule({ workspace = tostring(ws), monitor = SECONDARY_MONITOR, persistent = true })
     end
@@ -48,14 +72,13 @@ local function apply_workspace_layout()
       hl.workspace_rule({ workspace = tostring(ws), monitor = PRIMARY_MONITOR, persistent = true })
     end
   else
-    -- Secondary monitor is disconnected: collapse all persistent workspaces (1-10) onto primary
     for ws = 1, 10 do
       hl.workspace_rule({ workspace = tostring(ws), monitor = PRIMARY_MONITOR, persistent = true })
     end
   end
 end
 
-apply_workspace_layout()
+hl.timer(apply_workspace_layout, { timeout = 3000, type = "oneshot" })
 hl.on("monitor.added", apply_workspace_layout)
 hl.on("monitor.removed", apply_workspace_layout)
 
