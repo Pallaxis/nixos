@@ -43,8 +43,8 @@ if hostname == "thinkpad" then
   PRIMARY_MONITOR = "eDP-1"
   SECONDARY_MONITOR = "desc:Dell Inc. DELL U2715H 6VY7R735038S"
 elseif hostname == "night" then
-  PRIMARY_MONITOR = "eDP-1"
-  SECONDARY_MONITOR = "DP-5"
+  PRIMARY_MONITOR = "DP-1"
+  SECONDARY_MONITOR = "DP-2"
 else
   PRIMARY_MONITOR = "DP-1"
   SECONDARY_MONITOR = "DP-2"
