@@ -57,36 +57,23 @@ Scope {
         }
 
         // Right blocks
-        Rectangle {
-          Layout.fillHeight: true
-          Layout.preferredWidth: rightBlocks.implicitWidth
-          color: "blue"
-          opacity: 0.5
+        RowLayout {
+          id: rightBlocks
 
-          RowLayout {
-            id: rightBlocks
+          spacing: 10
 
-            spacing: 10
-            anchors.verticalCenter: parent.verticalCenter
-
-            Text {
-              text: "R1"
-              color: "white"
-            }
-
-            Text {
-              text: "R2"
-              color: "white"
-            }
-
-            Text {
-              text: "R3"
-              color: "white"
-            }
-
+          // Rectangle {
+          //   color: "blue"
+          //   Layout.fillHeight: true
+          //   width: 50
+          // }
+          Pipewire {}
+          Battery {}
+          Item {
+            width: 5
           }
-
         }
+
 
       }
       RowLayout {
