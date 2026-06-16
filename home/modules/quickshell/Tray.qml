@@ -16,16 +16,23 @@ RowLayout {
       source: modelData.icon
       implicitSize: 18
       MouseArea {
+        id: mouseArea
         anchors.fill: parent
 
+      acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
         onClicked: event => {
           if (event.button == Qt.LeftButton) {
             modelData.activate();
           } else if (event.button == Qt.MiddleButton) {
             modelData.secondaryActivate();
           } else if (event.button == Qt.RightButton) {
-            // menuAnchor.open();
+            menuAnchor.open();
           }
+        }
+        QsMenuAnchor {
+          id: menuAnchor
+          menu: modelData.menu
+          anchor.item: mouseArea
         }
       }
     }
