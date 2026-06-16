@@ -67,6 +67,10 @@ Scope {
           //   Layout.fillHeight: true
           //   width: 50
           // }
+          Tray {}
+          Network {}
+          Mem {}
+          Cpu {}
           Pipewire {}
           Battery {}
           Item {
