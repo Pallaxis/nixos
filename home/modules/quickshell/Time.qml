@@ -1,9 +1,10 @@
-// Time.qml
+pragma Singleton
+
 import Quickshell
 import Quickshell.Io
 import QtQuick
 
-Scope {
+Singleton {
   id: root
   property string time
 
@@ -13,7 +14,9 @@ Scope {
     running: true
 
     stdout: StdioCollector {
-      onStreamFinished: root.time = this.text
+      onStreamFinished: {
+        root.time = this.text
+      }
     }
   }
 

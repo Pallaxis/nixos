@@ -1,12 +1,17 @@
+pragma Singleton
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
-RowLayout {
+Singleton {
+  id: root
   property int cpuUsage: 0
   property var lastCpuTotal: 0
   property var lastCpuIdle: 0
+  property int memUsage: 0
+
   Process {
     id: cpuProc
     command: ["sh", "-c", "head -1 /proc/stat"]
@@ -26,13 +31,29 @@ RowLayout {
     }
     Component.onCompleted: running = true
   }
+  Process {
+    id: memProc
+    command: ["sh", "-c", "free | grep Mem"]
+
+    stdout: SplitParser {
+      onRead: data => {
+        if (!data) return
+        var parts = data.trim().split(/\s+/)
+        var total = parseInt(parts[1]) || 1
+        var used = parseInt(parts[2]) || 0
+        memUsage = Math.round(100 * used / total)
+      }
+    }
+    Component.onCompleted: running = true
+  }
+
   Timer {
     interval: 2000
     running: true
     repeat: true
-    onTriggered: cpuProc.running = true
-  }
-  Text {
-    text: cpuUsage + "%"
+    onTriggered: {
+      cpuProc.running = true
+      memProc.running = true
+    }
   }
 }

@@ -4,9 +4,9 @@ import Quickshell
 import Quickshell.Hyprland
 
 Scope {
-  Time {
-    id: timeSource
-  }
+  // Time {
+  //   id: timeSource
+  // }
 
   Variants {
     model: Quickshell.screens
@@ -68,11 +68,15 @@ Scope {
           //   width: 50
           // }
           Tray {}
-          Network {}
-          Mem {}
-          Cpu {}
+          NetworkModule {}
+          Text {
+            text: Performance.memUsage + "%"
+          }
+          Text {
+            text: Performance.cpuUsage + "%"
+          }
           Pipewire {}
-          Battery {}
+          BatteryWidget {}
           Item {
             width: 5
           }
@@ -86,7 +90,6 @@ Scope {
         spacing: 10
 
         ClockWidget {
-          time: timeSource.time
           verticalAlignment: Text.AlignVCenter
         }
         // Other true-center modules here

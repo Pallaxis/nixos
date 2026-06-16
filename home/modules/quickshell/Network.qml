@@ -1,9 +1,11 @@
+pragma Singleton
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
-RowLayout {
+Singleton {
   property int rxKbps: 0
   property int txKbps: 0
   property int lastRxBytes: 0
@@ -49,8 +51,5 @@ RowLayout {
       rxProc.running = true
       txProc.running = true
     }
-  }
-  Text {
-    text: rxKbps + "KB/s " + txKbps + "KB/s"
   }
 }
