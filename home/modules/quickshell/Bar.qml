@@ -4,9 +4,8 @@ import Quickshell
 import Quickshell.Hyprland
 
 Scope {
-  // Time {
-  //   id: timeSource
-  // }
+  id: root
+  Theme { id: globalTheme }
 
   Variants {
     model: Quickshell.screens
@@ -59,20 +58,18 @@ Scope {
         // Right blocks
         RowLayout {
           id: rightBlocks
+          // spacing: 10
 
-          spacing: 10
-
-          // Rectangle {
-          //   color: "blue"
-          //   Layout.fillHeight: true
-          //   width: 50
-          // }
           Tray {}
           NetworkModule {}
           Text {
+            color: globalTheme.textColour
+            font.family: globalTheme.fontName
             text: "  " + Performance.memUsage + "%"
           }
           Text {
+            color: globalTheme.textColour
+            font.family: globalTheme.fontName
             text: "󰻠 " + Performance.cpuUsage + "%"
           }
           Pipewire {}

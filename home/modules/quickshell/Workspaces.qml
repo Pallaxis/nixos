@@ -26,7 +26,8 @@ RowLayout {
 
       Text {
         anchors.centerIn: parent
-        color: "white"
+        color: globalTheme.textColour
+        font.family: globalTheme.fontName
         font.pixelSize: 12
         font.bold: true
         text: {

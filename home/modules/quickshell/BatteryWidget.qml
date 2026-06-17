@@ -1,7 +1,9 @@
 import QtQuick
 
 Text {
-  color: Battery.isCharging ? "#2ecc71" : "#ffffff"
+  // color: Battery.isCharging ? "#2ecc71" : "#ffffff"
+  color: globalTheme.textColour
+  font.family: globalTheme.fontName
   text: {
     let icon = "⚠️"
     if (Battery.status === "Charging") icon = "󰂄"
