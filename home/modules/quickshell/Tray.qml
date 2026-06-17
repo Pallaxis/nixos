@@ -7,6 +7,13 @@ import Quickshell.Services.SystemTray
 RowLayout {
   id: trayLayout
 
+  Item {
+    // Need to have this here so the middle bar doesn't collapse
+    // when the tray is empty
+    id: placeholder
+    visible: trayRepeater.count === 0
+  }
+
   Repeater {
     id: trayRepeater
     model: SystemTray.items
@@ -19,7 +26,7 @@ RowLayout {
         id: mouseArea
         anchors.fill: parent
 
-      acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
+        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
         onClicked: event => {
           if (event.button == Qt.LeftButton) {
             modelData.activate();
