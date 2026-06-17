@@ -70,10 +70,10 @@ Scope {
           Tray {}
           NetworkModule {}
           Text {
-            text: Performance.memUsage + "%"
+            text: "  " + Performance.memUsage + "%"
           }
           Text {
-            text: Performance.cpuUsage + "%"
+            text: "󰻠 " + Performance.cpuUsage + "%"
           }
           Pipewire {}
           BatteryWidget {}

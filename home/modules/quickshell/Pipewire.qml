@@ -16,7 +16,6 @@ RowLayout {
   // }
 
   Text {
-    color: "white" 
     text: defaultSink?.audio 
       ? Math.round(defaultSink.audio.volume * 100) + "%" 
       : "0%"

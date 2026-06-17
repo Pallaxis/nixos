@@ -26,6 +26,8 @@ RowLayout {
           } else if (event.button == Qt.MiddleButton) {
             modelData.secondaryActivate();
           } else if (event.button == Qt.RightButton) {
+            menuAnchor.anchor.rect.x = event.x
+            menuAnchor.anchor.rect.y = event.y
             menuAnchor.open();
           }
         }
