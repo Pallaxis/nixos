@@ -8,4 +8,5 @@ Text {
   color: globalTheme.textColour
   font.family: globalTheme.fontName
   text: Time.time
+  anchors.centerIn: parent
 }

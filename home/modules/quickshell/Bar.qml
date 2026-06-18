@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Wayland
 
 Scope {
   id: root
@@ -9,6 +10,11 @@ Scope {
     id: globalTheme
   }
 
+  IdleInhibitor {
+    id: customInhibitor
+    window: myWindow
+    enabled: false
+  }
   Variants {
     model: Quickshell.screens
 
@@ -25,70 +31,139 @@ Scope {
         right: true
       }
 
-      RowLayout {
-        id: allBlocks
-
-        spacing: 0
+      Rectangle {
+        id: panelBackground
         anchors.fill: parent
+        height: 30
+        color: "transparent"
 
-        // Left blocks
-        RowLayout {
-          id: leftBlocks
-
-          Item {
-            width: 5
-          }
+        // LEFT - variable width, anchored to left
+        Rectangle {
+          id: leftSection
+          anchors.left: parent.left
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          width: workspaces.implicitWidth
+          color: "transparent"
 
           Workspaces {
+            id: workspaces
             screen: modelData
+            anchors.fill: parent
           }
         }
 
-        // Center spacer
+        // RIGHT - variable width, anchored to right
         Rectangle {
-          id: centerSpacer
-          Layout.fillWidth: true
-          Layout.fillHeight: true
+          id: rightSection
+          anchors.right: parent.right
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
+          width: rightBlocks.implicitWidth
           color: "transparent"
-          border.width: 1
-          border.color: "red"
-          opacity: 0.5
+
+          RowLayout {
+            id: rightBlocks
+            anchors.fill: parent
+
+            Tray {}
+            NetworkModule {}
+            Text {
+              color: globalTheme.textColour
+              font.family: globalTheme.fontName
+              text: "  " + Performance.memUsage + "%"
+            }
+            Text {
+              color: globalTheme.textColour
+              font.family: globalTheme.fontName
+              text: "󰻠 " + Performance.cpuUsage + "%"
+            }
+            Pipewire {}
+            BatteryWidget {}
+            Item {
+              width: 5
+            }
+          }
         }
 
-        // Right blocks
-        RowLayout {
-          id: rightBlocks
-          // spacing: 10
+        // LOGO - positioned at exact monitor center (absolutely positioned)
+        Rectangle {
+          id: logoRect
+          width: nixLogo.implicitWidth
+          height: nixLogo.implicitHeight
+          color: "transparent"
+          x: (panelBackground.width / 2) - (width / 2)
+          y: (panelBackground.height / 2) - (height / 2)
 
-          Tray {}
-          NetworkModule {}
           Text {
-            color: globalTheme.textColour
+            id: nixLogo
+            text: ""
+            anchors.centerIn: parent
+            font.pixelSize: 35
+            color: customInhibitor.enabled ? "#f38ba8" : globalTheme.textColour
             font.family: globalTheme.fontName
-            text: "  " + Performance.memUsage + "%"
-          }
-          Text {
-            color: globalTheme.textColour
-            font.family: globalTheme.fontName
-            text: "󰻠 " + Performance.cpuUsage + "%"
-          }
-          Pipewire {}
-          BatteryWidget {}
-          Item {
-            width: 5
-          }
-        }
-      }
-      RowLayout {
-        id: clockContainer
-        anchors.centerIn: parent  // This centers on the full monitor width!
-        spacing: 10
+            MouseArea {
+              id: mouseArea
+              anchors.fill: parent
 
-        ClockWidget {
-          verticalAlignment: Text.AlignVCenter
+              acceptedButtons: Qt.AllButtons
+              onClicked: event => {
+                customInhibitor.enabled = !customInhibitor.enabled
+              }
+              QsMenuAnchor {
+                id: menuAnchor
+                menu: modelData.menu
+                anchor.item: mouseArea
+              }
+            }
+          }
+
+          // DEBUG: Show center point of logo
+          // Rectangle {
+          //   width: 2
+          //   height: parent.height
+          //   color: "red"
+          //   anchors.horizontalCenter: parent.horizontalCenter
+          // }
         }
-        // Other true-center modules here
+
+        // Seg1 - positioned relative to logo (to the left)
+        Rectangle {
+          id: seg1Rect
+          width: 90
+          height: 50
+          color: "lightgreen"
+          x: logoRect.x - width - 10  // 10px gap to the left of logo
+          y: (panelBackground.height / 2) - (height / 2)
+
+          Text { text: "19-06"; anchors.centerIn: parent; color: "white" }
+        }
+
+        // Seg3 - positioned relative to logo (to the right)
+        Rectangle {
+          id: clockRect
+          width: 90
+          height: 50
+          color: "lightblue"
+          x: logoRect.x + logoRect.width + 10  // 10px gap to the right of logo
+          y: (panelBackground.height / 2) - (height / 2)
+
+          ClockWidget {
+            id: clockWidget
+          }
+          // Text { text: "Seg3"; anchors.centerIn: parent }
+        }
+
+        // DEBUG: Show exact monitor center
+        // Rectangle {
+        //   width: 2
+        //   height: panelBackground.height
+        //   color: "blue"
+        //   x: panelBackground.width / 2
+        //   opacity: 0.7
+        // }
       }
     }
   }
 }
+
