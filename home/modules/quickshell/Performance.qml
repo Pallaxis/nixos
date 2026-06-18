@@ -18,15 +18,16 @@ Singleton {
 
     stdout: SplitParser {
       onRead: data => {
-        if (!data) return
-        var p = data.trim().split(/\s+/)
-        var idle = parseInt(p[4]) + parseInt(p[5])
-        var total = p.slice(1, 8).reduce((a, b) => a + parseInt(b), 0)
+        if (!data)
+          return;
+        var p = data.trim().split(/\s+/);
+        var idle = parseInt(p[4]) + parseInt(p[5]);
+        var total = p.slice(1, 8).reduce((a, b) => a + parseInt(b), 0);
         if (lastCpuTotal > 0) {
-          cpuUsage = Math.round(100 * (1 - (idle - lastCpuIdle) / (total - lastCpuTotal)))
+          cpuUsage = Math.round(100 * (1 - (idle - lastCpuIdle) / (total - lastCpuTotal)));
         }
-        lastCpuTotal = total
-        lastCpuIdle = idle
+        lastCpuTotal = total;
+        lastCpuIdle = idle;
       }
     }
     Component.onCompleted: running = true
@@ -37,11 +38,12 @@ Singleton {
 
     stdout: SplitParser {
       onRead: data => {
-        if (!data) return
-        var parts = data.trim().split(/\s+/)
-        var total = parseInt(parts[1]) || 1
-        var used = parseInt(parts[2]) || 0
-        memUsage = Math.round(100 * used / total)
+        if (!data)
+          return;
+        var parts = data.trim().split(/\s+/);
+        var total = parseInt(parts[1]) || 1;
+        var used = parseInt(parts[2]) || 0;
+        memUsage = Math.round(100 * used / total);
       }
     }
     Component.onCompleted: running = true
@@ -52,8 +54,8 @@ Singleton {
     running: true
     repeat: true
     onTriggered: {
-      cpuProc.running = true
-      memProc.running = true
+      cpuProc.running = true;
+      memProc.running = true;
     }
   }
 }

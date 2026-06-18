@@ -16,8 +16,8 @@ Singleton {
     path: "/sys/class/power_supply/BAT0/status"
     blockLoading: true
     onTextChanged: {
-      status = text().trim()
-      isCharging = (status === "Charging" || status === "Full")
+      status = text().trim();
+      isCharging = (status === "Charging" || status === "Full");
       // console.log("charging: " + isCharging)
     }
   }
@@ -26,7 +26,7 @@ Singleton {
     path: "/sys/class/power_supply/BAT0/capacity"
     blockLoading: true
     onTextChanged: {
-      percentage = text() ? parseInt(String(text()).trim()) : 0
+      percentage = text() ? parseInt(String(text()).trim()) : 0;
     }
   }
   Timer {
@@ -34,8 +34,8 @@ Singleton {
     running: true
     repeat: true
     onTriggered: {
-      batteryStatus.reload()
-      batteryPercent.reload()
+      batteryStatus.reload();
+      batteryPercent.reload();
     }
   }
 }

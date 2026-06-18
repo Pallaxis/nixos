@@ -4,8 +4,8 @@ import Quickshell
 import Quickshell.Hyprland
 
 RowLayout {
-  required property var screen
   id: workspaceLayout
+  required property var screen
 
   Repeater {
     model: Hyprland.workspaces
@@ -41,9 +41,6 @@ RowLayout {
           return mapping[modelData.id] || " any";
         }
       }
-
     }
-
   }
-
 }

@@ -5,7 +5,9 @@ import Quickshell.Hyprland
 
 Scope {
   id: root
-  Theme { id: globalTheme }
+  Theme {
+    id: globalTheme
+  }
 
   Variants {
     model: Quickshell.screens
@@ -40,9 +42,7 @@ Scope {
           Workspaces {
             screen: modelData
           }
-
         }
-
 
         // Center spacer
         Rectangle {
@@ -78,8 +78,6 @@ Scope {
             width: 5
           }
         }
-
-
       }
       RowLayout {
         id: clockContainer
@@ -91,9 +89,6 @@ Scope {
         }
         // Other true-center modules here
       }
-
     }
-
   }
-
 }

@@ -17,12 +17,13 @@ Singleton {
 
     stdout: SplitParser {
       onRead: data => {
-        if (!data) return
+        if (!data)
+          return;
         if (lastRxBytes > 0) {
-          let diff = data - lastRxBytes
-          rxKbps = diff / 1024
+          let diff = data - lastRxBytes;
+          rxKbps = diff / 1024;
         }
-        lastRxBytes = data
+        lastRxBytes = data;
       }
     }
     Component.onCompleted: running = true
@@ -33,12 +34,13 @@ Singleton {
 
     stdout: SplitParser {
       onRead: data => {
-        if (!data) return
+        if (!data)
+          return;
         if (lastTxBytes > 0) {
-          let diff = data - lastTxBytes
-          txKbps = diff / 1024
+          let diff = data - lastTxBytes;
+          txKbps = diff / 1024;
         }
-        lastTxBytes = data
+        lastTxBytes = data;
       }
     }
     Component.onCompleted: running = true
@@ -48,8 +50,8 @@ Singleton {
     running: true
     repeat: true
     onTriggered: {
-      rxProc.running = true
-      txProc.running = true
+      rxProc.running = true;
+      txProc.running = true;
     }
   }
 }

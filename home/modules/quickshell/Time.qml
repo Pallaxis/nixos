@@ -15,7 +15,7 @@ Singleton {
 
     stdout: StdioCollector {
       onStreamFinished: {
-        root.time = this.text
+        root.time = this.text;
       }
     }
   }
