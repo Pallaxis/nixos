@@ -13,7 +13,7 @@
     waylandSupport = true;
     extraPackages = with pkgs; [
       alejandra # nix formatter
-      libsForQt5.qt5.qtdeclarative # qml formatter
+      kdePackages.qtdeclarative # qml formatter
       statix # nix linter
       nixd # nix ls
       stylua # lua formatter

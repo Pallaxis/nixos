@@ -25,6 +25,9 @@
             stylua = {
               args = { "--indent-type", "Spaces", "--indent-width", "2", "-", "--column-width", "200" }
             },
+            qmlformat = {
+              append_args = { "--indent-width", "2" }
+            }
           },
         })
       '';
