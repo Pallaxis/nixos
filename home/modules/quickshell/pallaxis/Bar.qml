@@ -108,7 +108,7 @@ Scope {
 
               acceptedButtons: Qt.AllButtons
               onClicked: event => {
-                customInhibitor.enabled = !customInhibitor.enabled
+                customInhibitor.enabled = !customInhibitor.enabled;
               }
               QsMenuAnchor {
                 id: menuAnchor
@@ -136,7 +136,9 @@ Scope {
           x: logoRect.x - width - 10  // 10px gap to the left of logo
           y: (panelBackground.height / 2) - (height / 2)
 
-          Text { text: "19-06"; anchors.centerIn: parent; color: "white" }
+          DateWidget {
+            id: dateWidget
+          }
         }
 
         // Seg3 - positioned relative to logo (to the right)
@@ -151,7 +153,6 @@ Scope {
           ClockWidget {
             id: clockWidget
           }
-          // Text { text: "Seg3"; anchors.centerIn: parent }
         }
 
         // DEBUG: Show exact monitor center
@@ -166,4 +167,3 @@ Scope {
     }
   }
 }
-

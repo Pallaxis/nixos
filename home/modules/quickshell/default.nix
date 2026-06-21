@@ -9,9 +9,10 @@ in {
     lib.mkEnableOption "Quickshell";
 
   config = lib.mkIf cfg.enable {
-    xdg.configFile."quickshell".source = ../quickshell;
+    xdg.configFile."quickshell/pallaxis".source = ../quickshell/pallaxis;
     programs.quickshell = {
       enable = true;
+      activeConfig = "pallaxis";
     };
   };
 }
