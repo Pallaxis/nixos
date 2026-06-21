@@ -7,6 +7,6 @@ Text {
 
   color: globalTheme.textColour
   font.family: globalTheme.fontName
-  text: Time.time
+  text: "󰥔 " + Time.time
   anchors.centerIn: parent
 }

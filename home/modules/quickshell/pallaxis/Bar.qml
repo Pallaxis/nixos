@@ -132,7 +132,7 @@ Scope {
           id: seg1Rect
           width: 90
           height: 50
-          color: "lightgreen"
+          color: "transparent"
           x: logoRect.x - width - 10  // 10px gap to the left of logo
           y: (panelBackground.height / 2) - (height / 2)
 
@@ -146,7 +146,7 @@ Scope {
           id: clockRect
           width: 90
           height: 50
-          color: "lightblue"
+          color: "transparent"
           x: logoRect.x + logoRect.width + 10  // 10px gap to the right of logo
           y: (panelBackground.height / 2) - (height / 2)
 
