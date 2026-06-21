@@ -27,7 +27,8 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    my.home.modules.waybar.enable = true;
+    my.home.modules.waybar.enable = false;
+    my.home.modules.quickshell.enable = true;
     my.home.modules.desktop.enable = true;
     my.home.services.handleMonitorConnect.enable = false; # TODO: unneeded systemd service, could keep as an example
     home = {
@@ -89,8 +90,11 @@ in {
         };
       };
     };
+    programs.quickshell = {
+      systemd.enable = true;
+      systemd.target = "hyprland-session.target";
+    };
     programs.waybar = {
-      enable = true;
       systemd.enable = true;
       systemd.targets = ["hyprland-session.target"];
     };
