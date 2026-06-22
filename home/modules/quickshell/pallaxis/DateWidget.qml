@@ -7,6 +7,6 @@ Text {
 
   color: globalTheme.textColour
   font.family: globalTheme.fontName
-  text: " " + Date.date
+  text: Date.date + " "
   anchors.centerIn: parent
 }
