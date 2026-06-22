@@ -7,6 +7,14 @@
 }: let
   cfg = osConfig.my.modules.hyprland;
 in {
+  imports = [
+    ./scripts/brightness.nix
+    ./scripts/change-volume.nix
+    ./scripts/screenshot-tool.nix
+    ./scripts/select-wp.nix
+    ./scripts/toggle-workspace-number.nix
+    ./scripts/windowpin.nix
+  ];
   options.my.home.modules = {
     hyprland = {
       enable = lib.mkEnableOption "hyprland";
@@ -32,7 +40,7 @@ in {
     my.home.modules.desktop.enable = true;
     my.home.services.handleMonitorConnect.enable = false; # TODO: unneeded systemd service, could keep as an example
     home = {
-      file.".config/hypr/scripts".source = ./scripts;
+      # file.".config/hypr/scripts".source = ./scripts;
       pointerCursor = {
         enable = true;
         package = pkgs.bibata-cursors;
@@ -111,8 +119,8 @@ in {
         listener = [
           {
             timeout = 300; # 5 mins.
-            on-timeout = "$XDG_CONFIG_HOME/hypr/scripts/brightness.sh dim_monitors"; # Set monitor backlight to minimum, avoid 0 on OLED monitor.
-            on-resume = "$XDG_CONFIG_HOME/hypr/scripts/brightness.sh restore_brightness"; # Monitor backlight restore.
+            on-timeout = "brightness dim_monitors"; # Set monitor backlight to minimum, avoid 0 on OLED monitor.
+            on-resume = "brightness restore_brightness"; # Monitor backlight restore.
           }
           # turn off keyboard backlight
           {
