@@ -279,7 +279,7 @@ hl.bind("SUPER + CTRL + SHIFT + K", hl.dsp.window.move({ direction = "u" }), { d
 hl.bind("SUPER + CTRL + SHIFT + L", hl.dsp.window.move({ direction = "r" }), { description = "Move window right" })
 hl.bind("SUPER + ALT + S", hl.dsp.window.move({ workspace = "special" }), { description = "Move window to special workspace" })
 hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special", follow = true }), { description = "Move window to special workspace" })
-hl.bind("SUPER + S", hl.dsp.focus({ workspace = "special" }), { description = "Toggle special workspace" })
+hl.bind("SUPER + S", hl.dsp.workspace.toggle_special({ "special" }), { description = "Toggle special workspace" })
 hl.bind("SUPER + D", hl.dsp.focus({ workspace = "special" }), { description = "Toggle special workspace" })
 -- hl.bindd("SUPER, D, Toggle layout, togglesplit,")
 
