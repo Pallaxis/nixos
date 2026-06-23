@@ -10,11 +10,6 @@ Scope {
     id: globalTheme
   }
 
-  IdleInhibitor {
-    id: customInhibitor
-    window: myWindow
-    enabled: false
-  }
   Variants {
     model: Quickshell.screens
 
@@ -24,6 +19,27 @@ Scope {
       screen: modelData
       color: "transparent"
       implicitHeight: 30
+
+      IdleInhibitor {
+        id: idleInhibitor
+        window: PanelWindow {
+          // end-4's code :3
+          // Inhibitor requires a "visible" surface
+          // Actually not lol
+          implicitWidth: 0
+          implicitHeight: 0
+          color: "transparent"
+          // Just in case...
+          anchors {
+            right: true
+            bottom: true
+          }
+          // Make it not interactable
+          mask: Region {
+            item: null
+          }
+        }
+      }
 
       anchors {
         top: true
@@ -100,7 +116,7 @@ Scope {
             text: ""
             anchors.centerIn: parent
             font.pixelSize: 35
-            color: customInhibitor.enabled ? "#f38ba8" : globalTheme.textColour
+            color: idleInhibitor.enabled ? "#f38ba8" : globalTheme.textColour
             font.family: globalTheme.fontName
             MouseArea {
               id: mouseArea
@@ -108,7 +124,8 @@ Scope {
 
               acceptedButtons: Qt.AllButtons
               onClicked: event => {
-                customInhibitor.enabled = !customInhibitor.enabled;
+                idleInhibitor.enabled = !idleInhibitor.enabled;
+                console.log(idleInhibitor.enabled);
               }
               QsMenuAnchor {
                 id: menuAnchor
