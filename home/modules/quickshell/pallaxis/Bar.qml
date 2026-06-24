@@ -10,6 +10,27 @@ Scope {
     id: globalTheme
   }
 
+  IdleInhibitor {
+    id: idleInhibitor
+    window: PanelWindow {
+      // end-4's code :3
+      // Inhibitor requires a "visible" surface
+      // Actually not lol
+      implicitWidth: 0
+      implicitHeight: 0
+      color: "transparent"
+      // Just in case...
+      anchors {
+        right: true
+        bottom: true
+      }
+      // Make it not interactable
+      mask: Region {
+        item: null
+      }
+    }
+  }
+
   Variants {
     model: Quickshell.screens
 
@@ -19,27 +40,6 @@ Scope {
       screen: modelData
       color: "transparent"
       implicitHeight: 30
-
-      IdleInhibitor {
-        id: idleInhibitor
-        window: PanelWindow {
-          // end-4's code :3
-          // Inhibitor requires a "visible" surface
-          // Actually not lol
-          implicitWidth: 0
-          implicitHeight: 0
-          color: "transparent"
-          // Just in case...
-          anchors {
-            right: true
-            bottom: true
-          }
-          // Make it not interactable
-          mask: Region {
-            item: null
-          }
-        }
-      }
 
       anchors {
         top: true
