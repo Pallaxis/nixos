@@ -78,7 +78,7 @@ local function apply_workspace_layout()
   end
 end
 
-hl.timer(apply_workspace_layout, { timeout = 3000, type = "oneshot" })
+apply_workspace_layout()
 hl.on("monitor.added", apply_workspace_layout)
 hl.on("monitor.removed", apply_workspace_layout)
 
@@ -233,8 +233,8 @@ hl.bind("SUPER + SHIFT + slash", hl.dsp.exec_cmd("setsid -f $term -T Keybindings
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"), { description = "Program launcher" })
 hl.bind("SUPER + backspace", hl.dsp.exec_cmd("logout-menu"), { description = "Logout menu" })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { description = "Toggle audio mute" })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("change-volume 5%-"), { description = "Lower volume" })
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("change-volume 5%+"), { description = "Raise volume" })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"), { description = "Lower volume" })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"), { description = "Raise volume" })
 hl.bind("SUPER + P", hl.dsp.exec_cmd("screenshot-tool freeze-area"), { description = "Copy selection to clipboard" })
 hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("screenshot-tool freeze-area-save"), { description = "Saves selection to named file" })
 hl.bind("SUPER + ALT + P", hl.dsp.exec_cmd("screenshot-tool copy-focused-monitor"), { description = "Copy focused monitor to clipboard" })

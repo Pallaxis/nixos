@@ -18,7 +18,7 @@ RowLayout {
   Text {
     color: globalTheme.textColour
     font.family: globalTheme.fontName
-    text: defaultSink?.audio ? Math.round(defaultSink.audio.volume * 100) + "%" : "0%"
+    text: defaultSink?.audio ? " " + Math.round(defaultSink.audio.volume * 100) + "%" : " 0%"
   }
   MouseArea {
     acceptedButtons: Qt.MiddleButton

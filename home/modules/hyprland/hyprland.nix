@@ -9,7 +9,6 @@
 in {
   imports = [
     ./scripts/brightness.nix
-    ./scripts/change-volume.nix
     ./scripts/screenshot-tool.nix
     ./scripts/select-wp.nix
     ./scripts/toggle-workspace-number.nix
