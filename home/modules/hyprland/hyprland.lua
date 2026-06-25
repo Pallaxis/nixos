@@ -1,64 +1,25 @@
 --
--- Monitors
+-- Functions
 --
 
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
--- Home monitors
-hl.monitor({ output = "desc:Samsung Electric Company LC32G7xT H4ZR900653", mode = "2560x1440@240", position = "0x0", scale = "1" })
-hl.monitor({ output = "desc:Ancor Communications Inc ROG PG278Q", mode = "2560x1440@144", position = "-2560x0", scale = "1" })
--- Work monitors
-hl.monitor({ output = "desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536", mode = "1920x1080@60", position = "0x0", scale = "1.25" })
-hl.monitor({ output = "desc:Dell Inc. DELL U2715H 6VY7R735038S", mode = "2560x1440@60", position = "auto-center-up", scale = "1.25" })
+function get_hostname()
+  local handle = io.popen("hostname")
+  local result = handle:read("*a")
+  handle:close()
 
---
--- Workspace rules
---
-
--- keeping so i know how to peel apart a lua key value pair (im stupid)
--- hl.bind("SUPER + N", function()
---   -- Define your Lua function output
---   local output = ""
---   local my_output = hl.get_monitors()
---   for k, v in pairs(my_output) do
---     output = output .. tostring(k) .. ": " .. tostring(v) .. "\n"
---   end
---
---   -- Send it as an on-screen notification
---   hl.notification.create({
---     text = output,
---     duration = 3000, -- Duration in milliseconds
---     icon = 0,
---   })
--- end)
-hl.bind("SUPER + N", function()
-  apply_workspace_layout()
-end)
-
-local file = io.popen("hostname")
-local hostname = file and file:read("*l") or ""
-if file then
-  file:close()
-end
-if hostname == "thinkpad" then
-  PRIMARY_MONITOR = "eDP-1"
-  SECONDARY_MONITOR = "desc:Dell Inc. DELL U2715H 6VY7R735038S"
-elseif hostname == "night" then
-  PRIMARY_MONITOR = "DP-1"
-  SECONDARY_MONITOR = "DP-2"
-else
-  PRIMARY_MONITOR = "DP-1"
-  SECONDARY_MONITOR = "DP-2"
+  -- Clean up trailing newlines
+  return result:gsub("%s+$", "")
 end
 
--- hl.workspace_rule({ workspace = "name:web", monitor = "DP-5", persistent = true })
--- hl.workspace_rule({ workspace = "name:term", monitor = "DP-5", persistent = true })
-local function apply_workspace_layout()
+local function apply_workspace_layout(active_config)
   local active_monitors = hl.get_monitors()
+  local target_secondary = active_config.secondary.output
+  local target_primary = active_config.primary.output
 
   -- Helper function to check if our secondary monitor is connected
   local is_secondary_connected = false
   for id, mon in ipairs(active_monitors) do
-    if mon.name == SECONDARY_MONITOR or id == 1 then -- workaround for get_monitors not exposing desc
+    if mon.name == target_secondary or id == 1 then -- workaround for get_monitors not exposing desc
       is_secondary_connected = true
       break
     end
@@ -66,25 +27,93 @@ local function apply_workspace_layout()
 
   if is_secondary_connected then
     for ws = 1, 5 do
-      hl.workspace_rule({ workspace = tostring(ws), monitor = SECONDARY_MONITOR, persistent = true })
+      hl.workspace_rule({ workspace = tostring(ws), monitor = target_secondary, persistent = true })
     end
     for ws = 6, 10 do
-      hl.workspace_rule({ workspace = tostring(ws), monitor = PRIMARY_MONITOR, persistent = true })
+      hl.workspace_rule({ workspace = tostring(ws), monitor = target_primary, persistent = true })
     end
   else
     for ws = 1, 10 do
-      hl.workspace_rule({ workspace = tostring(ws), monitor = PRIMARY_MONITOR, persistent = true })
+      hl.workspace_rule({ workspace = tostring(ws), monitor = target_primary, persistent = true })
     end
   end
 end
 
-apply_workspace_layout()
-hl.on("monitor.added", apply_workspace_layout)
-hl.on("monitor.removed", apply_workspace_layout)
+--
+-- Monitors
+--
+
+Hostname = get_hostname()
+local monitor_configs = {
+  default = {
+    primary = { output = "", mode = "preferred", position = "auto", scale = "auto" },
+    secondary = { output = "", mode = "preferred", position = "auto", scale = "auto" },
+  },
+  thinkpad = {
+    primary = { output = "eDP-1", mode = "2560x1440@240", position = "0x0", scale = "1.25" },
+    secondary = { output = "desc:Dell Inc. DELL U2715H 6VY7R735038S", mode = "2560x1440@60", position = "auto-center-up", scale = "1.25" },
+  },
+  night = {
+    primary = { output = "DP-1", mode = "2560x1440@240", position = "0x0", scale = "1" },
+    secondary = { output = "DP-2", mode = "2560x1440@144", position = "-2560x0", scale = "1" },
+  },
+}
+local config = monitor_configs[Hostname] or monitor_configs["default"]
+
+-- dynamically sets attached monitors to the default section for apply_workspace_layout
+if config == monitor_configs["default"] then
+  hl.notification.create({
+    text = "Monitor config doesn't exist for " .. Hostname,
+    duration = 5000,
+    icon = 0,
+  })
+  local current_monitors = hl.get_monitors()
+  local connected = {}
+  for id, name in pairs(current_monitors) do
+    table.insert(connected, name.name)
+  end
+
+  config.primary.output = connected[1] or ""
+  config.secondary.output = connected[2] or ""
+end
+
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
+hl.monitor(config.primary)
+hl.monitor(config.secondary)
+
+--
+-- Workspace rules
+--
+
+apply_workspace_layout(config)
+hl.on("monitor.added", function()
+  apply_workspace_layout(config)
+end)
+hl.on("monitor.removed", function()
+  apply_workspace_layout(config)
+end)
+
+-- keeping so i know how to peel apart a lua key value pair (im stupid)
+-- hl.bind("SUPER + N", function()
+--   -- Define your Lua function output
+--   local output = ""
+--   local my_output = hl.get_monitors()
+--   for id, name in pairs(my_output) do
+--     output = output .. tostring(id) .. ": " .. tostring(name) .. "\n"
+--   end
+--
+--   -- Send it as an on-screen notification
+--   hl.notification.create({
+--     text = output,
+--     duration = 8000, -- Duration in milliseconds
+--     icon = 0,
+--   })
+-- end)
 
 --
 -- Devices
 --
+
 hl.device({
   name = "bcm5974",
   sensitivity = 0,
@@ -203,6 +232,9 @@ hl.config({
   xwayland = {
     force_zero_scaling = true,
   },
+  debug = {
+    disable_logs = true, -- Keep off for performace
+  },
 })
 
 --
@@ -280,8 +312,7 @@ hl.bind("SUPER + CTRL + SHIFT + L", hl.dsp.window.move({ direction = "r" }), { d
 hl.bind("SUPER + ALT + S", hl.dsp.window.move({ workspace = "special" }), { description = "Move window to special workspace" })
 hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special", follow = true }), { description = "Move window to special workspace" })
 hl.bind("SUPER + S", hl.dsp.workspace.toggle_special({ "special" }), { description = "Toggle special workspace" })
-hl.bind("SUPER + D", hl.dsp.focus({ workspace = "special" }), { description = "Toggle special workspace" })
--- hl.bindd("SUPER, D, Toggle layout, togglesplit,")
+-- hl.bind("SUPER + D", hl.dsp.layout("togglesplit"), { description = "Toggle layout" }) -- requires preserve_split to be set
 
 hl.bind("SUPER + SHIFT + H", hl.dsp.window.resize({ x = -30, y = 0 }), { repeating = true })
 hl.bind("SUPER + SHIFT + J", hl.dsp.window.resize({ x = 0, y = 30 }), { repeating = true })
