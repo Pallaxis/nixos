@@ -10,10 +10,28 @@ Singleton {
   property int txKbps: 0
   property int lastRxBytes: 0
   property int lastTxBytes: 0
+  property string device: ""
+
+  Process {
+    id: currentAdapter
+    command: ["sh", "-c", "nmcli -f DEVICE con show --active | awk 'NR==2 {print $1}'"]
+    stdout: StdioCollector {
+      onStreamFinished: {
+        const output = text.trim();
+        if (!output) {
+          return;
+        }
+        device = output;
+      }
+    }
+    Component.onCompleted: {
+      running = true;
+    }
+  }
 
   Process {
     id: rxProc
-    command: ["sh", "-c", "cat /sys/class/net/enp0s20f0u2u4/statistics/rx_bytes"]
+    command: ["sh", "-c", "cat /sys/class/net/" + device + "/statistics/rx_bytes"]
 
     stdout: SplitParser {
       onRead: data => {
@@ -30,7 +48,7 @@ Singleton {
   }
   Process {
     id: txProc
-    command: ["sh", "-c", "cat /sys/class/net/enp0s20f0u2u4/statistics/tx_bytes"]
+    command: ["sh", "-c", "cat /sys/class/net/" + device + "/statistics/tx_bytes"]
 
     stdout: SplitParser {
       onRead: data => {
@@ -52,6 +70,7 @@ Singleton {
     onTriggered: {
       rxProc.running = true;
       txProc.running = true;
+      currentAdapter.running = true;
     }
   }
 }
