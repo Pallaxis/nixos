@@ -11,6 +11,7 @@ in {
   config = lib.mkIf cfg.enable {
     catppuccin = {
       enable = true;
+      # cache.enable = true; # needs sudo otherwise shows loads of warnings
       autoEnable = true;
       accent = "blue";
       flavor = "mocha";
