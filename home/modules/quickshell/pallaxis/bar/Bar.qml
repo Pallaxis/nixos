@@ -144,9 +144,8 @@ Scope {
           // }
         }
 
-        // Seg1 - positioned relative to logo (to the left)
         Rectangle {
-          id: seg1Rect
+          id: dateRect
           width: 90
           height: 50
           color: "transparent"
@@ -158,7 +157,6 @@ Scope {
           }
         }
 
-        // Seg3 - positioned relative to logo (to the right)
         Rectangle {
           id: clockRect
           width: 90

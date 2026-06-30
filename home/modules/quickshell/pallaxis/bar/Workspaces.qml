@@ -16,7 +16,7 @@ RowLayout {
       // }
       visible: modelData.monitor && modelData.monitor.name === screen.name
       width: 50
-      height: 15
+      height: 25
       color: modelData.active ? "#cba6f7" : "transparent"
 
       MouseArea {
