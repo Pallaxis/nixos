@@ -253,6 +253,7 @@ in {
         gd = "git diff";
         gc = "git commit --verbose";
         gca = "git commit --verbose --all";
+        "gc!" = "git commit --verbose --amend";
         "gca!" = "git commit --verbose --all --amend";
       };
     };
