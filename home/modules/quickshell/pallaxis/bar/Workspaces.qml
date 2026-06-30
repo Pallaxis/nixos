@@ -15,7 +15,7 @@ RowLayout {
       //   console.log("name", modelData.name);
       // }
       visible: modelData.monitor && modelData.monitor.name === screen.name
-      width: 50
+      width: workspaceName.implicitWidth + 8
       height: 25
       color: modelData.active ? "#cba6f7" : "transparent"
 
@@ -25,6 +25,7 @@ RowLayout {
       }
 
       Text {
+        id: workspaceName
         anchors.centerIn: parent
         color: globalTheme.textColour
         font.family: globalTheme.fontName
@@ -36,7 +37,8 @@ RowLayout {
             "2": " term",
             "5": " slack",
             "9": " pass",
-            "10": " email"
+            "10": " email",
+            "-99": " special"
           };
           return mapping[modelData.id] || " any";
         }
