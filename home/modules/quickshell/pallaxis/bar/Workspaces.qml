@@ -7,6 +7,10 @@ RowLayout {
   id: workspaceLayout
   required property var screen
 
+  Item {
+    width: 5
+  }
+
   Repeater {
     model: Hyprland.workspaces
 
