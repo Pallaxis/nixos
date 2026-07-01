@@ -5,6 +5,7 @@
   '';
   nixpkgs.config.allowUnfree = true;
   documentation.man.cache.enable = true;
+  documentation.man.cache.generateAtRuntime = true;
   environment.etc."libinput/local-overrides.quirks".text = ''
     [Serial Keyboards]
     MatchUdevType=keyboard
