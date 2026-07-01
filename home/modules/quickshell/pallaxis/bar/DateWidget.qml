@@ -1,5 +1,4 @@
 import Quickshell
-import Quickshell.Io
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -12,6 +11,9 @@ Item {
 
   Text {
     id: dateText
+    Theme {
+      id: globalTheme
+    }
     color: globalTheme.textColour
     font.family: globalTheme.fontName
     text: DateInput.date + " "
@@ -75,8 +77,8 @@ Item {
 
           MonthGrid {
             id: grid
-            month: currentDate.getMonth()
-            year: currentDate.getFullYear()
+            month: root.currentDate.getMonth()
+            year: root.currentDate.getFullYear()
             locale: Qt.locale("en_NZ")
 
             Layout.fillWidth: true

@@ -1,11 +1,11 @@
 pragma Singleton
 
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
 Singleton {
+  id: root
   property int rxKbps: 0
   property int txKbps: 0
   property int lastRxBytes: 0
@@ -21,7 +21,7 @@ Singleton {
         if (!output) {
           return;
         }
-        device = output;
+        root.device = output;
       }
     }
     Component.onCompleted: {
@@ -31,34 +31,34 @@ Singleton {
 
   Process {
     id: rxProc
-    command: ["sh", "-c", "cat /sys/class/net/" + device + "/statistics/rx_bytes"]
+    command: ["sh", "-c", "cat /sys/class/net/" + root.device + "/statistics/rx_bytes"]
 
     stdout: SplitParser {
       onRead: data => {
         if (!data)
           return;
-        if (lastRxBytes > 0) {
-          let diff = data - lastRxBytes;
-          rxKbps = diff / 1024;
+        if (root.lastRxBytes > 0) {
+          let diff = data - root.lastRxBytes;
+          root.rxKbps = diff / 1024;
         }
-        lastRxBytes = data;
+        root.lastRxBytes = data;
       }
     }
     Component.onCompleted: running = true
   }
   Process {
     id: txProc
-    command: ["sh", "-c", "cat /sys/class/net/" + device + "/statistics/tx_bytes"]
+    command: ["sh", "-c", "cat /sys/class/net/" + root.device + "/statistics/tx_bytes"]
 
     stdout: SplitParser {
       onRead: data => {
         if (!data)
           return;
-        if (lastTxBytes > 0) {
-          let diff = data - lastTxBytes;
-          txKbps = diff / 1024;
+        if (root.lastTxBytes > 0) {
+          let diff = data - root.lastTxBytes;
+          root.txKbps = diff / 1024;
         }
-        lastTxBytes = data;
+        root.lastTxBytes = data;
       }
     }
     Component.onCompleted: running = true

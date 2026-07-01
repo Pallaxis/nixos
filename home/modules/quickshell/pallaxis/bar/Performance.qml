@@ -1,7 +1,6 @@
 pragma Singleton
 
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
@@ -23,11 +22,11 @@ Singleton {
         var p = data.trim().split(/\s+/);
         var idle = parseInt(p[4]) + parseInt(p[5]);
         var total = p.slice(1, 8).reduce((a, b) => a + parseInt(b), 0);
-        if (lastCpuTotal > 0) {
-          cpuUsage = Math.round(100 * (1 - (idle - lastCpuIdle) / (total - lastCpuTotal)));
+        if (root.lastCpuTotal > 0) {
+          root.cpuUsage = Math.round(100 * (1 - (idle - root.lastCpuIdle) / (total - root.lastCpuTotal)));
         }
-        lastCpuTotal = total;
-        lastCpuIdle = idle;
+        root.lastCpuTotal = total;
+        root.lastCpuIdle = idle;
       }
     }
     Component.onCompleted: running = true
@@ -43,7 +42,7 @@ Singleton {
         var parts = data.trim().split(/\s+/);
         var total = parseInt(parts[1]) || 1;
         var used = parseInt(parts[2]) || 0;
-        memUsage = Math.round(100 * used / total);
+        root.memUsage = Math.round(100 * used / total);
       }
     }
     Component.onCompleted: running = true

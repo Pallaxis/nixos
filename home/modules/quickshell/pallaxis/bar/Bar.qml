@@ -1,7 +1,7 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Hyprland
 import Quickshell.Wayland
 
 Scope {
@@ -35,6 +35,7 @@ Scope {
     model: Quickshell.screens
 
     PanelWindow {
+      id: panelWindow
       required property var modelData
 
       screen: modelData
@@ -64,7 +65,7 @@ Scope {
 
           Workspaces {
             id: workspaces
-            screen: modelData
+            screen: panelWindow.modelData
             anchors.fill: parent
           }
         }
@@ -98,7 +99,7 @@ Scope {
             Pipewire {}
             BatteryWidget {}
             Item {
-              width: 5
+              Layout.rightMargin: 5
             }
           }
         }

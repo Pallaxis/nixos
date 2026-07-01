@@ -1,16 +1,14 @@
 import QtQuick
-import QtQuick.Layouts
-import Quickshell
-import Quickshell.Io
 import Quickshell.Services.Pipewire
 
 Item {
+  id: root
   property PwNode defaultSink: Pipewire.defaultAudioSink
   implicitWidth: text.implicitWidth
   implicitHeight: text.implicitHeight
 
   PwObjectTracker {
-    objects: [defaultSink]
+    objects: [root.defaultSink]
   }
   // Component.onCompleted: {
   //   console.log("sink: ", defaultSink?.name)
@@ -19,16 +17,19 @@ Item {
 
   Text {
     id: text
+    Theme {
+      id: globalTheme
+    }
     color: globalTheme.textColour
     font.family: globalTheme.fontName
-    text: defaultSink?.audio ? " " + Math.round(defaultSink.audio.volume * 100) + "%" : " 0%"
+    text: root.defaultSink?.audio ? " " + Math.round(root.defaultSink.audio.volume * 100) + "%" : " 0%"
   }
   MouseArea {
     anchors.fill: parent
     acceptedButtons: Qt.MiddleButton
     onClicked: mouse => {
       if (mouse.button === Qt.MiddleButton) {
-        defaultSink.audio.muted = !defaultSink.audio.muted;
+        root.defaultSink.audio.muted = !root.defaultSink.audio.muted;
       }
     }
   }

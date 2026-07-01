@@ -18,10 +18,12 @@ RowLayout {
     id: trayRepeater
     model: SystemTray.items
 
-    IconImage {
+    delegate: IconImage {
       id: icon
+      required property var modelData
       source: modelData.icon
       implicitSize: 18
+
       MouseArea {
         id: mouseArea
         anchors.fill: parent
@@ -29,9 +31,9 @@ RowLayout {
         acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
         onClicked: event => {
           if (event.button == Qt.LeftButton) {
-            modelData.activate();
+            icon.modelData.activate();
           } else if (event.button == Qt.MiddleButton) {
-            modelData.secondaryActivate();
+            icon.modelData.secondaryActivate();
           } else if (event.button == Qt.RightButton) {
             menuAnchor.anchor.rect.x = event.x;
             menuAnchor.anchor.rect.y = event.y;
@@ -40,7 +42,7 @@ RowLayout {
         }
         QsMenuAnchor {
           id: menuAnchor
-          menu: modelData.menu
+          menu: icon.modelData.menu
           anchor.item: mouseArea
         }
       }

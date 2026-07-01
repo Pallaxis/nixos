@@ -1,7 +1,6 @@
 pragma Singleton
 
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
@@ -16,23 +15,23 @@ Singleton {
 
   FileView {
     id: batteryStatus
-    path: statusPath
+    path: root.statusPath
     blockLoading: true
     onTextChanged: {
-      status = text().trim();
-      isCharging = (status != "Discharging");
+      root.status = text().trim();
+      root.isCharging = (root.status != "Discharging");
       // console.log("charging: " + isCharging);
     }
   }
   FileView {
     id: batteryPercent
-    path: capacityPath
+    path: root.capacityPath
     blockLoading: true
     onTextChanged: {
-      percentage = text() ? parseInt(String(text()).trim()) : 0;
+      root.percentage = text() ? parseInt(String(text()).trim()) : 0;
     }
     onLoadFailed: error => {
-      hasBattery = false;
+      root.hasBattery = false;
     }
   }
   Timer {

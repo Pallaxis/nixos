@@ -1,36 +1,41 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Hyprland
 
 RowLayout {
-  id: workspaceLayout
+  id: root
   required property var screen
 
   Item {
-    width: 5
+    Layout.leftMargin: 5
   }
 
   Repeater {
     model: Hyprland.workspaces
 
     delegate: Rectangle {
+      id: button
+      required property var modelData
       // Component.onCompleted: {
       //   console.log("name", modelData.name);
       // }
-      visible: modelData.monitor && modelData.monitor.name === screen.name
+      visible: modelData.monitor && modelData.monitor.name === root.screen.name
       width: workspaceName.implicitWidth + 8
       height: 25
       color: modelData.active ? "#cba6f7" : "transparent"
 
       MouseArea {
         anchors.fill: parent
-        onClicked: Hyprland.dispatch("hl.dsp.focus({workspace=" + modelData.id + "})")
+        onClicked: Hyprland.dispatch("hl.dsp.focus({workspace=" + button.modelData.id + "})")
       }
 
       Text {
         id: workspaceName
         anchors.centerIn: parent
+        Theme {
+          id: globalTheme
+        }
         color: globalTheme.textColour
         font.family: globalTheme.fontName
         font.pixelSize: 12
@@ -44,7 +49,7 @@ RowLayout {
             "10": " email",
             "-99": " special"
           };
-          return mapping[modelData.id] || " any";
+          return mapping[button.modelData.id] || " any";
         }
       }
     }
