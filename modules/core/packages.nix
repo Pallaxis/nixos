@@ -12,6 +12,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    brightnessctl
     fd
     file
     fzf
