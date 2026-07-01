@@ -229,7 +229,7 @@
       plugin = pkgs.vimPlugins.nvim-lspconfig;
       type = "lua";
       config = ''
-        local servers = { 'nixd', 'basedpyright', 'yaml-language-server', 'hyprls', 'shellcheck' }
+        local servers = { 'nixd', 'basedpyright', 'yaml-language-server', 'hyprls', 'shellcheck', 'qmlls' }
           for _, server in ipairs(servers) do
              vim.lsp.enable(server)
           end
@@ -264,6 +264,9 @@
               },
             },
           },
+        })
+        vim.lsp.config("qmlls", {
+          cmd = { "qmlls", "-E" },
         })
         --  vim.api.nvim_create_autocmd('LspAttach', {
         --    group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),

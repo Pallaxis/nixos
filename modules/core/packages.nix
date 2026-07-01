@@ -11,6 +11,8 @@
     neovim.enable = true;
   };
 
+  qt.enable = true;
+
   environment.systemPackages = with pkgs; [
     brightnessctl
     fd
@@ -26,6 +28,7 @@
     man-pages
     nodejs
     pavucontrol
+    quickshell
     udisks
     usbutils
     wl-clipboard

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.my.home.modules.quickshell;
@@ -14,5 +15,6 @@ in {
       enable = true;
       activeConfig = "pallaxis";
     };
+    home.packages = [pkgs.kdePackages.qtdeclarative];
   };
 }
