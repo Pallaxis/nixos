@@ -8,25 +8,31 @@ import Quickshell.Io
 Singleton {
   id: root
   property string status: ""
+  property bool hasBattery: true
   property bool isCharging: false
   property int percentage: 0
+  readonly property string statusPath: "/sys/class/power_supply/BAT0/status"
+  readonly property string capacityPath: "/sys/class/power_supply/BAT0/capacity"
 
   FileView {
     id: batteryStatus
-    path: "/sys/class/power_supply/BAT0/status"
+    path: statusPath
     blockLoading: true
     onTextChanged: {
       status = text().trim();
-      isCharging = (status === "Charging" || status === "Full");
-      // console.log("charging: " + isCharging)
+      isCharging = (status != "Discharging");
+      // console.log("charging: " + isCharging);
     }
   }
   FileView {
     id: batteryPercent
-    path: "/sys/class/power_supply/BAT0/capacity"
+    path: capacityPath
     blockLoading: true
     onTextChanged: {
       percentage = text() ? parseInt(String(text()).trim()) : 0;
+    }
+    onLoadFailed: error => {
+      hasBattery = false;
     }
   }
   Timer {
