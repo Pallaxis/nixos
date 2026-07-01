@@ -8,12 +8,14 @@ Item {
   id: root
   width: parent.width
   height: parent.height
+  property date currentDate: new Date()
 
   Text {
     id: dateText
     color: globalTheme.textColour
     font.family: globalTheme.fontName
-    text: Date.date + " "
+    text: DateInput.date + " "
+
     anchors.centerIn: parent
     MouseArea {
       anchors.fill: parent
@@ -73,8 +75,8 @@ Item {
 
           MonthGrid {
             id: grid
-            month: new Date().getMonth()
-            year: new Date().getFullYear()
+            month: currentDate.getMonth()
+            year: currentDate.getFullYear()
             locale: Qt.locale("en_NZ")
 
             Layout.fillWidth: true

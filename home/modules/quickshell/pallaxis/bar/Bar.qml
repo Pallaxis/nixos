@@ -125,12 +125,7 @@ Scope {
               acceptedButtons: Qt.AllButtons
               onClicked: event => {
                 idleInhibitor.enabled = !idleInhibitor.enabled;
-                console.log(idleInhibitor.enabled);
-              }
-              QsMenuAnchor {
-                id: menuAnchor
-                menu: modelData.menu
-                anchor.item: mouseArea
+              // console.log(idleInhibitor.enabled);
               }
             }
           }
