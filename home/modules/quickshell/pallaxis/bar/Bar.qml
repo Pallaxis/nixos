@@ -81,13 +81,14 @@ Scope {
           RowLayout {
             id: rightBlocks
             anchors.fill: parent
+            spacing: 10
 
             Tray {}
             NetworkModule {}
             Text {
               color: globalTheme.textColour
               font.family: globalTheme.fontName
-              text: "  " + Performance.memUsage + "%"
+              text: " " + Performance.memUsage + "%"
             }
             Text {
               color: globalTheme.textColour
