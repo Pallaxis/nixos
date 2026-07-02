@@ -15,11 +15,11 @@ local function apply_workspace_layout(active_config)
   local active_monitors = hl.get_monitors()
   local target_secondary = active_config.secondary.output
   local target_primary = active_config.primary.output
+  local target_description = target_secondary:gsub("^desc:", "")
 
-  -- Helper function to check if our secondary monitor is connected
   local is_secondary_connected = false
-  for id, mon in ipairs(active_monitors) do
-    if mon.name == target_secondary or id == 1 then -- workaround for get_monitors not exposing desc
+  for _, mon in ipairs(active_monitors) do
+    if mon.description == target_description then
       is_secondary_connected = true
       break
     end
@@ -50,7 +50,7 @@ local monitor_configs = {
     secondary = { output = "", mode = "preferred", position = "auto", scale = "auto" },
   },
   thinkpad = {
-    primary = { output = "eDP-1", mode = "2560x1440@240", position = "0x0", scale = "1.25" },
+    primary = { output = "eDP-1", mode = "1920x1080@60", position = "0x0", scale = "1.25" },
     secondary = { output = "desc:Dell Inc. DELL U2715H 6VY7R735038S", mode = "2560x1440@60", position = "auto-center-up", scale = "1.25" },
   },
   night = {
@@ -94,21 +94,22 @@ hl.on("monitor.removed", function()
 end)
 
 -- keeping so i know how to peel apart a lua key value pair (im stupid)
--- hl.bind("SUPER + N", function()
---   -- Define your Lua function output
---   local output = ""
---   local my_output = hl.get_monitors()
---   for id, name in pairs(my_output) do
---     output = output .. tostring(id) .. ": " .. tostring(name) .. "\n"
---   end
---
---   -- Send it as an on-screen notification
---   hl.notification.create({
---     text = output,
---     duration = 8000, -- Duration in milliseconds
---     icon = 0,
---   })
--- end)
+hl.bind("SUPER + N", function()
+  apply_workspace_layout(config)
+  -- Define your Lua function output
+  -- local output = ""
+  -- local my_output = hl.get_monitors()
+  -- for id, name in pairs(my_output) do
+  --   output = output .. tostring(id) .. ": " .. tostring(name) .. "\n"
+  -- end
+  --
+  -- -- Send it as an on-screen notification
+  -- hl.notification.create({
+  --   text = output,
+  --   duration = 8000, -- Duration in milliseconds
+  --   icon = 0,
+  -- })
+end)
 
 --
 -- Devices
