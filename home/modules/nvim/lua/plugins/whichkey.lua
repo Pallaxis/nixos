@@ -1,4 +1,13 @@
-require("which-key").setup({})
+vim.opt.timeoutlen = 0 -- fixes first <leader> invocation being slow
+require("which-key").setup({
+  preset = "helix",
+  delay = function(ctx)
+    if ctx.keys:match("^<Space>") then
+      return 0
+    end
+    return ctx.plugin and 0 or 200
+  end,
+})
 
 vim.keymap.set("n", "<leader>?", function()
   require("which-key").show({ global = false })
