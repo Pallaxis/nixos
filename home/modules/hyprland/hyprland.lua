@@ -228,7 +228,7 @@ hl.config({
     },
   },
   misc = {
-    initial_workspace_tracking = 1,
+    initial_workspace_tracking = 2,
   },
   xwayland = {
     force_zero_scaling = true,
