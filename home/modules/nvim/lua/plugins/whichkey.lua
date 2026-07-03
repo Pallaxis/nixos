@@ -1,4 +1,3 @@
-vim.opt.timeoutlen = 0 -- fixes first <leader> invocation being slow
 require("which-key").setup({
   preset = "helix",
   delay = function(ctx)

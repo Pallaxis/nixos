@@ -7,12 +7,20 @@
     viAlias = true;
     waylandSupport = true;
     plugins = with pkgs.vimPlugins; [
+      blink-cmp
       catppuccin-nvim
       conform-nvim
-      which-key-nvim
-      # # navigator-nvim
-      smart-splits-nvim
+      diffview-nvim
+      gitsigns-nvim
+      luasnip
       nvim-lint
+      nvim-lspconfig
+      nvim-web-devicons
+      render-markdown-nvim
+      smart-splits-nvim
+      snacks-nvim
+      vim-fugitive
+      which-key-nvim
       (nvim-treesitter.withPlugins (p: [
         p.bash
         p.c
@@ -31,14 +39,6 @@
         p.vim
         p.vimdoc
       ]))
-      gitsigns-nvim
-      render-markdown-nvim
-      snacks-nvim
-      nvim-lspconfig
-      luasnip
-      blink-cmp
-      diffview-nvim
-      nvim-web-devicons
     ];
     extraPackages = with pkgs; [
       alejandra # nix formatter
