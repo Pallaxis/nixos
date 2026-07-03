@@ -1,16 +1,45 @@
 {pkgs, ...}: {
-  imports = [
-    ./autocmds.nix
-    ./keymaps.nix
-    ./options.nix
-    ./plugins.nix
-    ./snippets.nix
-  ];
+  xdg.configFile."nvim/init.lua".source = ./init.lua;
+  xdg.configFile."nvim/lua".source = ./lua;
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     waylandSupport = true;
+    plugins = with pkgs.vimPlugins; [
+      blink-cmp
+      catppuccin-nvim
+      conform-nvim
+      diffview-nvim
+      gitsigns-nvim
+      luasnip
+      nvim-lint
+      nvim-lspconfig
+      nvim-web-devicons
+      render-markdown-nvim
+      smart-splits-nvim
+      snacks-nvim
+      vim-fugitive
+      which-key-nvim
+      (nvim-treesitter.withPlugins (p: [
+        p.bash
+        p.c
+        p.diff
+        p.gitcommit
+        p.gitignore
+        p.git_rebase
+        p.javascript
+        p.lua
+        p.luadoc
+        p.markdown
+        p.markdown_inline
+        p.nix
+        p.python
+        p.qmljs
+        p.vim
+        p.vimdoc
+      ]))
+    ];
     extraPackages = with pkgs; [
       alejandra # nix formatter
       kdePackages.qtdeclarative # qml formatter
