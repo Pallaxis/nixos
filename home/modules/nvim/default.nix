@@ -46,6 +46,7 @@
       statix # nix linter
       nixd # nix ls
       stylua # lua formatter
+      lua-language-server # lua ls
       basedpyright # python ls
       hyprls # hypr ls
       shellcheck-minimal # bash ls

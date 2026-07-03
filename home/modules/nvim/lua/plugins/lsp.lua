@@ -1,4 +1,4 @@
-local servers = { "nixd", "basedpyright", "yaml-language-server", "hyprls", "shellcheck", "qmlls" }
+local servers = { "nixd", "basedpyright", "yaml-language-server", "hyprls", "shellcheck", "qmlls", "lua_ls" }
 for _, server in ipairs(servers) do
   vim.lsp.enable(server)
 end
@@ -36,6 +36,29 @@ vim.lsp.config("basedpyright", {
 })
 vim.lsp.config("qmlls", {
   cmd = { "qmlls", "-E" },
+})
+vim.lsp.config("lua_ls", {
+  cmd = { "lua-language-server" },
+  filetypes = { "lua" },
+  -- Sets the "workspace" to the directory where any of these files is found.
+  root_markers = {
+    ".luarc.json",
+    ".luarc.jsonc",
+    ".luacheckrc",
+    ".stylua.toml",
+    ".git",
+  },
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+    },
+  },
 })
 --  vim.api.nvim_create_autocmd('LspAttach', {
 --    group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
