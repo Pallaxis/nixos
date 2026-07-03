@@ -6,8 +6,8 @@
   ];
   config = {
     my.home.modules = {
-      zellij.enable = true;
-      tmux.enable = false;
+      zellij.enable = false;
+      tmux.enable = true;
       zsh.enable = true;
     };
 

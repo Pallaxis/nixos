@@ -70,26 +70,6 @@ in {
         "prompt_subst"
       ];
       initContent = let
-        zshConfigEarlyInit = lib.mkOrder 500 ''
-          # # Make general or attach to it if it's already running
-          # if [[ -z "$TMUX" && -n "$DISPLAY" ]]; then
-          #     if [[ -z $(tmux list-sessions) ]]; then
-          #   exec tmux new-session -s general
-          #     elif [[ -z $(tmux list-clients) ]]; then
-          #   exec tmux new-session -A -s general
-          #     fi
-          # fi
-          if [[ -z "$ZELLIJ" ]]; then
-            # if general has clients attached make random
-            if [[ $(zellij -s general action list-clients | wc -l) -gt 1 ]]; then
-              zellij
-            else
-              zellij attach -c general
-            fi
-
-            # exit
-          fi
-        '';
         zshPrompt = lib.mkOrder 1000 "PROMPT=$'\n''%F{#89b4fa}%~%f %(?..%F{red}%?%f )'$'\n''%F{#cba6f7}%f '";
         fzfTab = lib.mkOrder 1200 ''
           bindkey "^[[3~" delete-char
@@ -211,7 +191,7 @@ in {
           }
         '';
       in
-        lib.mkMerge [zshConfigEarlyInit zshPrompt fzfTab functions];
+        lib.mkMerge [zshPrompt fzfTab functions];
       shellAliases = let
         pretty = ''--pretty="%C(#89b4fa)%h%Creset -%C(auto)%d%Creset %s %C(#a6e3a1)(%ad) %C(bold #cba6f7)<%an>%Creset"'';
       in {

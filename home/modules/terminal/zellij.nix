@@ -627,5 +627,16 @@ in {
         };
       };
     };
+    programs.zsh.initContent = lib.mkOrder 500 ''
+      if [[ -z "$ZELLIJ" ]]; then
+        # if general has clients attached make random
+        if [[ $(zellij -s general action list-clients | wc -l) -gt 1 ]]; then
+          zellij
+        else
+          zellij attach -c general
+        fi
+        # exit
+      fi
+    '';
   };
 }

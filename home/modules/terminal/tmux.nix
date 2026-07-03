@@ -89,5 +89,15 @@ in {
         bind c new-window -c "#{pane_current_path}"
       '';
     };
+    programs.zsh.initContent = lib.mkOrder 500 ''
+      # # Make general or attach to it if it's already running
+      if [[ -z "$TMUX" && -n "$DISPLAY" ]]; then
+        if [[ -z $(tmux list-sessions) ]]; then
+          exec tmux new-session -s general
+        elif [[ -z $(tmux list-clients) ]]; then
+          exec tmux new-session -A -s general
+        fi
+      fi
+    '';
   };
 }
