@@ -1,7 +1,11 @@
 {self, ...}: {
-  boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 20;
+      consoleMode = "max";
+    };
   };
 
   system.configurationRevision = self.rev or self.dirtyRev or null;

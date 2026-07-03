@@ -39,14 +39,6 @@ in {
             device = cfg.bootDisk;
             inherit (cfg) swapSize;
           }).disko.devices;
-
-        # boot.loader = {
-        #   systemd-boot = {
-        #     enable = true;
-        #     configurationLimit = 20;
-        #   };
-        #   efi.canTouchEfiVariables = true;
-        # };
       })
       (lib.mkIf mbr {
         disko.devices =
