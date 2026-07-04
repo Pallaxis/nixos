@@ -235,9 +235,6 @@ hl.config({
   xwayland = {
     force_zero_scaling = true,
   },
-  screencopy = {
-    allow_token_by_default = false, -- Can enable if it's annoying enough
-  },
   debug = {
     disable_logs = true, -- Keep off for performace
   },
