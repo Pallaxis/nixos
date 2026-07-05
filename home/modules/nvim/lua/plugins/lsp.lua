@@ -37,6 +37,13 @@ vim.lsp.config("basedpyright", {
 vim.lsp.config("qmlls", {
   cmd = { "qmlls", "-E" },
 })
+
+-- could clean this up a bit by just moving generated into lua/
+-- however that's a symlink and nix says it's not in $HOME...
+local gen = dofile(vim.fn.stdpath("config") .. "/generated.lua")
+local library = vim.api.nvim_get_runtime_file("", true)
+table.insert(library, (gen.hyprland_share or "") .. "/hypr/stubs/hl.meta.lua")
+
 vim.lsp.config("lua_ls", {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
@@ -54,7 +61,7 @@ vim.lsp.config("lua_ls", {
         version = "LuaJIT",
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
+        library = library,
         checkThirdParty = false,
       },
     },

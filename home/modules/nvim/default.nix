@@ -1,6 +1,11 @@
 {pkgs, ...}: {
   xdg.configFile."nvim/init.lua".source = ./init.lua;
   xdg.configFile."nvim/lua".source = ./lua;
+  xdg.configFile."nvim/generated.lua".source = pkgs.writeText "generated.lua" ''
+    return {
+      hyprland_share = "${pkgs.hyprland}/share",
+    }
+  '';
   programs.neovim = {
     enable = true;
     defaultEditor = true;
