@@ -141,7 +141,7 @@ hl.gesture({
 hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 20")
 
 hl.on("hyprland.start", function()
-  hl.exec_cmd("firefox", { workspace = "1 silent" })
+  hl.exec_cmd(browser, { workspace = "1 silent" })
   hl.exec_cmd("foot", { workspace = "2 silent" })
 end)
 
@@ -241,21 +241,25 @@ hl.bind("SUPER + J", hl.dsp.focus({ direction = "d" }))
 hl.bind("SUPER + K", hl.dsp.focus({ direction = "u" }))
 hl.bind("SUPER + L", hl.dsp.focus({ direction = "r" }))
 
+local term = "foot"
+local browser = "firefox"
+
 -- hl.bind(keys, dispatcher, { flag1 = true, flag2 = true })
 hl.bind("SUPER + C", hl.dsp.window.kill(), { description = "Kills active window" })
--- hl.bind("SUPER + W", hl.dsp.togglefloating, { description = "Toggles window floating" })
--- hl.bindd("SUPER, W, Toggles window floating, togglefloating")
+hl.bind("SUPER + W", function()
+  hl.dispatch(hl.dsp.window.float({ action, "toggle", window = "activewindow" }), { description = "Toggles window floating" })
+  hl.dispatch(hl.dsp.window.resize({ x = 1000, y = 800 }))
+end)
 hl.bind("SUPER + G", hl.dsp.group.toggle(), { description = "Toggle focused window to group" })
 hl.bind("ALT + return", hl.dsp.window.fullscreen({ action = "toggle" }), { description = "Toggle fullscreen" })
 hl.bind("SUPER + SHIFT + F", hl.dsp.exec_cmd("windowpin"), { description = "Pin focused window" })
-hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("systemctl --user is-active waybar && systemctl --user stop waybar || systemctl --user start waybar"), { description = "Toggle waybar" })
+hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("systemctl --user is-active quickshell && systemctl --user stop quickshell || systemctl --user start quickshell"), { description = "Toggle quickshell" })
+-- hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("systemctl --user is-active waybar && systemctl --user stop waybar || systemctl --user start waybar"), { description = "Toggle waybar" })
 -- hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("pkill waybar || waybar"), { description = "Toggle waybar" })
 hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd("select-wp"), { description = "Wallpaper selection script" })
-hl.bind("SUPER + T", hl.dsp.exec_cmd("foot"), { description = "Launch terminal" })
-hl.bind("SUPER + F", hl.dsp.exec_cmd("firefox"), { description = "Launch browser" })
--- FIXME: btop
-hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("setsid -f $term -e btop"), { description = "Launch btop" })
--- FIXME: keybinds
+hl.bind("SUPER + T", hl.dsp.exec_cmd(term), { description = "Launch terminal" })
+hl.bind("SUPER + F", hl.dsp.exec_cmd(browser), { description = "Launch browser" })
+hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("setsid -f " .. term .. " -e btop"), { description = "Launch btop" })
 hl.bind("SUPER + SHIFT + slash", hl.dsp.exec_cmd("setsid -f $term -T Keybindings -e $scr_path/keybindings"), { description = "Show keybinds" })
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"), { description = "Program launcher" })
 hl.bind("SUPER + backspace", hl.dsp.exec_cmd("logout-menu"), { description = "Logout menu" })
