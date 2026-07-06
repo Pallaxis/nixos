@@ -1,9 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    ./zellij.nix
-    ./tmux.nix
-    ./zsh.nix
-  ];
   config = {
     my.home.modules = {
       zellij.enable = false;

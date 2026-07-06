@@ -24,36 +24,6 @@
       work.enable = true;
     };
   };
-  # Home-Manager options
-  home-manager.users.henry = {
-    my = {
-      home.modules = {
-        # hyprland = {
-        #   monitor = [
-        #     ",preferred,auto,auto"
-        #     "desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536, 1920x1080@60, 0x0, 1.25" # Work Thinkpad
-        #     "desc:Dell Inc. DELL U2715H 6VY7R735038S, 2560x1440@60, auto-center-up, 1.25"
-        #   ];
-        #   workspaces = [
-        #     "1, monitor:desc:Dell Inc. DELL U2715H 6VY7R735038S, default:true"
-        #     "2, monitor:desc:Dell Inc. DELL U2715H 6VY7R735038S"
-        #     "3, monitor:desc:Dell Inc. DELL U2715H 6VY7R735038S"
-        #     "4, monitor:desc:Dell Inc. DELL U2715H 6VY7R735038S"
-        #     "5, monitor:desc:Dell Inc. DELL U2715H 6VY7R735038S"
-        #     "6, monitor:desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536"
-        #     "7, monitor:desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536"
-        #     "8, monitor:desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536"
-        #     "9, monitor:desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536"
-        #     "10, monitor:desc:InfoVision Optoelectronics (Kunshan) Co.Ltd China 0x0536, default:true"
-        #   ];
-        #   exec-once = [
-        #     "[workspace 5 silent] slack"
-        #     "[workspace 10 silent] thunderbird"
-        #   ];
-        # };
-      };
-    };
-  };
 
   # Only need this on thinkpad
   services.udev.extraRules = ''
