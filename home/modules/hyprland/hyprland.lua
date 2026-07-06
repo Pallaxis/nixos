@@ -43,6 +43,12 @@ local function apply_workspace_layout(active_config)
 end
 
 --
+-- Vars
+--
+
+Term = "foot"
+Browser = "firefox"
+--
 -- Monitors
 --
 
@@ -144,7 +150,7 @@ hl.gesture({
 hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 20")
 
 hl.on("hyprland.start", function()
-  hl.exec_cmd(BROWSER, { workspace = "1 silent" })
+  hl.exec_cmd(Browser, { workspace = "1 silent" })
   hl.exec_cmd("foot", { workspace = "2 silent" })
 end)
 
@@ -246,9 +252,6 @@ hl.bind("SUPER + J", hl.dsp.focus({ direction = "d" }))
 hl.bind("SUPER + K", hl.dsp.focus({ direction = "u" }))
 hl.bind("SUPER + L", hl.dsp.focus({ direction = "r" }))
 
-TERM = "foot"
-BROWSER = "firefox"
-
 -- hl.bind(keys, dispatcher, { flag1 = true, flag2 = true })
 hl.bind("SUPER + C", hl.dsp.window.kill(), { description = "Kills active window" })
 hl.bind("SUPER + W", function()
@@ -262,9 +265,9 @@ hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("systemctl --user is-active quickshe
 -- hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("systemctl --user is-active waybar && systemctl --user stop waybar || systemctl --user start waybar"), { description = "Toggle waybar" })
 -- hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("pkill waybar || waybar"), { description = "Toggle waybar" })
 hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd("select-wp"), { description = "Wallpaper selection script" })
-hl.bind("SUPER + T", hl.dsp.exec_cmd(TERM), { description = "Launch terminal" })
-hl.bind("SUPER + F", hl.dsp.exec_cmd(BROWSER), { description = "Launch browser" })
-hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("setsid -f " .. TERM .. " -e btop"), { description = "Launch btop" })
+hl.bind("SUPER + T", hl.dsp.exec_cmd(Term), { description = "Launch terminal" })
+hl.bind("SUPER + F", hl.dsp.exec_cmd(Browser), { description = "Launch browser" })
+hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("setsid -f " .. Term .. " -e btop"), { description = "Launch btop" })
 hl.bind("SUPER + SHIFT + slash", hl.dsp.exec_cmd("setsid -f $term -T Keybindings -e $scr_path/keybindings"), { description = "Show keybinds" })
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"), { description = "Program launcher" })
 hl.bind("SUPER + backspace", hl.dsp.exec_cmd("logout-menu"), { description = "Logout menu" })
