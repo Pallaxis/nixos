@@ -41,7 +41,21 @@ in {
     lib.mkEnableOption "Desktop";
 
   config = lib.mkIf cfg.enable {
-    home.packages = [logoutMenu];
+    my.home.modules = {
+      thunderbird.enable = true;
+      catppuccin.enable = true;
+    };
+
+    home.packages =
+      [logoutMenu]
+      ++ (with pkgs; [
+        cowsay
+        fastfetch
+        fortune
+        keepassxc
+        lolcat
+        nerd-fonts.jetbrains-mono
+      ]);
     programs.fuzzel = {
       enable = true;
       settings = {
