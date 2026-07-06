@@ -12,7 +12,4 @@
 
   # links fonts to where programs expect them to be
   fonts.fontconfig.enable = true;
-
-  ### LAZY DOTFILES, to be deleted ###
-  home.file.".config/rofi".source = ./dotfiles/rofi;
 }
