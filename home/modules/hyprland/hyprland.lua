@@ -54,7 +54,7 @@ local monitor_configs = {
     secondary = { output = "desc:Dell Inc. DELL U2715H 6VY7R735038S", mode = "2560x1440@60", position = "auto-center-up", scale = "1.25" },
   },
   night = {
-    primary = { output = "DP-1", mode = "2560x1440@240", position = "0x0", scale = "1" },
+    primary = { output = "desc:Ancor Communications Inc ROG PG278Q #ASMObu8P/tXd", mode = "2560x1440@144", position = "0x0", scale = "1" },
     secondary = { output = "DP-2", mode = "2560x1440@144", position = "-2560x0", scale = "1" },
   },
 }
