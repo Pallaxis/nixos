@@ -2,8 +2,11 @@
 -- Functions
 --
 
-function get_hostname()
+local function get_hostname()
   local handle = io.popen("hostname")
+  if not handle then
+    return nil, "failed to run hostname command"
+  end
   local result = handle:read("*a")
   handle:close()
 
@@ -64,7 +67,7 @@ local config = monitor_configs[Hostname] or monitor_configs["default"]
 if config == monitor_configs["default"] then
   hl.notification.create({
     text = "Monitor config doesn't exist for " .. Hostname,
-    duration = 5000,
+    timeout = 5000,
     icon = 0,
   })
   local current_monitors = hl.get_monitors()
@@ -141,7 +144,7 @@ hl.gesture({
 hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 20")
 
 hl.on("hyprland.start", function()
-  hl.exec_cmd(browser, { workspace = "1 silent" })
+  hl.exec_cmd(BROWSER, { workspace = "1 silent" })
   hl.exec_cmd("foot", { workspace = "2 silent" })
 end)
 
@@ -193,7 +196,7 @@ hl.config({
     border_size = 2,
     ["col.active_border"] = { colors = { "rgba(f5c2e7ff)", "rgba(cba6f7ff)", angle = "45deg" } },
     ["col.inactive_border"] = { colors = { "rgba(89b4faff)", "rgba(89b4fadf)", angle = "45deg" } },
-    layout = dwindle,
+    layout = "dwindle",
     resize_on_border = true,
   },
   decoration = {
@@ -241,15 +244,15 @@ hl.bind("SUPER + J", hl.dsp.focus({ direction = "d" }))
 hl.bind("SUPER + K", hl.dsp.focus({ direction = "u" }))
 hl.bind("SUPER + L", hl.dsp.focus({ direction = "r" }))
 
-local term = "foot"
-local browser = "firefox"
+TERM = "foot"
+BROWSER = "firefox"
 
 -- hl.bind(keys, dispatcher, { flag1 = true, flag2 = true })
 hl.bind("SUPER + C", hl.dsp.window.kill(), { description = "Kills active window" })
 hl.bind("SUPER + W", function()
-  hl.dispatch(hl.dsp.window.float({ action, "toggle", window = "activewindow" }), { description = "Toggles window floating" })
+  hl.dispatch(hl.dsp.window.float({ action = "toggle", window = "activewindow" }))
   hl.dispatch(hl.dsp.window.resize({ x = 1000, y = 800 }))
-end)
+end, { description = "Toggles window floating" })
 hl.bind("SUPER + G", hl.dsp.group.toggle(), { description = "Toggle focused window to group" })
 hl.bind("ALT + return", hl.dsp.window.fullscreen({ action = "toggle" }), { description = "Toggle fullscreen" })
 hl.bind("SUPER + SHIFT + F", hl.dsp.exec_cmd("windowpin"), { description = "Pin focused window" })
@@ -257,9 +260,9 @@ hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("systemctl --user is-active quickshe
 -- hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("systemctl --user is-active waybar && systemctl --user stop waybar || systemctl --user start waybar"), { description = "Toggle waybar" })
 -- hl.bind("CONTROL + ESCAPE", hl.dsp.exec_cmd("pkill waybar || waybar"), { description = "Toggle waybar" })
 hl.bind("SUPER + ALT + W", hl.dsp.exec_cmd("select-wp"), { description = "Wallpaper selection script" })
-hl.bind("SUPER + T", hl.dsp.exec_cmd(term), { description = "Launch terminal" })
-hl.bind("SUPER + F", hl.dsp.exec_cmd(browser), { description = "Launch browser" })
-hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("setsid -f " .. term .. " -e btop"), { description = "Launch btop" })
+hl.bind("SUPER + T", hl.dsp.exec_cmd(TERM), { description = "Launch terminal" })
+hl.bind("SUPER + F", hl.dsp.exec_cmd(BROWSER), { description = "Launch browser" })
+hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("setsid -f " .. TERM .. " -e btop"), { description = "Launch btop" })
 hl.bind("SUPER + SHIFT + slash", hl.dsp.exec_cmd("setsid -f $term -T Keybindings -e $scr_path/keybindings"), { description = "Show keybinds" })
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("pkill -x fuzzel || fuzzel"), { description = "Program launcher" })
 hl.bind("SUPER + backspace", hl.dsp.exec_cmd("logout-menu"), { description = "Logout menu" })
