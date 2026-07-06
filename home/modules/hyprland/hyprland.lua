@@ -120,19 +120,11 @@ hl.device({
   sensitivity = 0,
 })
 hl.device({
-  name = "logitech-usb-receiver",
+  name = "logitech-pro-x-1",
   sensitivity = -0.7,
 })
 hl.device({
   name = "logitech-pro-x-wireless",
-  sensitivity = -0.7,
-})
-hl.device({
-  name = "logitech-pro-x-wireless-1",
-  sensitivity = -0.7,
-})
-hl.device({
-  name = "logitech-pro-x-wireless-2",
   sensitivity = -0.7,
 })
 
