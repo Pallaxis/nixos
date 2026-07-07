@@ -61,6 +61,7 @@ in {
         #bind -T copy-mode-vi y send -X copy-pipe "wl-copy" \; display-message "Copied"
         bind -T copy-mode-vi Enter send -X copy-selection
         bind -T copy-mode-vi y send -X copy-selection \; display-message "Copied"
+        bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-no-clear
 
         # Ctrl+Alt vim keys to switch windows
         bind -n C-M-k previous-window
