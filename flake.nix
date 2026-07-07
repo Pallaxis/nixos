@@ -31,13 +31,12 @@
     nix-index-database,
     ...
   } @ inputs: let
+    username = "henry";
     # A helper to reduce boilerplate for any host added to the folder
     mkSystem = hostName:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit self;
-          inherit inputs;
-          inherit hostName;
+          inherit self inputs hostName username;
         };
         modules = [
           # Modules every host will need
@@ -47,14 +46,16 @@
           # Home manager defined here because I only have 1 user
           inputs.home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit inputs;};
-            home-manager.users.henry.imports = [
-              ./modules/henry.nix
-              catppuccin.homeModules.catppuccin
-              nix-index-database.homeModules.nix-index
-            ];
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs username;};
+              users.${username}.imports = [
+                ./modules/user.nix
+                catppuccin.homeModules.catppuccin
+                nix-index-database.homeModules.nix-index
+              ];
+            };
           }
           {
             nixpkgs.overlays = [
@@ -69,9 +70,9 @@
       # mist = mkSystem "mist";
     };
     homeConfigurations = {
-      henry = home-manager.lib.homeManagerConfiguration {
+      ${username} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./home/henry.nix];
+        modules = [./modules/user.nix];
       };
     };
   };

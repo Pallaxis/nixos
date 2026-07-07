@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  lib,
+  username,
+  ...
+}: let
   entries = builtins.readDir ./.;
 
   importPaths =
@@ -15,8 +19,8 @@ in {
 
   # Basic user info
   home = {
-    username = "henry";
-    homeDirectory = "/home/henry";
+    inherit username;
+    homeDirectory = "/home/${username}";
     stateVersion = "26.05";
   };
   programs = {

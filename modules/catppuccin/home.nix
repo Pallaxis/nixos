@@ -1,6 +1,7 @@
 {
   osConfig,
   lib,
+  username,
   ...
 }: let
   cfg = osConfig.my.catppuccin;
@@ -15,7 +16,7 @@ in {
 
       hyprlock.useDefaultConfig = false;
       zsh-syntax-highlighting.enable = false;
-      thunderbird.profile = "henry";
+      thunderbird.profile = username;
       tmux.extraConfig = ''
         set -g @catppuccin_window_status_style "rounded"
         set -ogq @catppuccin_window_text " #W"

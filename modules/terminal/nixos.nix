@@ -1,10 +1,16 @@
-{lib, ...}: {
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.my.terminal;
+in {
   options.my.terminal.enable =
     lib.mkEnableOption "Terminal";
-  config = {
+  config = lib.mkIf cfg.enable {
     my = {
-      zellij.enable = false;
       tmux.enable = true;
+      zellij.enable = false;
       zsh.enable = true;
     };
   };

@@ -2,6 +2,7 @@
   osConfig,
   lib,
   pkgs,
+  username,
   ...
 }: let
   cfg = osConfig.my.hyprland;
@@ -58,14 +59,14 @@ in {
         Appearance = {
           style = "kvantum";
           custom_palette = "true";
-          color_scheme_path = "/home/henry/.config/qt5ct/style-colors.conf";
+          color_scheme_path = "/home/${username}/.config/qt5ct/style-colors.conf";
         };
       };
       qt6ctSettings = {
         Appearance = {
           style = "kvantum";
           custom_palette = "true";
-          color_scheme_path = "/home/henry/.config/qt6ct/style-colors.conf";
+          color_scheme_path = "/home/${username}/.config/qt6ct/style-colors.conf";
         };
       };
     };

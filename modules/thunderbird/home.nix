@@ -1,6 +1,7 @@
 {
   osConfig,
   lib,
+  username,
   ...
 }: let
   cfg = osConfig.my.thunderbird;
@@ -9,7 +10,7 @@ in {
     programs.thunderbird = {
       enable = true;
       profiles = {
-        henry = {
+        username = {
           isDefault = true;
           settings = {
             "mailnews.start_page.enabled" = false;

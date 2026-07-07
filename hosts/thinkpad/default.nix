@@ -1,9 +1,9 @@
 {...}: {
   imports = [
     ../../modules
+    ../../profiles/core.nix
     ../../profiles/desktop.nix
     ../../profiles/workstation.nix
-    ../../profiles/core.nix
   ];
 
   # Global options

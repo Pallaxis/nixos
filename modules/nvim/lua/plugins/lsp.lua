@@ -1,3 +1,6 @@
+local home = os.getenv("HOME")
+local host = os.getenv("HOST")
+local user = os.getenv("USER")
 local servers = { "nixd", "basedpyright", "yaml-language-server", "hyprls", "shellcheck", "qmlls", "lua_ls" }
 for _, server in ipairs(servers) do
   vim.lsp.enable(server)
@@ -14,10 +17,11 @@ vim.lsp.config("nixd", {
       },
       options = {
         nixos = {
-          expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.thinkpad.options',
+          -- TODO: hardcoded paths should be more dynamic based on current system
+          expr = string.format('(builtins.getFlake "%s/.nixos").nixosConfigurations.%s.options', home, host),
         },
         home_manager = {
-          expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."henry@thinkpad".options',
+          expr = string.format('(builtins.getFlake "%s/.nixos").homeConfigurations."%s@%s".options', home, user, host),
         },
       },
     },

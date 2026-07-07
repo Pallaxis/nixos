@@ -1,6 +1,7 @@
 {
   osConfig,
   lib,
+  username,
   ...
 }: let
   cfg = osConfig.my.syncthing;
@@ -19,7 +20,7 @@ in {
             };
           };
           folders = {
-            "/home/henry/share/Syncthing" = {
+            "/home/${username}/share/Syncthing" = {
               id = "syncthing";
               devices = ["iPhone"];
               versioning = {
