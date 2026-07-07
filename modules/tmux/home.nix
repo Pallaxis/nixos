@@ -28,6 +28,8 @@ in {
         set-option -g detach-on-destroy off
         # Fixes nvim long esc wait time
         set -sg escape-time 10
+        # Command prompt fix, not sure why it broke
+        set-option -g message-style "width=95%,align=left,fill=#181825"
 
         # <C-b> r to reload config quickly
         unbind r
@@ -50,7 +52,6 @@ in {
         bind Down select-pane -D
         bind Up select-pane -U
         bind Right select-pane -R
-
         # 1 indexed session list
         bind s choose-tree -ZsK '#{?#{e|<:#{line},9},#{e|+:1,#{line}},#{?#{e|<:#{line},35},M-#{a:#{e|+:97,#{e|-:#{line},9}}},}}'
 
