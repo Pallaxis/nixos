@@ -1,0 +1,47 @@
+{
+  osConfig,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = osConfig.my.services.handleMonitorConnect;
+in {
+  config = lib.mkIf cfg.enable {
+    systemd.user.services."handle-monitor-connect" = {
+      Unit = {
+        Description = "Moves workspaces when new monitor is connected";
+        After = ["hyprland-session.target"];
+      };
+      Install = {
+        WantedBy = ["hyprland-session.target"];
+      };
+      Service = {
+        Restart = "on-failure";
+        ExecStart = "${pkgs.writeShellApplication {
+          name = "handle-monitor-connect";
+          runtimeInputs = [pkgs.socat pkgs.hyprland pkgs.coreutils];
+
+          text = ''
+            handle() {
+              case "$1" in
+                monitoradded*)
+                  seq 1 5 | xargs -I {} hyprctl dispatch "hl.dsp.workspace.move({workspace={}, monitor=1})"
+                  ;;
+              esac
+            }
+
+            hypr_socket="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+
+            socat -u UNIX-CONNECT:"$hypr_socket" - |
+            while read -r line; do
+              handle "$line"
+            done
+
+            echo "Outside of loop, something's gone wrong!"
+            exit 1
+          '';
+        }}/bin/handle-monitor-connect";
+      };
+    };
+  };
+}

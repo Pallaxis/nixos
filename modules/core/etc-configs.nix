@@ -12,4 +12,12 @@
     MatchName=keyd virtual keyboard
     AttrKeyboardIntegration=internal
   '';
+  # Syncthing ports, can't use option because it needs system service enabled
+  networking.firewall = {
+    allowedTCPPorts = [22000];
+    allowedUDPPorts = [
+      21027
+      22000
+    ];
+  };
 }

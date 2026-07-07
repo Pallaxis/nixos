@@ -1,0 +1,164 @@
+{
+  osConfig,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = osConfig.my.hyprland;
+in {
+  imports = [
+    ./scripts/brightness.nix
+    ./scripts/screenshot-tool.nix
+    ./scripts/select-wp.nix
+    ./scripts/toggle-workspace-number.nix
+    ./scripts/windowpin.nix
+  ];
+  config = lib.mkIf cfg.enable {
+    # my.home.services.handleMonitorConnect.enable = false; # TODO: unneeded systemd service, could keep as an example
+    home = {
+      # file.".config/hypr/scripts".source = ./scripts;
+      pointerCursor = {
+        enable = true;
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+        size = 24;
+        hyprcursor.enable = true;
+        hyprcursor.size = 24;
+        gtk.enable = true;
+      };
+    };
+
+    xdg.configFile."hypr/hyprland.lua".source = ./hyprland.lua;
+    wayland.windowManager.hyprland = {
+      enable = true;
+      systemd.enable = true;
+    };
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        splash = false;
+        wallpaper = [
+          {
+            monitor = "";
+            path = "${osConfig.my.hyprland.wallpaper}";
+          }
+        ];
+      };
+    };
+    services.hyprpolkitagent.enable = true;
+    services.dunst.enable = true;
+    gtk = {
+      enable = true;
+      colorScheme = "dark";
+    };
+    qt = {
+      enable = true;
+      style.name = "kvantum";
+      qt5ctSettings = {
+        Appearance = {
+          style = "kvantum";
+          custom_palette = "true";
+          color_scheme_path = "/home/henry/.config/qt5ct/style-colors.conf";
+        };
+      };
+      qt6ctSettings = {
+        Appearance = {
+          style = "kvantum";
+          custom_palette = "true";
+          color_scheme_path = "/home/henry/.config/qt6ct/style-colors.conf";
+        };
+      };
+    };
+    programs.quickshell = {
+      systemd.enable = true;
+      systemd.target = "hyprland-session.target";
+    };
+    programs.waybar = {
+      systemd.enable = true;
+      systemd.targets = ["hyprland-session.target"];
+    };
+    services.hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          lock_cmd = "pidof hyprlock || hyprlock --grace 0"; # Avoid starting multiple hyprlock instances.
+          before_sleep_cmd = "loginctl lock-session"; # Lock before suspend.
+          after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = 'enable' })'"; # To avoid having to press a key twice to turn on the display.
+          inhibit_sleep = "3"; # Waits for lock before sleeping
+        };
+
+        listener = [
+          {
+            timeout = 300; # 5 mins.
+            on-timeout = "brightness dim_monitors"; # Set monitor backlight to minimum, avoid 0 on OLED monitor.
+            on-resume = "brightness restore_brightness"; # Monitor backlight restore.
+          }
+          # turn off keyboard backlight
+          {
+            timeout = 300; # 5 mins.
+            on-timeout = "brightnessctl -sd '*':kbd_backlight set 0"; # Turn off keyboard backlight.
+            on-resume = "brightnessctl -rd '*':kbd_backlight"; # Turn on keyboard backlight.
+          }
+          {
+            timeout = 300; # 5 mins
+            on-timeout = "loginctl lock-session"; # Lock screen when timeout has passed
+          }
+          {
+            timeout = 900; # 15min
+            on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = 'disable' } )'"; # Screen off when timeout has passed
+            on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = 'enable' })'"; # Screen on when activity is detected after timeout has fired.
+          }
+          {
+            timeout = 7200; # 120min
+            on-timeout = "systemctl suspend"; # Suspend pc
+          }
+        ];
+      };
+    };
+    programs.hyprlock = {
+      enable = true;
+      settings = {
+        general = {
+          hide_cursor = true;
+          immediate_render = true;
+          ignore_empty_input = true;
+        };
+        background = {
+          monitor = "";
+          path = "${osConfig.my.hyprland.wallpaper}";
+          blur_passes = "4";
+          blur_size = "1";
+        };
+        label = {
+          monitor = "";
+          text = "$TIME";
+          color = "$text";
+          font_size = 120;
+          font_family = "JetBrainsMono Nerd Font";
+          position = "1%, -1%";
+          halign = "left";
+          valign = "top";
+        };
+        input-field = {
+          monitor = "";
+          size = "300, 60";
+          outline_thickness = "4";
+          dots_size = "0.2";
+          dots_spacing = "0.2";
+          dots_center = true;
+          outer_color = "$accent";
+          inner_color = "$surface0";
+          font_color = "$subtext0";
+          font_family = "JetBrainsMono Nerd Font";
+          fade_on_empty = false;
+          placeholder_text = ''<span foreground="##$subtext0Alpha"><i>󰌾 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>'';
+          hide_input = false;
+          fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
+          position = "0, -47";
+          halign = "center";
+          valign = "center";
+        };
+      };
+    };
+  };
+}

@@ -1,7 +1,15 @@
 {lib, ...}: let
-  # Maps dirs in current dir to a list of paths
-  dirNames = lib.attrNames (lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./.));
-  importPaths = map (name: ./. + "/${name}") dirNames;
+  entries = builtins.readDir ./.;
+
+  importPaths =
+    lib.mapAttrsToList
+    (name: _: ./. + "/${name}/nixos.nix")
+    (lib.filterAttrs
+      (name: type:
+        type
+        == "directory"
+        && builtins.pathExists (./. + "/${name}/nixos.nix"))
+      entries);
 in {
   imports = importPaths;
 }

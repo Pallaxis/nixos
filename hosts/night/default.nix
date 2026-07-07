@@ -1,6 +1,9 @@
 {...}: {
   imports = [
     ../../modules
+    ../../profiles/desktop.nix
+    ../../profiles/gaming.nix
+    ../../profiles/core.nix
   ];
 
   # Global options
@@ -14,15 +17,7 @@
         bootDisk = "/dev/disk/by-id/nvme-eui.00000000000000000026b768622a1055";
         swapSize = "32G";
       };
-      gaming.enable = true;
-      garbageCollect.enable = true;
-      hyprland.enable = true;
-      # plasma.enable = true;
-      networking.enable = true;
       nvidia.enable = true;
-      other.enable = true;
-      plymouth.enable = true;
-      work.enable = false;
     };
   };
 

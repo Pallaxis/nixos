@@ -1,0 +1,5 @@
+{
+  my = {
+    gaming.enable = true;
+  };
+}

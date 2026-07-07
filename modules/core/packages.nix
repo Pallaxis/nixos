@@ -21,15 +21,19 @@
     git
     glib
     grimblast
+    imagemagick
     imv
     jq
     ldns
     libsForQt5.qt5ct
     man-pages
+    mpv
     nodejs
     pavucontrol
+    python3
     quickshell
     udisks
+    unrar
     usbutils
     wl-clipboard
   ];

@@ -51,7 +51,7 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {inherit inputs;};
             home-manager.users.henry.imports = [
-              ./home/henry.nix
+              ./modules/henry.nix
               catppuccin.homeModules.catppuccin
               nix-index-database.homeModules.nix-index
             ];
