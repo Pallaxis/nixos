@@ -1,6 +1,8 @@
 {
-  osConfig,
+  inputs,
   lib,
+  osConfig,
+  pkgs,
   username,
   ...
 }: let
@@ -9,6 +11,9 @@ in {
   config = lib.mkIf cfg.enable {
     catppuccin = {
       enable = true;
+      sources = inputs.catppuccin.packages.${pkgs.stdenv.hostPlatform.system}.overrideScope (final: prev: {
+        whiskers = pkgs.catppuccin-whiskers;
+      });
       # cache.enable = true; # needs sudo otherwise shows loads of warnings
       autoEnable = true;
       accent = "blue";
