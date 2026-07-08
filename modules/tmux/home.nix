@@ -30,6 +30,8 @@ in {
         set -sg escape-time 10
         # Command prompt fix, not sure why it broke
         set-option -g message-style "width=95%,align=left,fill=#181825"
+        # On launch will use correct envar (provided its a new pane)
+        set -ag update-environment "HYPRLAND_INSTANCE_SIGNATURE"
 
         # <C-b> r to reload config quickly
         unbind r
@@ -89,7 +91,7 @@ in {
       '';
     };
     programs.zsh.initContent = lib.mkOrder 500 ''
-      # # Make general or attach to it if it's already running
+      # Make general or attach to it if it's already running
       if [[ -z "$TMUX" && -n "$DISPLAY" ]]; then
         if [[ -z $(tmux list-sessions) ]]; then
           exec tmux new-session -s general
