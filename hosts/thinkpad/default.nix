@@ -18,6 +18,7 @@
         swapSize = "16G";
       };
     };
+    virtualisation.enable = true;
   };
 
   # Only need this on thinkpad
