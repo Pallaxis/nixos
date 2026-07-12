@@ -1,16 +1,30 @@
 # Modular NixOS flake with my dotfiles in home-manager user
+## Current best way to install
+### Use nixos-anywhere, disko install doesn't have enough memory to install the entire system
+```sh
 nix run github:nix-community/nixos-anywhere -- --flake ".#thinkpad" --target-host nixos@192.168.122.3 --generate-hardware-config nixos-generate-config ./hosts/thinkpad/hardware-configuration.nix
+```
 
-## To setup drive partition btrfs and encrtyption
+## Manually with disko, then installing the flake
+### To setup drive partition btrfs and encrtyption
 1. Boot up using the NixOS install media
+```sh
+sudo nix --experimental-features "nix-command flakes" \
+  run github:nix-community/disko -- \
+  --mode disko,mount \
+  --flake github:pallaxis/nixos/homelab.#homelab
+```
 3. Clone this repo: `git clone https://github.com/pallaxis/nixos.git ~/.nixos`
-4. Copy hosts/night to hosts/<your-hostname>, then delete the `hardware-configuration.nix` file.
-5. Modify the default.nix in your new host to have the right disko settings, as well as any additional configs, i.e hyprland monitors
-6. `sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount ~/.nixos/hosts/<hostname>/disko.nix`
-^ WIP: need to figure out the process better, shouldn't need the flake install section below as I've added disko as a module
+4. Create a new dir with your hostname in `hosts/`, then copy default.nix from another system
+5. Generate a new hardware-configuration.nix and put in that dir `nixos-generate-config --no-filesystems`
+5. Modify the default.nix in your new host to have the right disko settings
+6. Finally run this to setup partitions/btrfs
+```sh
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount --flake ~/.nixos/hosts/<hostname>/disko.nix`
+```
 
-## To install the flake
-1. Install NixOS onto a UEFI capable machine
+### To install the flake
+1. Run through the nix-install
 2. Install git in temp shell: `nix-shell -p git` (You can also install neovim/other editor here)
 3. Enable flakes & set hostname in /etc/nixos/configuration.nix
 ```nix
