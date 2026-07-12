@@ -1,6 +1,6 @@
-local home = os.getenv("HOME")
-local host = os.getenv("HOST")
-local user = os.getenv("USER")
+local host = vim.uv.os_gethostname()
+local home = vim.uv.os_homedir()
+local user = vim.uv.os_getenv("USER")
 local servers = { "nixd", "basedpyright", "yaml-language-server", "hyprls", "shellcheck", "qmlls", "lua_ls" }
 for _, server in ipairs(servers) do
   vim.lsp.enable(server)
@@ -10,7 +10,7 @@ vim.lsp.config("nixd", {
   settings = {
     nixd = {
       nixpkgs = {
-        expr = "import <nixpkgs> { }",
+        expr = string.format('(builtins.getFlake "%s/.nixos").inputs.nixpkgs.outPath', home),
       },
       formatting = {
         command = { "nixfmt" },

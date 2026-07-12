@@ -69,11 +69,20 @@
       thinkpad = mkSystem "thinkpad";
       # mist = mkSystem "mist";
     };
-    homeConfigurations = {
-      ${username} = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./modules/user.nix];
-      };
-    };
+    # Disabling for now, unneeded for my setup currently
+    # homeConfigurations = {
+    #   ${username} = home-manager.lib.homeManagerConfiguration {
+    #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    #     extraSpecialArgs = {
+    #       inherit inputs username;
+    #       osConfig = self.nixosConfigurations.thinkpad.config;
+    #     };
+    #     modules = [
+    #       ./modules/user.nix
+    #       catppuccin.homeModules.catppuccin
+    #       nix-index-database.homeModules.nix-index
+    #     ];
+    #   };
+    # };
   };
 }
