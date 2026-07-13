@@ -67,7 +67,7 @@
     nixosConfigurations = {
       night = mkSystem "night";
       thinkpad = mkSystem "thinkpad";
-      # mist = mkSystem "mist";
+      homelab = mkSystem "homelab";
     };
     # Disabling for now, unneeded for my setup currently
     # homeConfigurations = {
