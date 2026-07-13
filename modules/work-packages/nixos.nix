@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.my.work;
+  cfg = config.my.workPackages;
 in {
-  options.my.work.enable =
+  options.my.workPackages.enable =
     lib.mkEnableOption "Packages used for work";
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
