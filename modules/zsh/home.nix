@@ -186,6 +186,21 @@ in {
           gdt() {
             nvim -c "DiffviewOpen $1..$2"
           }
+          # Helper function to relink only if the file is a symlink
+          # also won't relink if there is no symlink to relink over
+          relink() {
+            nixmodule=$1
+            configdir=$2
+
+            nix_path="/home/henry/.nixos/modules/$nixmodule"
+            config_path="/home/henry/.config/$configdir"
+
+            if [[ -L "$config_path" && -e "$config_path" ]]; then
+              ln -sfn "$nix_path" "$config_path"
+            else
+              echo "$config_path is not a symlink, exiting."
+            fi
+          }
         '';
       in
         lib.mkMerge [zshPrompt fzfTab functions];
