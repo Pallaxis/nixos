@@ -28,13 +28,13 @@
       increase_brightness(){
         local output=""
         output=$(brightnessctl set 5%+ | awk '/Current/{print $4}' | tr -d '()')
-        dunstify -u low -h string:x-dunst-stack-tag:brightness -h int:value:"$output" "Brightness: ''${output}"
+        # dunstify -u low -h string:x-dunst-stack-tag:brightness -h int:value:"$output" "Brightness: ''${output}"
       }
 
       decrease_brightness(){
         local output=""
         output=$(brightnessctl set 5%- | awk '/Current/{print $4}' | tr -d '()')
-        dunstify -u low -h string:x-dunst-stack-tag:brightness -h int:value:"$output" "Brightness: ''${output}"
+        # dunstify -u low -h string:x-dunst-stack-tag:brightness -h int:value:"$output" "Brightness: ''${output}"
       }
 
       # Check if the first argument is supplied and if the function exists
