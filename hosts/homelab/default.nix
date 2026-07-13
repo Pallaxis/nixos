@@ -21,5 +21,8 @@
     nixflix.enable = true;
   };
 
+  # TODO: remove me, for testing purposes
+  security.sudo.wheelNeedsPassword = false;
+
   system.stateVersion = "25.11"; # Don't ever change this
 }
