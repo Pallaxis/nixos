@@ -18,6 +18,7 @@
     };
     ssh.enable = true;
     ssh.server.enable = true;
+    nixflix.enable = true;
   };
 
   system.stateVersion = "25.11"; # Don't ever change this

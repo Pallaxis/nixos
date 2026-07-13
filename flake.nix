@@ -20,15 +20,25 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixflix = {
+      url = "github:kiriwalawren/nixflix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
-    home-manager,
-    catppuccin,
     disko,
+    # home-manager,
+    catppuccin,
     nix-index-database,
+    nixflix,
+    sops-nix,
     ...
   } @ inputs: let
     username = "henry";
@@ -43,6 +53,8 @@
           ./hosts/${hostname}/default.nix
           ./hosts/${hostname}/hardware-configuration.nix
           disko.nixosModules.disko
+          nixflix.nixosModules.default
+          sops-nix.nixosModules.sops
           # Home manager defined here because I only have 1 user
           inputs.home-manager.nixosModules.home-manager
           {
