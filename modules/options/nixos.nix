@@ -1,13 +1,13 @@
 {
   lib,
-  hostName,
+  hostname,
   ...
 }: {
   options.my = with lib; {
     host = {
       name = mkOption {
         type = types.str;
-        default = hostName;
+        default = hostname;
       };
       # system = mkOption {
       #   type = types.enum inputs.flake-utils.lib.allSystems;

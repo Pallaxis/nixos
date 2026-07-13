@@ -33,15 +33,15 @@
   } @ inputs: let
     username = "henry";
     # A helper to reduce boilerplate for any host added to the folder
-    mkSystem = hostName:
+    mkSystem = hostname:
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit self inputs hostName username;
+          inherit self inputs hostname username;
         };
         modules = [
           # Modules every host will need
-          ./hosts/${hostName}/default.nix
-          ./hosts/${hostName}/hardware-configuration.nix
+          ./hosts/${hostname}/default.nix
+          ./hosts/${hostname}/hardware-configuration.nix
           disko.nixosModules.disko
           # Home manager defined here because I only have 1 user
           inputs.home-manager.nixosModules.home-manager
