@@ -89,29 +89,45 @@ in {
         };
 
         listener = [
+          # After 5 mins
+          # Locks session
           {
-            timeout = 300; # 5 mins.
-            on-timeout = "brightness dim_monitors"; # Set monitor backlight to minimum, avoid 0 on OLED monitor.
-            on-resume = "brightness restore_brightness"; # Monitor backlight restore.
+            timeout = 300;
+            on-timeout = "loginctl lock-session";
           }
-          # turn off keyboard backlight
+
+          # After 10 mins
+          # Dims monitors
+          # Brightens monitors after activity
           {
-            timeout = 300; # 5 mins.
-            on-timeout = "brightnessctl -sd '*':kbd_backlight set 0"; # Turn off keyboard backlight.
-            on-resume = "brightnessctl -rd '*':kbd_backlight"; # Turn on keyboard backlight.
+            timeout = 600;
+            on-timeout = "brightness dim_monitors";
+            on-resume = "brightness restore_brightness";
           }
+
+          # After 10 mins
+          # Turns off keyboard backlight
+          # Turns on keyboard backlight after activity
           {
-            timeout = 300; # 5 mins
-            on-timeout = "loginctl lock-session"; # Lock screen when timeout has passed
+            timeout = 600;
+            on-timeout = "brightnessctl -sd '*':kbd_backlight set 0";
+            on-resume = "brightnessctl -rd '*':kbd_backlight";
           }
+
+          # After 30 mins
+          # Turns off all monitors
+          # Turns on all monitors after activity
           {
-            timeout = 900; # 15min
-            on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = 'disable' } )'"; # Screen off when timeout has passed
-            on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = 'enable' })'"; # Screen on when activity is detected after timeout has fired.
+            timeout = 1800;
+            on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = 'disable' } )'";
+            on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = 'enable' })'";
           }
+
+          # After 120 mins
+          # Suspends system
           {
-            timeout = 7200; # 120min
-            on-timeout = "systemctl suspend"; # Suspend pc
+            timeout = 7200;
+            on-timeout = "systemctl suspend";
           }
         ];
       };
