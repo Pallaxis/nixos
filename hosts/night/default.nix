@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./hardware-configuration.nix
     ../../modules
     ../../profiles/desktop.nix
     ../../profiles/gaming.nix

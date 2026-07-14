@@ -33,15 +33,15 @@
   outputs = {
     self,
     nixpkgs,
-    disko,
-    # home-manager,
-    catppuccin,
-    nix-index-database,
-    nixflix,
-    sops-nix,
     ...
   } @ inputs: let
     username = "henry";
+
+    hosts =
+      builtins.filter
+      (name: builtins.pathExists (./hosts + "/${name}/default.nix"))
+      (builtins.attrNames (builtins.readDir ./hosts));
+
     # A helper to reduce boilerplate for any host added to the folder
     mkSystem = hostname:
       nixpkgs.lib.nixosSystem {
@@ -49,26 +49,11 @@
           inherit self inputs hostname username;
         };
         modules = [
-          # Modules every host will need
-          ./hosts/${hostname}/default.nix
-          ./hosts/${hostname}/hardware-configuration.nix
-          disko.nixosModules.disko
-          nixflix.nixosModules.default
-          sops-nix.nixosModules.sops
-          # Home manager defined here because I only have 1 user
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs username;};
-              users.${username}.imports = [
-                ./modules/user.nix
-                catppuccin.homeModules.catppuccin
-                nix-index-database.homeModules.nix-index
-              ];
-            };
-          }
+          ./hosts/${hostname}
+          ./modules/home-manager.nix
+          inputs.disko.nixosModules.disko
+          inputs.sops-nix.nixosModules.sops
+          inputs.nixflix.nixosModules.default
           {
             nixpkgs.overlays = [
             ];
@@ -76,25 +61,6 @@
         ];
       };
   in {
-    nixosConfigurations = {
-      night = mkSystem "night";
-      thinkpad = mkSystem "thinkpad";
-      homelab = mkSystem "homelab";
-    };
-    # Disabling for now, unneeded for my setup currently
-    # homeConfigurations = {
-    #   ${username} = home-manager.lib.homeManagerConfiguration {
-    #     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    #     extraSpecialArgs = {
-    #       inherit inputs username;
-    #       osConfig = self.nixosConfigurations.thinkpad.config;
-    #     };
-    #     modules = [
-    #       ./modules/user.nix
-    #       catppuccin.homeModules.catppuccin
-    #       nix-index-database.homeModules.nix-index
-    #     ];
-    #   };
-    # };
+    nixosConfigurations = nixpkgs.lib.genAttrs hosts mkSystem;
   };
 }
