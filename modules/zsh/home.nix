@@ -201,6 +201,9 @@ in {
               echo "$config_path is not a symlink, exiting."
             fi
           }
+          ":q"(){
+            echo "nice one lol" | cowsay
+          }
         '';
       in
         lib.mkMerge [zshPrompt fzfTab functions];
