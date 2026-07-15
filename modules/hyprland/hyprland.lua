@@ -231,7 +231,7 @@ hl.config({
     },
   },
   misc = {
-    initial_workspace_tracking = 2,
+    initial_workspace_tracking = 1,
     disable_hyprland_logo = true,
     disable_splash_rendering = true,
     key_press_enables_dpms = true,
