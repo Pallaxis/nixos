@@ -18,6 +18,7 @@
     fd
     file
     fzf
+    gdu
     git
     glib
     grimblast
@@ -34,7 +35,9 @@
     quickshell
     udisks
     unrar
+    unzip
     usbutils
     wl-clipboard
+    zip
   ];
 }
