@@ -1,4 +1,9 @@
-{...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules
@@ -19,5 +24,16 @@
       };
     };
   };
+
+  # Needed for stupid broadcom-wl driver
+  nixpkgs.config.permittedInsecurePackages = [
+    "broadcom-sta-6.30.223.271-59-6.18.38"
+  ];
+  boot = {
+    kernelModules = ["kvm-intel" "wl"];
+    extraModulePackages = [config.boot.kernelPackages.broadcom_sta];
+    kernelPackages = lib.mkForce pkgs.linuxPackages_6_18;
+  };
+
   system.stateVersion = "25.11"; # Don't ever change this
 }
