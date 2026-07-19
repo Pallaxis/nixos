@@ -14,6 +14,7 @@
   qt.enable = true;
 
   environment.systemPackages = with pkgs; [
+    age
     brightnessctl
     fd
     file
@@ -33,6 +34,7 @@
     pavucontrol
     python3
     quickshell
+    sops
     udisks
     unrar
     unzip
