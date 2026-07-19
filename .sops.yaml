@@ -1,7 +1,13 @@
 keys:
-  - &admin_key age1vgqkvqjxtkx46twetla2mkpshlx0zz02jvh0nl45s60xd033vgds3m6x7z
+  - &homelab age1vgqkvqjxtkx46twetla2mkpshlx0zz02jvh0nl45s60xd033vgds3m6x7z
+  - &core age1522nj3m07fu9rkyh3e08m5lljjwddylqupkyhc9d5x27fjqr4ufqp2j9er
 creation_rules:
-  - path_regex: ^secrets\/.*\.yaml$
+  - path_regex: ^secrets/homelab\.yaml$
     key_groups:
       - age:
-          - *admin_key
+          - *homelab
+
+  - path_regex: ^secrets/core\.yaml$
+    key_groups:
+      - age:
+          - *core
