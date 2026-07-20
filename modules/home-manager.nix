@@ -12,6 +12,7 @@
       ./user.nix
       inputs.catppuccin.homeModules.catppuccin
       inputs.nix-index-database.homeModules.nix-index
+      inputs.sops-nix.homeManagerModules.sops
     ];
   };
 }
