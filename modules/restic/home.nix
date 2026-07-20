@@ -2,9 +2,17 @@
   lib,
   config,
   osConfig,
+  pkgs,
   ...
 }: let
   cfg = osConfig.my.restic;
+  resticWrapper = pkgs.writeShellScriptBin "restic" ''
+    # Wraps restic so i don't need to source a .env file
+    export RESTIC_REPOSITORY_FILE="${config.sops.secrets.restic-remote-repo.path}"
+    export RESTIC_PASSWORD_FILE="${config.sops.secrets.restic-password.path}"
+
+    exec ${pkgs.restic}/bin/restic "$@"
+  '';
 in {
   config = lib.mkIf cfg.enable {
     sops = {
@@ -52,5 +60,6 @@ in {
         };
       };
     };
+    home.packages = [resticWrapper];
   };
 }
