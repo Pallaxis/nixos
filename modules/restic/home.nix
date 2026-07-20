@@ -13,7 +13,10 @@ in {
       secrets = {
         restic-remote-repo = {};
         restic-password = {};
-        restic-ssh-key = {};
+        restic-ssh-key = {
+          path = "${config.home.homeDirectory}/.ssh/id_ed25519_oracle";
+          mode = "0600";
+        };
         restic-known-hosts = {
           # TODO: use this to avoid needing to ssh to the server first time
           path = "${config.xdg.configHome}/restic/known-hosts";
