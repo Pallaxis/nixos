@@ -7,5 +7,5 @@
 in {
   options.my.template.enable =
     lib.mkEnableOption "Template";
-  config = lib.mkEnable cfg.enable {};
+  config = lib.mkIf cfg.enable {};
 }
