@@ -84,7 +84,8 @@ in {
         general = {
           lock_cmd = "pidof hyprlock || hyprlock --grace 0"; # Avoid starting multiple hyprlock instances.
           before_sleep_cmd = "pidof hyprlock || hyprlock --grace 0 --no-fade-in"; # Lock before suspend.
-          after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = 'enable' })'"; # To avoid having to press a key twice to turn on the display.
+          # Disabling after_sleep_cmd as it is causing the screen to turn off after wake, screen is on after wake anyway so its redundant
+          # after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = 'enable' })'"; # To avoid having to press a key twice to turn on the display.
           inhibit_sleep = "2"; # Waits for lock before sleeping
         };
 
