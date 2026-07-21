@@ -6,8 +6,8 @@ import Quickshell.Io
 
 Singleton {
   id: root
-  property int rxKbps: 0
-  property int txKbps: 0
+  property int rxMbps: 0
+  property int txMbps: 0
   property int lastRxBytes: 0
   property int lastTxBytes: 0
   property string device: ""
@@ -39,7 +39,7 @@ Singleton {
           return;
         if (root.lastRxBytes > 0) {
           let diff = data - root.lastRxBytes;
-          root.rxKbps = diff / 1024;
+          root.rxMbps = (diff * 8) / 1000000;
         }
         root.lastRxBytes = data;
       }
@@ -56,7 +56,7 @@ Singleton {
           return;
         if (root.lastTxBytes > 0) {
           let diff = data - root.lastTxBytes;
-          root.txKbps = diff / 1024;
+          root.txMbps = (diff * 8) / 1000000;
         }
         root.lastTxBytes = data;
       }
