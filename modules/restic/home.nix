@@ -16,7 +16,7 @@
 in {
   config = lib.mkIf cfg.enable {
     sops = {
-      age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
+      age.keyFile = "${config.xdg.configHome}/sops/age/core-key.txt";
       defaultSopsFile = ../../secrets/core.yaml;
       secrets = {
         restic-remote-repo = {};
