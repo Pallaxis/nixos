@@ -60,6 +60,18 @@ in {
         };
       };
     };
+    # TODO: setup a rest server for faster transfers & over https
+    # https://github.com/restic/rest-server
+
+    # Extends the generated systemd service to wait for network online
+    # may be unneeded, disabling to test
+    # systemd.user.services.restic-backups-remoteBackup = {
+    #   Unit = {
+    #     After = ["network-online.target"];
+    #     Wants = ["network-online.target"];
+    #   };
+    # };
+
     home.packages = [resticWrapper];
   };
 }
