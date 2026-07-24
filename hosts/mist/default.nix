@@ -25,6 +25,11 @@
     };
   };
 
+  # Fixes touchpad not disabling while typing
+  services.udev.extraRules = ''
+    ACTION=="add|change", SUBSYSTEM=="input", ENV{ID_VENDOR_ID}=="05ac", ENV{ID_MODEL_ID}=="02*", ENV{ID_INPUT_TOUCHPAD_INTEGRATION}="internal"
+  '';
+
   # Needed for stupid broadcom-wl driver
   nixpkgs.config.permittedInsecurePackages = [
     "broadcom-sta-6.30.223.271-59-6.18.38"
