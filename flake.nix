@@ -20,13 +20,12 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixflix = {
-      url = "github:kiriwalawren/nixflix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixflix = {
+      url = "github:kiriwalawren/nixflix";
     };
   };
 
@@ -53,7 +52,7 @@
           ./modules/home-manager.nix
           inputs.disko.nixosModules.disko
           inputs.sops-nix.nixosModules.sops
-          inputs.nixflix.nixosModules.default
+          inputs.nixflix.nixosModules.nixflix
           {
             nixpkgs.overlays = [
             ];
