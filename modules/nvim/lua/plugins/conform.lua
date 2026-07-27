@@ -7,6 +7,7 @@ require("conform").setup({
     lua = { "stylua" },
     nix = { "alejandra" },
     qml = { "qmlformat" },
+    yaml = { "yamlfmt" },
   },
   formatters = {
     stylua = {

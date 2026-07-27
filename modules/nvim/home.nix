@@ -57,6 +57,8 @@
       hyprls # hypr ls
       shellcheck-minimal # bash ls
       luajitPackages.jsregexp # for luasnip
+      yamllint
+      yamlfmt
       ripgrep
     ];
   };
