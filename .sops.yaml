@@ -6,8 +6,10 @@ creation_rules:
     key_groups:
       - age:
           - *homelab
-
   - path_regex: ^secrets/core\.yaml$
     key_groups:
       - age:
           - *core
+stores:
+  yaml:
+    indent: 2
