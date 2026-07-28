@@ -150,24 +150,19 @@ hl.gesture({
 hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 20")
 
 hl.on("hyprland.start", function()
+  -- tells systemd we've reached the graphical target
+  hl.exec_cmd("systemctl --user start hyprland-session.target")
+
+  -- a few auto started programs
   hl.exec_cmd(Browser, { workspace = "1 silent" })
   hl.exec_cmd("foot", { workspace = "2 silent" })
 end)
 
--- startup
--- hl.on("hyprland.start", function()
---   hl.exec_cmd(
---     "/nix/store/ai8mmqghspvnhv2jz12pfg6b6dqmg3b3-dbus-1.16.2/bin/dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE && systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target"
---   )
--- end)
-
--- replacing the one above with this
-hl.on("hyprland.start", function()
-  -- hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  -- NOTE: may need to change this somehow to avoid the instance sig not being updated on rebuild-switch
-  hl.exec_cmd(
-    "dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE && systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target"
-  )
+hl.on("hyprland.shutdown", function()
+  os.execute("systemctl --user stop hyprland-session.target && sleep 0.1")
+  -- uses a blocking exec function and sleeps a bit to give things time to close
+  -- you might also want to kill troublesome/crashing non-systemd background services here:
+  -- os.execute("pkill wallpaperthing; systemctl --user stop hyprland-session.target && sleep 0.1")
 end)
 
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")

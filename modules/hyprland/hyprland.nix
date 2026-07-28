@@ -33,6 +33,7 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
+      systemd.variables = ["--all"];
     };
     services.hyprpaper = {
       enable = true;
