@@ -173,16 +173,24 @@ in {
             esac
             ) & disown
           }
-          ns() {
-            # Create an array to store the prefixed packages
-            local pkgs=()
-            for pkg in "$@"; do
-              pkgs+=("nixpkgs#$pkg")
-            done
+          # disabling in favour of just using nix shell
+          # ns() {
+          #   # Create an array to store the prefixed packages
+          #   local pkgs=()
+          #   for pkg in "$@"; do
+          #     pkgs+=("nixpkgs#$pkg")
+          #   done
+          #
+          #   # Run the nix shell command with all prefixed packages
+          #   nix shell "''${pkgs[@]}" --command zsh -c "export IN_NIX_SHELL=impure; exec zsh"
+          # }
+          # _ns() {
+          #   words=(nix shell "''${words[@]:1}")
+          #   (( CURRENT += 1 ))
+          #   _nix
+          # }
+          # compdef _ns ns
 
-            # Run the nix shell command with all prefixed packages
-            nix shell "''${pkgs[@]}" --command zsh -c "export IN_NIX_SHELL=impure; exec zsh"
-          }
           gdt() {
             nvim -c "DiffviewOpen $1..$2"
           }
@@ -281,6 +289,11 @@ in {
           sigint_symbol = "";
           signal_symbol = "";
         };
+        # this thinks i'm always in a nix shell
+        # due to /nix/store in my path :(
+        # nix_shell = {
+        #   heuristic = true;
+        # };
       };
     };
   };
