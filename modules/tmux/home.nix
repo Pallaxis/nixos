@@ -5,12 +5,24 @@
   ...
 }: let
   cfg = osConfig.my.tmux;
+  smart-splits-tmux = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "smart-splits.nvim";
+    version = "2.1.0";
+    rtpFilePath = "smart-splits.tmux";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "mrjones2014";
+      repo = "smart-splits.nvim";
+      rev = "v2.1.0";
+      hash = "sha256-IuJNQT0bN68K5lnw0ixyU/heG8V1+zUwlvm0mNvvHOw=";
+    };
+  };
 in {
   config = lib.mkIf cfg.enable {
     programs.tmux = {
       enable = true;
       plugins = with pkgs; [
-        tmuxPlugins.vim-tmux-navigator
+        smart-splits-tmux
         tmuxPlugins.yank
       ];
       extraConfig = ''
