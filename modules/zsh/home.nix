@@ -63,7 +63,7 @@ in {
       setOptions = [
         "inc_append_history"
         "no_flow_control"
-        "extended_glob"
+        # "extended_glob"
         "prompt_subst"
       ];
       initContent = let

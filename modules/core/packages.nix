@@ -31,6 +31,7 @@
     man-pages
     mpv
     nodejs
+    parallel
     pavucontrol
     python3
     quickshell
