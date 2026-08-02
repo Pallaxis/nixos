@@ -36,6 +36,10 @@ in {
         "ats3" = {
           Hostname = "10.71.5.97";
         };
+        "cv2" = {
+          User = "pi";
+          Hostname = "10.71.5.219";
+        };
         "mikyla" = {
           User = "mikyla";
           Hostname = "10.71.0.125";
