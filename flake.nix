@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,37 +31,39 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    username = "henry";
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 
-    hosts =
-      builtins.filter
-      (name: builtins.pathExists (./hosts + "/${name}/default.nix"))
-      (builtins.attrNames (builtins.readDir ./hosts));
-
-    # A helper to reduce boilerplate for any host added to the folder
-    mkSystem = hostname:
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit self inputs hostname username;
-        };
-        modules = [
-          ./hosts/${hostname}
-          ./modules/home-manager.nix
-          inputs.disko.nixosModules.disko
-          inputs.sops-nix.nixosModules.sops
-          inputs.nixflix.nixosModules.nixflix
-          {
-            nixpkgs.overlays = [
-            ];
-          }
-        ];
-      };
-  in {
-    nixosConfigurations = nixpkgs.lib.genAttrs hosts mkSystem;
-  };
+  # outputs = {
+  #   self,
+  #   nixpkgs,
+  #   ...
+  # } @ inputs: let
+  #   username = "henry";
+  #
+  #   hosts =
+  #     builtins.filter
+  #     (name: builtins.pathExists (./hosts + "/${name}/default.nix"))
+  #     (builtins.attrNames (builtins.readDir ./hosts));
+  #
+  #   # A helper to reduce boilerplate for any host added to the folder
+  #   mkSystem = hostname:
+  #     nixpkgs.lib.nixosSystem {
+  #       specialArgs = {
+  #         inherit self inputs hostname username;
+  #       };
+  #       modules = [
+  #         ./hosts/${hostname}
+  #         ./modules/home-manager.nix
+  #         inputs.disko.nixosModules.disko
+  #         inputs.sops-nix.nixosModules.sops
+  #         inputs.nixflix.nixosModules.nixflix
+  #         {
+  #           nixpkgs.overlays = [
+  #           ];
+  #         }
+  #       ];
+  #     };
+  # in {
+  #   nixosConfigurations = nixpkgs.lib.genAttrs hosts mkSystem;
+  # };
 }
