@@ -7,9 +7,8 @@
   flake.modules.nixos.zombie = {
     imports = with inputs.self.modules.nixos; [
       system-desktop
-      systemd-boot
-
       nvidia
+
       hyprland
     ];
     networking.hostName = "zombie";

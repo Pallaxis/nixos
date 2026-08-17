@@ -1,11 +1,14 @@
-{
+{inputs, ...}: {
   flake.modules.nixos.nixflix = {
     config,
     lib,
     ...
   }: {
+    imports = [
+      inputs.nixflix.nixosModules.default
+    ];
     sops = {
-      age.keyFile = "/home/henry/.config/sops/age/keys.txt";
+      age.keyFile = "/home/henry/.config/sops/age/homelab-key.txt";
       defaultSopsFile = ../../../secrets/homelab.yaml;
       secrets = {
         "qbittorrent/password" = {};
@@ -94,49 +97,6 @@
               proxyPass = "http://127.0.0.1:8096";
             };
           };
-
-          # # Jellyfin
-          # "jellyfin.paradise.net" = {
-          #   locations."/" = {
-          #     proxyPass = "http://127.0.0.1:8096";
-          #     proxyWebsockets = true; # Required for Jellyfin's real-time features
-          #   };
-          # };
-          #
-          # # Sonarr
-          # "sonarr.paradise.net" = {
-          #   locations."/" = {
-          #     proxyPass = "http://127.0.0.1:8989";
-          #     proxyWebsockets = true;
-          #   };
-          # };
-          #
-          # # Radarr
-          # "radarr.paradise.net" = {
-          #   locations."/" = {
-          #     proxyPass = "http://127.0.0.1:7878";
-          #   };
-          # };
-          #
-          # # Prowlarr
-          # "prowlarr.paradise.net" = {
-          #   locations."/" = {
-          #     proxyPass = "http://127.0.0.1:9696";
-          #   };
-          # };
-          #
-          # # qBittorrent
-          # "qbittorrent.paradise.net" = {
-          #   locations."/" = {
-          #     proxyPass = "http://127.0.0.1:8282";
-          #   };
-          # };
-          #
-          # "seerr.paradise.net" = {
-          #   locations."/" = {
-          #     proxyPass = "http://127.0.0.1:5055";
-          #   };
-          # };
         };
       };
     };

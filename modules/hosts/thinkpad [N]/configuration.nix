@@ -2,7 +2,6 @@
   flake.modules.nixos.thinkpad = {
     imports = with inputs.self.modules.nixos; [
       system-desktop
-      systemd-boot
 
       hyprland
       work-packages

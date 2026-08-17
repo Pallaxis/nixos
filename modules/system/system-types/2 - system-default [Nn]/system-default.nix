@@ -5,6 +5,7 @@
     imports = with inputs.self.modules.nixos;
       [
         system-minimal
+        systemd-boot
         firmware
         home-manager
         sops
