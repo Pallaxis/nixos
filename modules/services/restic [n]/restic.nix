@@ -18,25 +18,36 @@
       # maybe it should always live in the same dir as the sops config file?
       defaultSopsFile = ../../../secrets/core.yaml;
       secrets = {
+        # used for wrapper
         restic-remote-repo = {};
         restic-password = {};
-        restic-ssh-key = {
-          path = "${config.home.homeDirectory}/.ssh/id_ed25519_oracle";
-          mode = "0600";
-        };
-        restic-known-hosts = {
-          # TODO: use this to avoid needing to ssh to the server first time
-          path = "${config.xdg.configHome}/restic/known-hosts";
-          mode = "0600";
-        };
+
+        restic-ssh-key = {};
+        restic-known-hosts = {};
       };
     };
+
+    programs.ssh = {
+      enable = true;
+
+      settings."restic-oracle" = {
+        hostname = "137.23.31.130";
+        user = "ubuntu";
+        identityFile = config.sops.secrets.restic-ssh-key.path;
+        identitiesOnly = true;
+        userKnownHostsFile = config.sops.secrets.restic-known-hosts.path;
+        connectTimeout = 30;
+        serverAliveInterval = 60;
+        serverAliveCountMax = 3;
+      };
+    };
+
     services.restic = {
       enable = true;
       backups = {
         remoteBackup = {
           paths = [config.home.homeDirectory];
-          repositoryFile = config.sops.secrets.restic-remote-repo.path;
+          repository = "sftp:restic-oracle:/srv/restic";
           passwordFile = config.sops.secrets.restic-password.path;
           exclude = [
             ".cache/"
@@ -47,7 +58,7 @@
             "git/"
             "work/firmware/"
             "work/burnin/"
-            "go"
+            "go/"
           ];
           timerConfig = {
             OnCalendar = "Daily";
@@ -94,9 +105,9 @@
 
           ${pkgs.hyprland}/bin/hyprctl notify \
             3 \
-            300000 \
+            60000 \
             "rgb(ff0000)" \
-            "fontsize:40 IMPORTANT: $FAILED_UNIT failed"
+            "fontsize:30 IMPORTANT: $FAILED_UNIT failed"
         '';
       };
     };
