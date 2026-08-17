@@ -62,11 +62,15 @@
 
     systemd.user.services."restic-backups-remoteBackup" = {
       Unit = {
-        Wants = ["network-online.target"];
-        After = ["network-online.target"];
+        Wants = ["sops-nix.service"];
+        After = ["sops-nix.service"];
         OnFailure = [
           "important-unit-failed@%n.service"
         ];
+      };
+      Service = {
+        Restart = "on-failure";
+        RestartSec = "5min";
       };
     };
 
