@@ -6,10 +6,11 @@
       [
         system-minimal
         systemd-boot
+        kernel
         firmware
         home-manager
         sops
-        locale # ?
+        locale
         keyd
         networking
         ssh
