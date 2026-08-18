@@ -1,9 +1,4 @@
 {inputs, ...}: {
-  # imports = [
-  #   ../../modules
-  #   ../../profiles/core.nix
-  #   ../../profiles/desktop.nix
-  # ];
   flake.modules.nixos.zombie = {
     imports = with inputs.self.modules.nixos; [
       system-desktop

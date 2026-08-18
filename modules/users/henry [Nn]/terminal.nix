@@ -12,24 +12,31 @@ in {
         };
       };
     };
+
     programs.fzf = {
       enable = true;
       enableZshIntegration = true;
     };
+
     programs.ripgrep = {
       enable = true;
       arguments = ["--smart-case"];
     };
+
     programs.tealdeer = {
       enable = true;
       enableAutoUpdates = true;
     };
+
     programs.taskwarrior = {
       enable = true;
       package = pkgs.taskwarrior3;
     };
+
     programs.yazi.enable = true;
+
     programs.eza.enable = true;
+
     programs.btop = {
       enable = true;
       settings = {
@@ -37,6 +44,7 @@ in {
         update_ms = "1000";
       };
     };
+
     programs.bat = {
       enable = true;
       config = {
