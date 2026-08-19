@@ -11,7 +11,7 @@
 
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "25.11"; # Don't ever change this
-    system.configurationRevision = inputs.rev or inputs.dirtyRev or null;
+    system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
     security.sudo.extraConfig = ''
       Defaults        timestamp_timeout=15
