@@ -26,6 +26,8 @@
       environment
       browser
       quickshell
+
+      opencode
     ];
   };
 }
