@@ -1,7 +1,7 @@
 {inputs, ...}: {
   flake.modules.nixos.niri = {pkgs, ...}: {
     home-manager.sharedModules = [
-      inputs.self.modules.homeManager.gnome
+      inputs.self.modules.homeManager.niri
     ];
 
     programs.niri.enable = true;
