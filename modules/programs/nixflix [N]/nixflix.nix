@@ -8,7 +8,7 @@
       inputs.nixflix.nixosModules.default
     ];
     sops = {
-      age.keyFile = "/home/henry/.config/sops/age/homelab-key.txt";
+      age.keyFile = "${config.users.users.${config.systemConstants.username}.home}/.config/sops/age/homelab-key.txt";
       defaultSopsFile = ../../../secrets/homelab.yaml;
       secrets = {
         "qbittorrent/password" = {};
@@ -102,7 +102,7 @@
     };
     nixflix = {
       enable = true;
-      mediaUsers = ["henry"];
+      mediaUsers = [config.systemConstants.username];
 
       theme = {
         enable = true;
@@ -121,7 +121,7 @@
         config = {
           apiKey._secret = config.sops.secrets."sonarr/api_key".path;
           hostConfig = {
-            username = "henry";
+            username = config.systemConstants.username;
             password._secret = config.sops.secrets."sonarr/password".path;
           };
         };
@@ -132,7 +132,7 @@
         config = {
           apiKey._secret = config.sops.secrets."radarr/api_key".path;
           hostConfig = {
-            username = "henry";
+            username = config.systemConstants.username;
             password._secret = config.sops.secrets."radarr/password".path;
           };
         };
@@ -148,7 +148,7 @@
         config = {
           apiKey._secret = config.sops.secrets."lidarr/api_key".path;
           hostConfig = {
-            username = "henry";
+            username = config.systemConstants.username;
             password._secret = config.sops.secrets."lidarr/password".path;
           };
         };
@@ -159,7 +159,7 @@
         config = {
           apiKey._secret = config.sops.secrets."prowlarr/api_key".path;
           hostConfig = {
-            username = "henry";
+            username = config.systemConstants.username;
             password._secret = config.sops.secrets."prowlarr/password".path;
           };
 
@@ -190,7 +190,7 @@
         password._secret = config.sops.secrets."qbittorrent/password".path;
         serverConfig = {
           Preferences.WebUI = {
-            Username = "henry";
+            Username = config.systemConstants.username;
             Password_PBKDF2 = "@ByteArray(4Fax2nH7DR6tK5KQtuMQCA==:Pq+4D+wUMdF05IIXKwksO7qGT5QQpSwDALRSime+Yk/z34/5zADJLvRk3kkx2QVw2VcgL4PGkWtoBKccPofWUQ==)";
 
             # this is just needed to avoid ssl fuckery with css
@@ -254,7 +254,7 @@
         ];
 
         users = {
-          henry = {
+          ${config.systemConstants.username} = {
             mutable = false;
             policy.isAdministrator = true;
             password._secret = config.sops.secrets."jellyfin/henry_password".path;
