@@ -17,7 +17,7 @@
     # Stops accidental power button presses
     services.logind.settings.Login = {
       HandlePowerKey = "ignore";
-      HandlePowerKeyLongPress = "powereoff";
+      HandlePowerKeyLongPress = "poweroff";
     };
 
     # PrtSc button used as meta key
