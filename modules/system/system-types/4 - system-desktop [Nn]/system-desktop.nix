@@ -10,6 +10,7 @@
       pulseaudio
       plymouth
       localsend
+      brightness
     ];
   };
 

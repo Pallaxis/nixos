@@ -5,7 +5,6 @@
 
       hyprland
       work-packages
-      brightness
     ];
     networking.hostName = "thinkpad";
 
