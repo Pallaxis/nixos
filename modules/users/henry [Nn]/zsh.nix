@@ -199,8 +199,8 @@ in {
             nixmodule=$1
             configdir=$2
 
-            nix_path="/home/henry/.nixos/modules/$nixmodule"
-            config_path="/home/henry/.config/$configdir"
+            nix_path="$HOME/.nixos/modules/$nixmodule"
+            config_path="$HOME/.config/$configdir"
 
             if [[ -L "$config_path" && -e "$config_path" ]]; then
               ln -sfn "$nix_path" "$config_path"

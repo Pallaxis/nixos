@@ -30,7 +30,7 @@ while true do
   end
 end
 
-local file, err = io.open("/home/henry/semix-serials.txt", "a+")
+local file, err = io.open(os.getenv("HOME") .. "/semix-serials.txt", "a+")
 
 file:write(serial .. "\n")
 file:seek("set", 0)
