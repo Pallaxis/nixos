@@ -1,11 +1,17 @@
 {inputs, ...}: {
-  flake.modules.nixos.brightness = {config, ...}: {
+  flake.modules.nixos.brightness = {
+    config,
+    lib,
+    ...
+  }: {
     home-manager.sharedModules = [
       inputs.self.modules.homeManager.brightness
     ];
 
     hardware.i2c.enable = true;
-    users.users."${config.systemConstants.username}".extraGroups = ["i2c"];
+    users.groups.i2c.members = lib.attrNames (
+      lib.filterAttrs (_: u: u.isNormalUser) config.users.users
+    );
   };
 
   flake.modules.homeManager.brightness = {pkgs, ...}: {
