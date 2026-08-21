@@ -5,6 +5,8 @@
       nvidia
 
       hyprland
+      gaming
+      brightness
     ];
     networking.hostName = "night";
   };
