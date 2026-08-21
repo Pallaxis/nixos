@@ -14,6 +14,7 @@
         keyd
         networking
         ssh
+        garbageCollect
         # secrets
       ]
       ++ (with inputs.self.modules.generic; [
