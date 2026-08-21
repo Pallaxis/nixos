@@ -1,7 +1,13 @@
 {inputs, ...}: let
   username = "henry";
 in {
-  flake.modules.nixos."${username}" = {pkgs, ...}: {
+  flake.modules.nixos."${username}" = {pkgs, config, ...}: {
+    # Auto-login wherever this user exists and greetd is enabled
+    services.greetd.settings.initial_session = {
+      command = "${pkgs.systemd}/bin/systemd-cat -t hyprland ${config.programs.hyprland.package}/bin/start-hyprland";
+      user = username;
+    };
+
     home-manager.users."${username}" = {
       imports = [
         inputs.self.modules.homeManager."${username}"

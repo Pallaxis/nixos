@@ -19,10 +19,6 @@
     services.greetd = {
       enable = true;
       settings = {
-        initial_session = {
-          command = "${pkgs.systemd}/bin/systemd-cat -t hyprland ${config.programs.hyprland.package}/bin/start-hyprland";
-          user = config.systemConstants.username;
-        };
         default_session = {
           command = "${pkgs.tuigreet}/bin/tuigreet --cmd \"${pkgs.systemd}/bin/systemd-cat -t hyprland ${config.programs.hyprland.package}/bin/start-hyprland\"";
           user = "greeter";
