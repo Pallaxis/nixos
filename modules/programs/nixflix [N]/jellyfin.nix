@@ -22,7 +22,7 @@
           ${admin} = {
             mutable = false;
             policy.isAdministrator = true;
-            password._secret = config.sops.secrets."jellyfin/henry_password".path;
+            password._secret = config.sops.secrets."jellyfin/password".path;
           };
         };
       };
