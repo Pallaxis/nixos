@@ -24,7 +24,7 @@
 
     # Needed for stupid broadcom-wl driver
     nixpkgs.config.permittedInsecurePackages = [
-      "broadcom-sta-6.30.223.271-63-6.18.41"
+      "broadcom-sta-6.30.223.271-63-6.18.44"
     ];
     boot = {
       kernelModules = ["kvm-intel" "wl"];
