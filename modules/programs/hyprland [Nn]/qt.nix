@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.hyprland = {
+  flake.modules.homeManager.hyprland = {config, ...}: {
     qt = {
       enable = true;
       style.name = "kvantum";
@@ -7,14 +7,14 @@
         Appearance = {
           style = "kvantum";
           custom_palette = "true";
-          color_scheme_path = "/home/henry/.config/qt5ct/style-colors.conf";
+          color_scheme_path = "${config.xdg.configHome}/qt5ct/style-colors.conf";
         };
       };
       qt6ctSettings = {
         Appearance = {
           style = "kvantum";
           custom_palette = "true";
-          color_scheme_path = "/home/henry/.config/qt6ct/style-colors.conf";
+          color_scheme_path = "${config.xdg.configHome}/qt6ct/style-colors.conf";
         };
       };
     };
