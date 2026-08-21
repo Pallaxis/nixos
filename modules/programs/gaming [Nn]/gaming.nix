@@ -1,7 +1,7 @@
 {inputs, ...}: {
   flake.modules.nixos.gaming = {pkgs, ...}: {
     home-manager.sharedModules = [
-      inputs.self.modules.homeManager.hyprland
+      inputs.self.modules.homeManager.gaming
     ];
 
     programs = {
