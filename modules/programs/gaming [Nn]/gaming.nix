@@ -38,7 +38,7 @@
     # };
 
     environment.systemPackages = with pkgs; [
-      gamma-launcher
+      # gamma-launcher
       protonup-ng
       wineWow64Packages.stagingFull
       winetricks
@@ -56,9 +56,5 @@
         pkgs.proton-ge-bin
       ];
     };
-
-    home.packages = [
-      pkgs.gamma-launcher
-    ];
   };
 }
