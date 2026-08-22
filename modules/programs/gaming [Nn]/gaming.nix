@@ -20,23 +20,6 @@
       };
     };
 
-    # May be needed to get gamescope to run
-    # programs.steam.package = pkgs.steam.override {
-    #   extraPkgs = pkgs': with pkgs'; [
-    #     xorg.libXcursor
-    #     xorg.libXi
-    #     xorg.libXinerama
-    #     xorg.libXScrnSaver
-    #     libpng
-    #     libpulseaudio
-    #     libvorbis
-    #     stdenv.cc.cc.lib # Provides libstdc++.so.6
-    #     libkrb5
-    #     keyutils
-    #     # Add other libraries as needed
-    #   ];
-    # };
-
     environment.systemPackages = with pkgs; [
       # gamma-launcher
       protonup-ng
@@ -46,15 +29,26 @@
   };
 
   flake.modules.homeManager.gaming = {pkgs, ...}: {
-    programs.vesktop.enable = true;
-    programs.lutris = {
-      enable = true;
-      extraPackages = with pkgs; [
-        umu-launcher
-      ];
-      protonPackages = [
-        pkgs.proton-ge-bin
-      ];
+    programs = {
+      vesktop.enable = true;
+      lutris = {
+        enable = true;
+        extraPackages = with pkgs; [
+          umu-launcher
+        ];
+        protonPackages = [
+          pkgs.proton-ge-bin
+        ];
+      };
+      mangohud.enable = true;
     };
+    xdg.configFile."gamescope/scripts/stutter-fix.lua".text = ''
+      function info(text)
+        gamescope.log(gamescope.log_priority.info, text)
+      end
+
+      info("Enabling explicit sync: " .. tostring(gamescope.convars.drm_debug_disable_explicit_sync.value) .. " -> " .. tostring(true))
+      gamescope.convars.drm_debug_disable_explicit_sync.value = true
+    '';
   };
 }

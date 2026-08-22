@@ -9,5 +9,7 @@
       brightness
     ];
     networking.hostName = "night";
+
+    services.ratbagd.enable = true;
   };
 }
