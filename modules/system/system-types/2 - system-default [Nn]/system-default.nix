@@ -13,7 +13,6 @@
         locale
         keyd
         networking
-        ssh
         garbageCollect
         # secrets
       ]
