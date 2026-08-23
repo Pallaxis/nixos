@@ -24,7 +24,6 @@
       pavucontrol
       python3
       quickshell
-      sops
       tcpdump
       udisks
       unrar
