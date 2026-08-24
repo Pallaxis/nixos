@@ -29,6 +29,7 @@
 
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false;
 
       settings."restic-oracle" = {
         hostname = "137.23.31.130";
