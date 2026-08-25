@@ -1,12 +1,9 @@
 {
-  flake.modules.nixos.nixflix = {
-    config,
-    ...
-  }: let
+  flake.modules.nixos.nixflix = {config, ...}: let
     admin = "henry";
   in {
     sops = {
-      age.keyFile = "${config.users.users.${admin}.home}/.config/sops/age/homelab-key.txt";
+      age.keyFile = "/etc/sops/age/homelab-age-key.txt";
       defaultSopsFile = ../../../secrets/homelab.yaml;
       secrets = {
         "qbittorrent/password" = {};
