@@ -25,7 +25,6 @@
       nginx = {
         enable = true;
         addHostsEntries = true;
-        domain = "paradise.net";
       };
     };
   };

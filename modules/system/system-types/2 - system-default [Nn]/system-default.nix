@@ -13,6 +13,7 @@
         locale
         keyd
         networking
+        tailscale
         garbageCollect
         # secrets
       ]
