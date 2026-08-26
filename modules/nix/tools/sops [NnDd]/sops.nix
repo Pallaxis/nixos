@@ -8,7 +8,7 @@
 
     sops = {
       age.keyFile = "/etc/sops/age/system-core-age-key.txt";
-      defaultSopsFile = ../../secrets/system.yaml;
+      defaultSopsFile = ../../../../secrets/system.yaml;
     };
   };
 
@@ -21,7 +21,7 @@
 
     sops = {
       age.keyFile = "/etc/sops/age/system-core-age-key.txt";
-      defaultSopsFile = ../../secrets/system.yaml;
+      defaultSopsFile = ../../../../secrets/system.yaml;
     };
   };
 
