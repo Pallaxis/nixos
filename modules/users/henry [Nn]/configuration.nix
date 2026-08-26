@@ -31,6 +31,7 @@ in {
       system-desktop
       catppuccin
       tmux
+      sops
     ];
   };
 }

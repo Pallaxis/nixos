@@ -5,6 +5,11 @@
     ];
 
     environment.systemPackages = [pkgs.sops];
+
+    sops = {
+      age.keyFile = "/etc/sops/age/system-core-age-key.txt";
+      defaultSopsFile = ../../secrets/nixos.yaml;
+    };
   };
 
   flake.modules.darwin.sops = {pkgs, ...}: {
@@ -13,6 +18,11 @@
     ];
 
     environment.systemPackages = [pkgs.sops];
+
+    sops = {
+      age.keyFile = "/etc/sops/age/system-core-age-key.txt";
+      defaultSopsFile = ../../secrets/nixos.yaml;
+    };
   };
 
   flake.modules.homeManager.sops = {pkgs, ...}: {

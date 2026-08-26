@@ -12,19 +12,13 @@
       exec ${pkgs.restic}/bin/restic "$@"
     '';
   in {
-    sops = {
-      age.keyFile = "${config.xdg.configHome}/sops/age/henry-age-key.txt";
-      # TODO: ideally this shouldn't be a relative path, or
-      # maybe it should always live in the same dir as the sops config file?
-      defaultSopsFile = ../../../secrets/core.yaml;
-      secrets = {
-        # used for wrapper
-        restic-remote-repo = {};
-        restic-password = {};
+    sops.secrets = {
+      # used for wrapper
+      restic-remote-repo = {};
+      restic-password = {};
 
-        restic-ssh-key = {};
-        restic-known-hosts = {};
-      };
+      restic-ssh-key = {};
+      restic-known-hosts = {};
     };
 
     programs.ssh = {
