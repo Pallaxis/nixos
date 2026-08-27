@@ -1,8 +1,5 @@
 {
-  flake.modules.nixos.nixflix = {
-    config,
-    ...
-  }: let
+  flake.modules.nixos.nixflix = {config, ...}: let
     admin = "henry";
   in {
     nixflix = {

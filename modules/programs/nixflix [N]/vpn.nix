@@ -1,8 +1,5 @@
 {
-  flake.modules.nixos.nixflix = {
-    config,
-    ...
-  }: {
+  flake.modules.nixos.nixflix = {config, ...}: {
     nixflix.vpn = {
       enable = true;
       wgConfFile = config.sops.secrets."wireguard/conf".path;

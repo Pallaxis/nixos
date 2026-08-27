@@ -22,10 +22,10 @@
       };
       postgres.enable = true;
 
-      nginx = {
-        enable = true;
-        addHostsEntries = true;
-      };
+      # nginx = {
+      #   enable = true;
+      #   addHostsEntries = true;
+      # };
     };
   };
 }
