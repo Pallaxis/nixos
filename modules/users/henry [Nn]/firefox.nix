@@ -54,11 +54,16 @@ in {
               "fanboy-thirdparty_social"
 
               # annoyances
-              "fanboy-ai-suggestions"
-              "easylist-chat"
-              "easylist-newsletters"
-              "easylist-notifications"
-              "easylist-annoyances"
+              # "fanboy-ai-suggestions"
+              # "easylist-chat"
+              # "easylist-newsletters"
+              # "easylist-notifications"
+              # "easylist-annoyances"
+              # swapped to adguard, easylist wasn't blocking "sign into google" popups
+              "adguard-mobile-app-banners"
+              "adguard-other-annoyances"
+              "adguard-popup-overlays"
+              "adguard-widgets"
             ];
 
             userFilters = ''
