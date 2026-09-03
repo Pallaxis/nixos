@@ -6,8 +6,7 @@
         general = {
           lock_cmd = "pidof hyprlock || hyprlock --grace 0"; # Avoid starting multiple hyprlock instances.
           before_sleep_cmd = "pidof hyprlock || hyprlock --grace 0 --no-fade-in"; # Lock before suspend.
-          # Disabling after_sleep_cmd as it is causing the screen to turn off after wake, screen is on after wake anyway so its redundant
-          # after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = 'enable' })'"; # To avoid having to press a key twice to turn on the display.
+          after_sleep_cmd = ''hyprctl dispatch "hl.dsp.dpms({ action = 'enable' })"'';
           inhibit_sleep = "2"; # Waits for lock before sleeping
         };
 
@@ -42,8 +41,8 @@
           # Turns on all monitors after activity
           {
             timeout = 1800;
-            on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = 'disable' } )'";
-            on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = 'enable' })'";
+            on-timeout = ''hyprctl dispatch "hl.dsp.dpms({ action = 'disable' })"'';
+            on-resume = ''hyprctl dispatch "hl.dsp.dpms({ action = 'enable' })"'';
           }
 
           # After 120 mins
