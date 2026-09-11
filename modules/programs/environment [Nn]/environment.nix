@@ -1,36 +1,17 @@
 {
   flake.modules.nixos.environment = {pkgs, ...}: {
+    # stuff i'd only need if i had a desktop environment/wm
     environment.systemPackages = with pkgs; [
-      age
       brightnessctl
-      fd
-      file
-      fzf
-      gdu
-      git
-      glib
       grimblast
       imagemagick
       imv
-      jq
-      ldns
       libsForQt5.qt5ct
-      man-pages
       mpv
-      nethogs
-      nmap
       nodejs
-      parallel
       pavucontrol
-      python3
       quickshell
-      tcpdump
-      udisks
-      unrar
-      unzip
-      usbutils
       wl-clipboard
-      zip
     ];
   };
 
@@ -66,16 +47,7 @@
       esac
     '';
   in {
-    home.packages =
-      [logoutMenu]
-      ++ (with pkgs; [
-        cowsay
-        fastfetch
-        fortune
-        keepassxc
-        lolcat
-        nerd-fonts.jetbrains-mono
-      ]);
+    home.packages = [logoutMenu];
     fonts.fontconfig.enable = true;
     programs.fuzzel = {
       enable = true;

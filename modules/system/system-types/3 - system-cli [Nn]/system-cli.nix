@@ -7,9 +7,9 @@
 
       keyd
       udisks
+      cli-tools
 
       # ssh
-      # cli-tools
     ];
   };
 
@@ -26,6 +26,7 @@
     imports = with inputs.self.modules.homeManager; [
       system-default
       xdg
+      cli-tools
 
       # shell
     ];
