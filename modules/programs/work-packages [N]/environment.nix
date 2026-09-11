@@ -7,7 +7,7 @@
       ddcutil
       ffmpeg-full
       gimp
-      libreoffice-fresh
+      libreoffice-stable
       slack
       # Overrides tio version as they haven't had a release in a while
       (tio.overrideAttrs (oldAttrs: {
