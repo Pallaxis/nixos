@@ -1,26 +1,48 @@
-function Shell_Ready()
-	expect("~]# ")
+-- Script expects that it is running before device has been booted
+function shell_ready()
+  tio.expect("~]# ")
 end
 
-write("\n")
+tio.write("\n")
 
 while true do
-	if expect("~]# ", 100) == 0 then
-		write("\n")
-		expect("login: ")
-		write("root\n")
-		Shell_Ready()
-	end
-	--write([[echo -e "\e[33mProbe status: $(x cert probe 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
-	--write("\n")
+  --   -- Puts SoM into EVK2 mode for this boot only SoM only for others
+  --   while true do
+  --     tio.write("t")
+  --     if tio.readline():find("5. Continue booting") then
+  --       print("PASSED")
+  --       tio.write("2\n")
+  --       tio.msleep("200")
+  --       tio.write("4\n")
+  --       tio.msleep("200")
+  --       tio.write("5\n")
+  --       break
+  --     end
+  --   end
 
-	--write([[echo -e "\e[33mVerify status: $(x cert verify 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
-	--write("\n")
+  while true do
+    local line, partial = tio.readline(1000)
+    local data = line or partial
 
-	--write([[echo -e "\e[33mManifest status: $(x manifest 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
-	--write("\n")
+    if data then
+      print("RX: " .. data)
 
-	write("hydra\n")
+      if data:match("~%]#") then
+        print("Shell ready")
+        break
+      elseif data:match("login:") then
+        print("Logging in")
+        tio.write("root\n")
+        tio.expect("~]#")
+        break
+      end
+    else
+      -- no line received, wake device
+      print("No new line")
+      tio.write("\n")
+    end
+  end
 
-	expect("login: ")
+  tio.write("hydra_provision -i 0 -e\n")
+  tio.expect("~]# ")
 end
