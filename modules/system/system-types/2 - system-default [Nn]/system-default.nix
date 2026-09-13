@@ -10,6 +10,7 @@
         firmware
         home-manager
         sops
+        autoupdate # auto pulls and rebuilds system
         locale
         keyd
         networking
