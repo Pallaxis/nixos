@@ -70,9 +70,10 @@
       Unit = {
         Wants = ["sops-nix.service"];
         After = ["sops-nix.service"];
-        OnFailure = [
-          "important-unit-failed@%n.service"
-        ];
+        # TEMP: disabling cause annoying
+        # OnFailure = [
+        #   "important-unit-failed@%n.service"
+        # ];
       };
       Service = {
         Restart = "on-failure";
