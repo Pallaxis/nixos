@@ -33,6 +33,7 @@
           "/nix/store/**" = "allow";
         };
       };
+      settings.plugin = ["@dietrichgebert/ponytail"];
     };
   };
 }
