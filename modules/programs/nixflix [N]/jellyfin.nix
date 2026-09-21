@@ -27,6 +27,7 @@
       seerr = {
         enable = true;
         apiKey._secret = config.sops.secrets."seerr/api_key".path;
+        jellyfin.externalHostname = "https://jellyfin.panthera-court.ts.net";
       };
     };
   };
