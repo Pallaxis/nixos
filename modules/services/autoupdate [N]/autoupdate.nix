@@ -2,6 +2,8 @@
   flake.modules.nixos.autoupdate = {pkgs, ...}: {
     # auto updates system from github repo
     # as long as current generation is clean
+    # FIXME: if current build is clean but its based off of unpushed changes then it will
+    # revert to the latest upstream which may be behind
     system.autoUpgrade = {
       enable = builtins.match ".*-dirty$" (inputs.self.rev or inputs.self.dirtyRev) == null;
       flake = "github:pallaxis/nixos/main";

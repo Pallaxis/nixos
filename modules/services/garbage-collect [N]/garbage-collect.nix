@@ -2,6 +2,7 @@ let
   keepGenerations = 20;
 in {
   flake.modules.nixos.garbageCollect = {pkgs, ...}: {
+    # TODO: make clean builds first-class citizens, keep x of them and always clear out dirty ones
     systemd.services.prune-nixos-generations = {
       description = "Prune old NixOS generations, keeping up to ${toString keepGenerations} and garbage collect";
       serviceConfig = {
