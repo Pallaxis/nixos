@@ -1,23 +1,20 @@
 {
   flake.modules.nixos.tv = {pkgs, ...}: {
-    services.displayManager = {
-      sddm = {
-        enable = true;
-        wayland.enable = true;
+    services = {
+      desktopManager.plasma6.enable = true;
+      displayManager = {
+        sddm = {
+          enable = true;
+          wayland.enable = true;
+        };
+        defaultSession = "plasma-bigscreen-wayland";
+        sessionPackages = [pkgs.kdePackages.plasma-bigscreen];
       };
-      defaultSession = "plasma-bigscreen-wayland";
-      sessionPackages = [pkgs.kdePackages.plasma-bigscreen];
     };
 
-    qt.enable = true;
+    xdg.portal.configPackages = [pkgs.kdePackages.plasma-bigscreen];
 
-    environment.systemPackages = with pkgs.kdePackages; [
-      plasma-bigscreen
-      plasma-workspace
-      kwin
-      plasma-integration
-      libplasma
-    ];
+    qt.enable = true;
 
     nixpkgs.overlays = [
       (final: prev: {
