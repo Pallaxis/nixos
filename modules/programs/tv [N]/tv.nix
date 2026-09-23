@@ -31,5 +31,9 @@
           };
       })
     ];
+
+    environment.systemPackages = with pkgs; [
+      vacuum-tube
+    ];
   };
 }
