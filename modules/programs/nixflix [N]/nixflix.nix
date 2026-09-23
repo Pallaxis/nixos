@@ -13,7 +13,7 @@
     };
 
     nixflix = {
-      enable = true;
+      enable = false; # FIXME: radarr blocking rebuilds
       mediaUsers = lib.attrNames (lib.filterAttrs (_: u: u.isNormalUser) config.users.users);
 
       theme = {

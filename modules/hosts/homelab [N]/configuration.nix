@@ -5,6 +5,8 @@
       ssh
       nixflix
       blocky
+
+      tv
     ];
     networking.hostName = "homelab";
 
