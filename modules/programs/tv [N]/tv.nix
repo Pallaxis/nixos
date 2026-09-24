@@ -12,6 +12,23 @@
       };
     };
 
+    environment.plasma6.excludePackages = with pkgs.kdePackages; [
+      ark
+      baloo-widgets
+      discover
+      dolphin
+      dolphin-plugins
+      elisa
+      gwenview
+      kate
+      khelpcenter
+      konsole
+      ktexteditor
+      okular
+      plasma-browser-integration
+      spectacle
+    ];
+
     xdg.portal.configPackages = [pkgs.kdePackages.plasma-bigscreen];
 
     qt.enable = true;
