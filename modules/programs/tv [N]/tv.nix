@@ -1,7 +1,9 @@
 {
   flake.modules.nixos.tv = {pkgs, ...}: {
     services = {
+      # bigscreen seems to depend on this
       desktopManager.plasma6.enable = true;
+
       displayManager = {
         sddm = {
           enable = true;
@@ -12,6 +14,10 @@
       };
     };
 
+    # another dependency
+    qt.enable = true;
+
+    # strips unneeded default packages
     environment.plasma6.excludePackages = with pkgs.kdePackages; [
       ark
       baloo-widgets
@@ -29,10 +35,10 @@
       spectacle
     ];
 
+    # something to do with the desktop portal
     xdg.portal.configPackages = [pkgs.kdePackages.plasma-bigscreen];
 
-    qt.enable = true;
-
+    # some sort of fix for kdeconnect
     nixpkgs.overlays = [
       (final: prev: {
         kdePackages =
@@ -49,6 +55,7 @@
       })
     ];
 
+    # unrelated to bigscreen
     environment.systemPackages = with pkgs; [
       vacuum-tube
     ];
