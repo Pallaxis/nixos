@@ -41,6 +41,13 @@
     # some sort of fix for kdeconnect
     nixpkgs.overlays = [
       (final: prev: {
+        vacuum-tube = prev.vacuum-tube.overrideAttrs (old: {
+          installPhase = old.installPhase + ''
+            wrapProgram $out/bin/VacuumTube \
+              --prefix LD_LIBRARY_PATH : "${final.libva.out}/lib" \
+              --add-flags "--ignore-gpu-blocklist --disable-gpu-driver-bug-workarounds --enable-zero-copy --enable-features=VaapiIgnoreDriverChecks"
+          '';
+        });
         kdePackages =
           prev.kdePackages
           // {
