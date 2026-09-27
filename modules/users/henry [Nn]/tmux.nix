@@ -33,6 +33,7 @@ in {
         set -g pane-base-index 1
         set-window-option -g pane-base-index 1
         set-option -g renumber-windows on
+        set -g set-clipboard on
         set -g default-terminal "tmux-256color"
         set -ag terminal-overrides ",xterm-256color:RGB"
         set-option -g status-position bottom
@@ -71,7 +72,7 @@ in {
 
         # Tmux select text binds
         bind -T copy-mode-vi v send-keys -X begin-selection
-        bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+        bind -T copy-mode-vi C-v send-keys -X rectangle-toggle \; send-keys -X begin-selection
         bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
         #bind -T copy-mode-vi y send -X copy-pipe "wl-copy" \; display-message "Copied"
         bind -T copy-mode-vi Enter send -X copy-selection
