@@ -2,7 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Wayland
+import Quickshell.Io
 
 Scope {
   id: root
@@ -10,25 +10,12 @@ Scope {
     id: globalTheme
   }
 
-  IdleInhibitor {
+  // Idle inhibit goes through logind, not the wayland protocol: hypridle
+  // watches Manager.BlockInhibited, and hyprland does not reliably
+  // propagate wayland inhibitors to idle daemons.
+  Process {
     id: idleInhibitor
-    window: PanelWindow {
-      // end-4's code :3
-      // Inhibitor requires a "visible" surface
-      // Actually not lol
-      implicitWidth: 0
-      implicitHeight: 0
-      color: "transparent"
-      // Just in case...
-      anchors {
-        right: true
-        bottom: true
-      }
-      // Make it not interactable
-      mask: Region {
-        item: null
-      }
-    }
+    command: ["systemd-inhibit", "--what=idle", "--mode=block", "--who=quickshell", "--why=bar idle toggle", "sleep", "infinity"]
   }
 
   Variants {
@@ -118,7 +105,7 @@ Scope {
             text: ""
             anchors.centerIn: parent
             font.pixelSize: 35
-            color: idleInhibitor.enabled ? "#f38ba8" : globalTheme.textColour
+            color: idleInhibitor.running ? "#f38ba8" : globalTheme.textColour
             font.family: globalTheme.fontName
             MouseArea {
               id: mouseArea
@@ -126,8 +113,8 @@ Scope {
 
               acceptedButtons: Qt.AllButtons
               onClicked: event => {
-                idleInhibitor.enabled = !idleInhibitor.enabled;
-              // console.log(idleInhibitor.enabled);
+                idleInhibitor.running = !idleInhibitor.running;
+              // console.log(idleInhibitor.running);
               }
             }
           }
