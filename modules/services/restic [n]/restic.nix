@@ -54,6 +54,7 @@
             "work/firmware/"
             "work/burnin/"
             "go/"
+            "games/"
           ];
           timerConfig = {
             OnCalendar = "Daily";
