@@ -11,6 +11,8 @@ in {
         diff.tool = "nvimdiff";
 
         difftool.nvimdiff.cmd = "nvim -c 'DiffviewOpen $LOCAL..$REMOTE'";
+
+        merge.conflictStyle = "zdiff3";
       };
     };
   };
