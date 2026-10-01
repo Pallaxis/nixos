@@ -7,7 +7,6 @@
     system.autoUpgrade = {
       enable = builtins.match ".*-dirty$" (inputs.self.rev or inputs.self.dirtyRev) == null;
       flake = "github:pallaxis/nixos/main";
-      randomizedDelaySec = "45m";
     };
     systemd.services.nixos-upgrade = {
       after = ["network-online.target"];
