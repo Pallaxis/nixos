@@ -49,6 +49,10 @@
           exit 0
         fi
 
+        if git diff --quiet HEAD "refs/remotes/origin/${branch}"; then
+          exit 0
+        fi
+
         git reset --hard "refs/remotes/origin/${branch}"
         systemctl start nixos-upgrade
       '';
