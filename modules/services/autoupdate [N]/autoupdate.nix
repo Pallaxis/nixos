@@ -85,7 +85,6 @@
       wantedBy = ["timers.target"];
       timerConfig = {
         OnCalendar = "daily";
-        RandomizedDelaySec = "45m";
         Persistent = true;
       };
     };

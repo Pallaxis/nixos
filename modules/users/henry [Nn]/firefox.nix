@@ -4,7 +4,7 @@ in {
   flake.modules.homeManager."${username}" = {config, ...}: {
     programs.firefox = {
       policies = {
-        OfferToSaveLogins = false;
+        # OfferToSaveLogins = false;
         DisableTelemetry = true;
         DisableFormHistory = true;
         DefaultDownloadDirectory = "${config.home.homeDirectory}/downloads";
