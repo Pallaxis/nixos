@@ -25,12 +25,10 @@
       };
       # Enables silent boot
       consoleLogLevel = 3;
-      initrd.verbose = false;
-      initrd.systemd.enable = true;
       kernelParams = [
         "quiet"
-        "udev.log_level=3"
-        "systemd.show_status=auto"
+        "rd.udev.log_level=3"
+        "rd.systemd.show_status=auto"
       ];
 
       loader.timeout = 3; # shows generations at boot for this long
